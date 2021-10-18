@@ -1,0 +1,33 @@
+Package: tutorials
+Title: PsyTeachR Tutorials
+Version: 1.0
+Authors@R:
+  c(
+    person(
+        given = "Dale", 
+        family = "Barr", 
+        role = c("aut"), 
+        email = "dale.barr@glasgow.ac.uk", 
+        comment = c(ORCID = "0000-0002-1121-4608")
+    ),
+    person(
+        given = "Lisa", 
+        family = "DeBruine", 
+        role = c("aut", "cre"), 
+        email = "debruine@gmail.com", 
+        comment = c(ORCID = "0000-0002-7523-5539")
+    )
+  )
+Description: This book includes tutorials and cookbook-style recipes for common tasks for psychologists in R.
+License: CC BY 4.0 + LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports:
+    webexercises,
+    glossary (>= 0.0.0.9001)
+Remotes: 
+    psyteachr/glossary
+Depends:
+    tidyverse

@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 Converting string values to numeric values for questionnaire scoring | Tutorials</title>
+<meta name="author" content="psyTeachR Team">
+<meta name="description" content='Dale Barr (August 18, 2021) A very common situation is that you want to convert string values ("Almost Always", "Frequently") into numeric values (5, 4, etc) so that we can calculate a score. The...'>
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 5 Converting string values to numeric values for questionnaire scoring | Tutorials">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://psyteachr.github.io/tutorials/converting-string-values-to-numeric-values-for-questionnaire-scoring.html">
+<meta property="og:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
+<meta property="og:description" content='Dale Barr (August 18, 2021) A very common situation is that you want to convert string values ("Almost Always", "Frequently") into numeric values (5, 4, etc) so that we can calculate a score. The...'>
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 Converting string values to numeric values for questionnaire scoring | Tutorials">
+<meta name="twitter:description" content='Dale Barr (August 18, 2021) A very common situation is that you want to convert string values ("Almost Always", "Frequently") into numeric values (5, 4, etc) so that we can calculate a score. The...'>
+<meta name="twitter:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6NP3MF25W3');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Tutorials</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li class="book-part">Data Wrangling</li>
+<li><a class="" href="multiple-import.html"><span class="header-section-number">1</span> Importing data from multiple files</a></li>
+<li><a class="" href="multi-row-headers.html"><span class="header-section-number">2</span> Multi-Row Headers</a></li>
+<li><a class="" href="detecting-runs-in-a-sequence.html"><span class="header-section-number">3</span> Detecting "runs" in a sequence</a></li>
+<li><a class="" href="pipes.html"><span class="header-section-number">4</span> Pipes</a></li>
+<li class="book-part">Questionnaires</li>
+<li><a class="active" href="converting-string-values-to-numeric-values-for-questionnaire-scoring.html"><span class="header-section-number">5</span> Converting string values to numeric values for questionnaire scoring</a></li>
+<li><a class="" href="how-to-reverse-score-questionnaire-items.html"><span class="header-section-number">6</span> How to reverse score questionnaire items</a></li>
+<li class="book-part">Plots</li>
+<li><a class="" href="highlight-a-range-of-x-values-on-a-ggplot.html"><span class="header-section-number">7</span> Highlight a range of x-values on a ggplot</a></li>
+<li class="book-part">Stats</li>
+<li><a class="" href="testing-for-normality.html"><span class="header-section-number">8</span> Testing for normality</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
+<li><a class="" href="symbols.html"><span class="header-section-number">B</span> Symbols</a></li>
+<li><a class="" href="conventions.html"><span class="header-section-number">C</span> Conventions</a></li>
+<li><a class="" href="license.html">License</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/psyteachr/template">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="converting-string-values-to-numeric-values-for-questionnaire-scoring" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Converting string values to numeric values for questionnaire scoring<a class="anchor" aria-label="anchor" href="#converting-string-values-to-numeric-values-for-questionnaire-scoring"><i class="fas fa-link"></i></a>
+</h1>
+<ul>
+<li>Dale Barr (August 18, 2021)</li>
+</ul>
+<p>A very common situation is that you want to convert string values ("Almost Always", "Frequently") into numeric values (5, 4, etc) so that we can calculate a score.</p>
+<p>The solution I present here will use something called a "lookup table" that matches string values to numbers.</p>
+<p>First, let's assume the following (made-up) questionnaire asks four questions about hygiene. When you bathe, how often do you:</p>
+<ol style="list-style-type: decimal">
+<li>Wash your legs?</li>
+<li>Wash behind your ears?</li>
+<li>Wash between your toes?</li>
+<li>Shampoo your hair?</li>
+</ol>
+<p>Let's assume that answers are on a scale made up of the values "Never", "Sometimes", "Frequently", "Always", which we want to assign scores of 0, 1, 2, and 3 respectively.</p>
+<p>Here is some (also made-up) data from five participants, stored in a tibble named <code>dat</code>.</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+subj_id
+</th>
+<th style="text-align:left;">
+wash_legs
+</th>
+<th style="text-align:left;">
+wash_ears
+</th>
+<th style="text-align:left;">
+wash_toes
+</th>
+<th style="text-align:left;">
+shampoo
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+S01
+</td>
+<td style="text-align:left;">
+Sometimes
+</td>
+<td style="text-align:left;">
+Never
+</td>
+<td style="text-align:left;">
+Never
+</td>
+<td style="text-align:left;">
+Frequently
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S02
+</td>
+<td style="text-align:left;">
+Sometimes
+</td>
+<td style="text-align:left;">
+Frequently
+</td>
+<td style="text-align:left;">
+Frequently
+</td>
+<td style="text-align:left;">
+Always
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S03
+</td>
+<td style="text-align:left;">
+Never
+</td>
+<td style="text-align:left;">
+Never
+</td>
+<td style="text-align:left;">
+Never
+</td>
+<td style="text-align:left;">
+Frequently
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S04
+</td>
+<td style="text-align:left;">
+Always
+</td>
+<td style="text-align:left;">
+Always
+</td>
+<td style="text-align:left;">
+Sometimes
+</td>
+<td style="text-align:left;">
+Always
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S05
+</td>
+<td style="text-align:left;">
+Frequently
+</td>
+<td style="text-align:left;">
+Sometimes
+</td>
+<td style="text-align:left;">
+Never
+</td>
+<td style="text-align:left;">
+Sometimes
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>(If you want to make <code>dat</code> so you can follow along with the example by running the code in R, click the button below.)</p>
+<div class="webex-solution">
+<button>
+show me the R code to create the table 'dat'
+</button>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span>
+
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">tribble</span><span class="op">(</span>
+  <span class="op">~</span><span class="va">subj_id</span>, <span class="op">~</span><span class="va">wash_legs</span>,   <span class="op">~</span><span class="va">wash_ears</span>,   <span class="op">~</span><span class="va">wash_toes</span>,   <span class="op">~</span><span class="va">shampoo</span>,
+  <span class="st">"S01"</span>,    <span class="st">"Sometimes"</span>,  <span class="st">"Never"</span>,      <span class="st">"Never"</span>,      <span class="st">"Frequently"</span>,
+  <span class="st">"S02"</span>,    <span class="st">"Sometimes"</span>,  <span class="st">"Frequently"</span>, <span class="st">"Frequently"</span>, <span class="st">"Always"</span>,
+  <span class="st">"S03"</span>,    <span class="st">"Never"</span>,      <span class="st">"Never"</span>,      <span class="st">"Never"</span>,      <span class="st">"Frequently"</span>,
+  <span class="st">"S04"</span>,    <span class="st">"Always"</span>,     <span class="st">"Always"</span>,     <span class="st">"Sometimes"</span>,  <span class="st">"Always"</span>,
+  <span class="st">"S05"</span>,    <span class="st">"Frequently"</span>, <span class="st">"Sometimes"</span>,  <span class="st">"Never"</span>,      <span class="st">"Sometimes"</span><span class="op">)</span></code></pre></div>
+</div>
+<p>This data is in <em>wide</em> format: there is a single row for each participant with data for each question forming the columns. What we are going to do first is to convert this data from wide to long using <code>pivot_longer()</code>. (You'll see why in a minute.)</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dat_long</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op">%&gt;%</span>
+  <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="va">wash_legs</span><span class="op">:</span><span class="va">shampoo</span>,
+               names_to <span class="op">=</span> <span class="st">"question"</span>, values_to <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span></code></pre></div>
+<p>Take a look at <code>dat_long</code>.</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+subj_id
+</th>
+<th style="text-align:left;">
+question
+</th>
+<th style="text-align:left;">
+response
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+S01
+</td>
+<td style="text-align:left;">
+wash_legs
+</td>
+<td style="text-align:left;">
+Sometimes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S01
+</td>
+<td style="text-align:left;">
+wash_ears
+</td>
+<td style="text-align:left;">
+Never
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S01
+</td>
+<td style="text-align:left;">
+wash_toes
+</td>
+<td style="text-align:left;">
+Never
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S01
+</td>
+<td style="text-align:left;">
+shampoo
+</td>
+<td style="text-align:left;">
+Frequently
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S02
+</td>
+<td style="text-align:left;">
+wash_legs
+</td>
+<td style="text-align:left;">
+Sometimes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S02
+</td>
+<td style="text-align:left;">
+wash_ears
+</td>
+<td style="text-align:left;">
+Frequently
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S02
+</td>
+<td style="text-align:left;">
+wash_toes
+</td>
+<td style="text-align:left;">
+Frequently
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S02
+</td>
+<td style="text-align:left;">
+shampoo
+</td>
+<td style="text-align:left;">
+Always
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S03
+</td>
+<td style="text-align:left;">
+wash_legs
+</td>
+<td style="text-align:left;">
+Never
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S03
+</td>
+<td style="text-align:left;">
+wash_ears
+</td>
+<td style="text-align:left;">
+Never
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S03
+</td>
+<td style="text-align:left;">
+wash_toes
+</td>
+<td style="text-align:left;">
+Never
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S03
+</td>
+<td style="text-align:left;">
+shampoo
+</td>
+<td style="text-align:left;">
+Frequently
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S04
+</td>
+<td style="text-align:left;">
+wash_legs
+</td>
+<td style="text-align:left;">
+Always
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S04
+</td>
+<td style="text-align:left;">
+wash_ears
+</td>
+<td style="text-align:left;">
+Always
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S04
+</td>
+<td style="text-align:left;">
+wash_toes
+</td>
+<td style="text-align:left;">
+Sometimes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S04
+</td>
+<td style="text-align:left;">
+shampoo
+</td>
+<td style="text-align:left;">
+Always
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S05
+</td>
+<td style="text-align:left;">
+wash_legs
+</td>
+<td style="text-align:left;">
+Frequently
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S05
+</td>
+<td style="text-align:left;">
+wash_ears
+</td>
+<td style="text-align:left;">
+Sometimes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S05
+</td>
+<td style="text-align:left;">
+wash_toes
+</td>
+<td style="text-align:left;">
+Never
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S05
+</td>
+<td style="text-align:left;">
+shampoo
+</td>
+<td style="text-align:left;">
+Sometimes
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Now we only have <em>one</em> variable we need to convert to numeric values (<code>response</code>) instead of the original four. There is an easy solution: we create a "lookup table" mapping the string values to the numeric values like so.</p>
+<p>But first let's check what the unique string values are in the data. Our lookup table must match these <em>exactly</em> or the approach won't work.</p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dat_long</span> <span class="op">%&gt;%</span>
+  <span class="fu">distinct</span><span class="op">(</span><span class="va">response</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">pull</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "Sometimes"  "Never"      "Frequently" "Always"</code></pre>
+<p>This step is important because sometimes these fields can have special characters that you don't normally see when you print out a table. The <code>distinct() %&gt;% pull()</code> pattern will give you those values in a way that makes them visible. For instance, a student once had values in the data like this:</p>
+<pre><code>[1] "Somewhat\nInfrequently" "Somewhat\nFrequently"   "Very\nInfrequently"
+[4] "Almost\nNever"          "Very\nFrequently"       "Almost\nAlways"</code></pre>
+<p>and the lookup table was constantly failing because the lookup table they created did not have the <code>\n</code> in the middle of each string. <em>Computers are very literal!</em></p>
+<p>OK now we're ready to create our lookup table where we match these four values to numbers.</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lookup</span> <span class="op">&lt;-</span> <span class="fu">tribble</span><span class="op">(</span>
+  <span class="op">~</span><span class="va">response</span>, <span class="op">~</span><span class="va">score</span>,
+  <span class="st">"Never"</span>,      <span class="fl">0</span>,
+  <span class="st">"Sometimes"</span>,  <span class="fl">1</span>,
+  <span class="st">"Frequently"</span>, <span class="fl">2</span>,
+  <span class="st">"always"</span>,     <span class="fl">3</span><span class="op">)</span></code></pre></div>
+<p>As the final step, we <code>inner_join()</code> the original table <code>dat_long</code> to <code>lookup</code> on the variable <code>response</code>.</p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">joined</span> <span class="op">&lt;-</span> <span class="fu">inner_join</span><span class="op">(</span><span class="va">dat_long</span>, <span class="va">lookup</span>, by <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span></code></pre></div>
+<p><strong>IMPORTANT</strong>: You should check to make sure that the join worked as intended. The values in the lookup table must <em>exactly</em> match the values in the <code>response</code> column of <code>dat_long</code>. It is easy to make a typo in the lookup table, and those values will be lost. An easy test is to make sure that the number of rows in <code>joined</code> matches the number of rows in <code>dat_long</code>.</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">joined</span><span class="op">)</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">dat_long</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>The function <code><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot()</a></code> will make our script fail if the stated condition (that both tables have the same number of rows) is not satisfied.</p>
+<p>Uh oh. Running it gives <code>Error: nrow(joined) == nrow(dat_long) is not TRUE</code>. The test failed, because I deliberately included a typo in the lookup table. Can you see it?</p>
+<div class="webex-solution">
+<button>
+what is it?
+</button>
+<p><code>always</code> should be <code>Always</code>. Capitalization matters!</p>
+</div>
+<p>So let's fix our lookup table and then we should be good to go. Here is the full code for this demonstration:</p>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dat_long</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op">%&gt;%</span>
+  <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="va">wash_legs</span><span class="op">:</span><span class="va">shampoo</span>,
+               names_to <span class="op">=</span> <span class="st">"question"</span>, values_to <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span>
+
+<span class="co">## check for hidden values</span>
+<span class="va">dat_long</span> <span class="op">%&gt;%</span>
+  <span class="fu">distinct</span><span class="op">(</span><span class="va">response</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">pull</span><span class="op">(</span><span class="op">)</span>
+
+<span class="va">lookup</span> <span class="op">&lt;-</span> <span class="fu">tribble</span><span class="op">(</span>
+  <span class="op">~</span><span class="va">response</span>, <span class="op">~</span><span class="va">score</span>,
+  <span class="st">"Never"</span>,      <span class="fl">0</span>,
+  <span class="st">"Sometimes"</span>,  <span class="fl">1</span>,
+  <span class="st">"Frequently"</span>, <span class="fl">2</span>,
+  <span class="st">"Always"</span>,     <span class="fl">3</span><span class="op">)</span>
+
+<span class="va">joined</span> <span class="op">&lt;-</span> <span class="fu">inner_join</span><span class="op">(</span><span class="va">dat_long</span>, <span class="va">lookup</span>, by <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span>
+
+<span class="co">## test whether the number of rows match</span>
+<span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">joined</span><span class="op">)</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">dat_long</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>You could then use</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">joined</span> <span class="op">%&gt;%</span>
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">subj_id</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">summarise</span><span class="op">(</span>hygiene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">score</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>to calculate a score for each subject.</p>
+
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    $(solveme[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    $(selects[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+$( document ).ready(function() {
+  var cite = ' ';
+  var psyteachr = ' <a href="https://psyteachr.github.io/"><img src="images/logos/psyteachr_logo.png" style="height: 31px; color: white;" alt="psyTeachR: Reproducible Research" /></a>';
+  var license = ' <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>';
+
+  $("footer div.row div:eq(1) p").html(
+    psyteachr + license + cite
+  );
+
+  // open rdrr links externally
+  $("a[href^='https://rdrr.io']").click(function(){
+    window.open(this.href);
+    return false;
+  });
+
+  // visible second sidebar in mobile
+  function move_sidebar() {
+    var w = window.innerWidth;
+    if (w < 992) {
+      $("#toc").appendTo($("#main-nav"));
+    } else {
+      $("#toc").appendTo($("div.sidebar-chapter"));
+    }
+  }
+  move_sidebar();
+  window.onresize = move_sidebar;
+});
+</script><div class="chapter-nav">
+<div class="prev"><a href="pipes.html"><span class="header-section-number">4</span> Pipes</a></div>
+<div class="next"><a href="how-to-reverse-score-questionnaire-items.html"><span class="header-section-number">6</span> How to reverse score questionnaire items</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#converting-string-values-to-numeric-values-for-questionnaire-scoring"><span class="header-section-number">5</span> Converting string values to numeric values for questionnaire scoring</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/psyteachr/template/blob/master/book/02-01-converting-string-values.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/psyteachr/template/edit/master/book/02-01-converting-string-values.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Tutorials</strong>" was written by psyTeachR Team. It was last built on 2021-10-18.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

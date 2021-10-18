@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 1 Importing data from multiple files | Tutorials</title>
+<meta name="author" content="psyTeachR Team">
+<meta name="description" content="Dale Barr (October 30, 2019) Sometimes you have multiple files, and you want to read them into one big table for analysis. The following code allows you to read in a whole bunch of files from a...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 1 Importing data from multiple files | Tutorials">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://psyteachr.github.io/tutorials/importing-data-from-multiple-files.html">
+<meta property="og:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
+<meta property="og:description" content="Dale Barr (October 30, 2019) Sometimes you have multiple files, and you want to read them into one big table for analysis. The following code allows you to read in a whole bunch of files from a...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 1 Importing data from multiple files | Tutorials">
+<meta name="twitter:description" content="Dale Barr (October 30, 2019) Sometimes you have multiple files, and you want to read them into one big table for analysis. The following code allows you to read in a whole bunch of files from a...">
+<meta name="twitter:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6NP3MF25W3');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Tutorials</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li class="book-part">Data Wrangling</li>
+<li><a class="active" href="importing-data-from-multiple-files.html"><span class="header-section-number">1</span> Importing data from multiple files</a></li>
+<li><a class="" href="multi-row-headers.html"><span class="header-section-number">2</span> Multi-Row Headers</a></li>
+<li><a class="" href="detecting-runs-in-a-sequence.html"><span class="header-section-number">3</span> Detecting "runs" in a sequence</a></li>
+<li><a class="" href="pipes.html"><span class="header-section-number">4</span> Pipes</a></li>
+<li class="book-part">Questionnaires</li>
+<li><a class="" href="converting-string-values-to-numeric-values-for-questionnaire-scoring.html"><span class="header-section-number">5</span> Converting string values to numeric values for questionnaire scoring</a></li>
+<li><a class="" href="how-to-reverse-score-questionnaire-items.html"><span class="header-section-number">6</span> How to reverse score questionnaire items</a></li>
+<li class="book-part">Plots</li>
+<li><a class="" href="highlight-a-range-of-x-values-on-a-ggplot.html"><span class="header-section-number">7</span> Highlight a range of x-values on a ggplot</a></li>
+<li class="book-part">Stats</li>
+<li><a class="" href="testing-for-normality.html"><span class="header-section-number">8</span> Testing for normality</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
+<li><a class="" href="symbols.html"><span class="header-section-number">B</span> Symbols</a></li>
+<li><a class="" href="conventions.html"><span class="header-section-number">C</span> Conventions</a></li>
+<li><a class="" href="license.html">License</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/psyteachr/template">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="importing-data-from-multiple-files" class="section level1" number="1">
+<h1>
+<span class="header-section-number">1</span> Importing data from multiple files<a class="anchor" aria-label="anchor" href="#importing-data-from-multiple-files"><i class="fas fa-link"></i></a>
+</h1>
+<ul>
+<li>Dale Barr (October 30, 2019)</li>
+</ul>
+<p>Sometimes you have multiple files, and you want to read them into one big table for analysis. The following code allows you to read in a whole bunch of files from a subdirectory.</p>
+<p>We'll call the subdirectory where these files live <code>datadir</code>; your subdirectory may have a different name. If the files are not in a subdirectory, but in the same directory as your script, replace <code>datadir</code> with a full stop, i.e., <code><a href="https://rdrr.io/r/base/list.files.html">dir(".", "\\.[Cc][Ss][Vv]$")</a></code>.</p>
+<p>The main work is accomplished using the <code>map()</code> function below from the <a href="http://purrr.tidyverse.org">purrr</a> package, which is part of the tidyverse. The function <code>map()</code> applies a function (in this case, <code>read_csv()</code>) to each of the elements in the vector supplied as the first argument.</p>
+<p>If you want to run the example to see how things work, you'll need to set up your environment with some sample files.</p>
+<div class="webex-solution">
+<button>
+Click here to see how to set things up so you can run the example code below
+</button>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="st">"datadir"</span>, <span class="cn">FALSE</span><span class="op">)</span>
+
+<span class="co">## create fake data files for three subjects</span>
+<span class="fu">write_csv</span><span class="op">(</span><span class="va">iris</span> <span class="op">%&gt;%</span> <span class="fu">slice</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"datadir"</span>, <span class="st">"S01.csv"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu">write_csv</span><span class="op">(</span><span class="va">iris</span> <span class="op">%&gt;%</span> <span class="fu">slice</span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"datadir"</span>, <span class="st">"S02.csv"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu">write_csv</span><span class="op">(</span><span class="va">iris</span> <span class="op">%&gt;%</span> <span class="fu">slice</span><span class="op">(</span><span class="fl">11</span><span class="op">:</span><span class="fl">15</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"datadir"</span>, <span class="st">"S03.csv"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<p><br><br></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span>
+
+<span class="co"># "\\.csv$" = find all files ending with csv or CSV</span>
+<span class="va">todo</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>filename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">dir</a></span><span class="op">(</span><span class="st">"datadir"</span>, <span class="st">"\\.[Cc][Ss][Vv]$"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">all_data</span> <span class="op">&lt;-</span> <span class="va">todo</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>imported <span class="op">=</span> <span class="fu">map</span><span class="op">(</span><span class="va">filename</span>, <span class="va">read_csv</span>, col_types <span class="op">=</span> <span class="st">"ddddc"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">unnest</span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">imported</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">all_data</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+filename
+</th>
+<th style="text-align:right;">
+Sepal.Length
+</th>
+<th style="text-align:right;">
+Sepal.Width
+</th>
+<th style="text-align:right;">
+Petal.Length
+</th>
+<th style="text-align:right;">
+Petal.Width
+</th>
+<th style="text-align:left;">
+Species
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+datadir/S01.csv
+</td>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+datadir/S01.csv
+</td>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+datadir/S01.csv
+</td>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+datadir/S01.csv
+</td>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+datadir/S01.csv
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+datadir/S02.csv
+</td>
+<td style="text-align:right;">
+5.4
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+datadir/S02.csv
+</td>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+datadir/S02.csv
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+datadir/S02.csv
+</td>
+<td style="text-align:right;">
+4.4
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+datadir/S02.csv
+</td>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+datadir/S03.csv
+</td>
+<td style="text-align:right;">
+5.4
+</td>
+<td style="text-align:right;">
+3.7
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+datadir/S03.csv
+</td>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+datadir/S03.csv
+</td>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+datadir/S03.csv
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+datadir/S03.csv
+</td>
+<td style="text-align:right;">
+5.8
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>In the above example, the <code>filename</code> variable of <code>todo</code> contains the values over which the function <code>read_csv()</code> is to be applied. The argument <code>col_types</code> which we supplied to <code>map()</code> is intended to be passed along to <code>read_csv()</code>. Any additional arguments that you want to pass along to <code>read_csv()</code> can be placed here (e.g., <code>skip = 1</code>).</p>
+<p>If there is preprocessing you need to do on each file before reading it in, you can write your own function and call that in place of <code>read_csv()</code>.</p>
+<p>Sometimes the filename contains metadata (e.g., a string identifying the subject: <code>S01</code>, <code>S02</code> etc) and you want to pull that out. You can do this by creating a new variable using <code>mutate()</code> on the filename. In the example below, we strip away the path from the filename (<code>datadir/S01.csv</code> to <code>S01.csv</code>) using <code><a href="https://rdrr.io/r/base/basename.html">basename()</a></code> and then remove the file extension <code>.csv</code> using <code><a href="https://rdrr.io/r/tools/fileutils.html">tools::file_path_sans_ext()</a></code>.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">all_data_id</span> <span class="op">&lt;-</span> <span class="va">all_data</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>subj_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">filename</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">tools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/tools/fileutils.html">file_path_sans_ext</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">select</span><span class="op">(</span><span class="va">subj_id</span>, <span class="va">Sepal.Length</span><span class="op">:</span><span class="va">Species</span><span class="op">)</span>
+
+<span class="va">all_data_id</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+subj_id
+</th>
+<th style="text-align:right;">
+Sepal.Length
+</th>
+<th style="text-align:right;">
+Sepal.Width
+</th>
+<th style="text-align:right;">
+Petal.Length
+</th>
+<th style="text-align:right;">
+Petal.Width
+</th>
+<th style="text-align:left;">
+Species
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+S01
+</td>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S01
+</td>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S01
+</td>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S01
+</td>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S01
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S02
+</td>
+<td style="text-align:right;">
+5.4
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S02
+</td>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S02
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S02
+</td>
+<td style="text-align:right;">
+4.4
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S02
+</td>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S03
+</td>
+<td style="text-align:right;">
+5.4
+</td>
+<td style="text-align:right;">
+3.7
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S03
+</td>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S03
+</td>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S03
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S03
+</td>
+<td style="text-align:right;">
+5.8
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    $(solveme[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    $(selects[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+$( document ).ready(function() {
+  var cite = ' ';
+  var psyteachr = ' <a href="https://psyteachr.github.io/"><img src="images/logos/psyteachr_logo.png" style="height: 31px; color: white;" alt="psyTeachR: Reproducible Research" /></a>';
+  var license = ' <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>';
+
+  $("footer div.row div:eq(1) p").html(
+    psyteachr + license + cite
+  );
+
+  // open rdrr links externally
+  $("a[href^='https://rdrr.io']").click(function(){
+    window.open(this.href);
+    return false;
+  });
+
+  // visible second sidebar in mobile
+  function move_sidebar() {
+    var w = window.innerWidth;
+    if (w < 992) {
+      $("#toc").appendTo($("#main-nav"));
+    } else {
+      $("#toc").appendTo($("div.sidebar-chapter"));
+    }
+  }
+  move_sidebar();
+  window.onresize = move_sidebar;
+});
+</script><div class="chapter-nav">
+<div class="prev"><a href="index.html">Overview</a></div>
+<div class="next"><a href="multi-row-headers.html"><span class="header-section-number">2</span> Multi-Row Headers</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#importing-data-from-multiple-files"><span class="header-section-number">1</span> Importing data from multiple files</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/psyteachr/template/blob/master/book/01-01-import-data-multiple-files.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/psyteachr/template/edit/master/book/01-01-import-data-multiple-files.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Tutorials</strong>" was written by psyTeachR Team. It was last built on 2021-10-18.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

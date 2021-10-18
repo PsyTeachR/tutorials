@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 8 Testing for normality | Tutorials</title>
+<meta name="author" content="psyTeachR Team">
+<meta name="description" content="Lisa DeBruine (2021-02-01) You've probably been directed here because you asked someone about how to test the normality of predictors in an analysis. However, statistical tests like t-tests,...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 8 Testing for normality | Tutorials">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://psyteachr.github.io/tutorials/testing-for-normality.html">
+<meta property="og:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
+<meta property="og:description" content="Lisa DeBruine (2021-02-01) You've probably been directed here because you asked someone about how to test the normality of predictors in an analysis. However, statistical tests like t-tests,...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 8 Testing for normality | Tutorials">
+<meta name="twitter:description" content="Lisa DeBruine (2021-02-01) You've probably been directed here because you asked someone about how to test the normality of predictors in an analysis. However, statistical tests like t-tests,...">
+<meta name="twitter:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6NP3MF25W3');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Tutorials</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li class="book-part">Data Wrangling</li>
+<li><a class="" href="multiple-import.html"><span class="header-section-number">1</span> Importing data from multiple files</a></li>
+<li><a class="" href="multi-row-headers.html"><span class="header-section-number">2</span> Multi-Row Headers</a></li>
+<li><a class="" href="detecting-runs-in-a-sequence.html"><span class="header-section-number">3</span> Detecting "runs" in a sequence</a></li>
+<li><a class="" href="pipes.html"><span class="header-section-number">4</span> Pipes</a></li>
+<li class="book-part">Questionnaires</li>
+<li><a class="" href="converting-string-values-to-numeric-values-for-questionnaire-scoring.html"><span class="header-section-number">5</span> Converting string values to numeric values for questionnaire scoring</a></li>
+<li><a class="" href="how-to-reverse-score-questionnaire-items.html"><span class="header-section-number">6</span> How to reverse score questionnaire items</a></li>
+<li class="book-part">Plots</li>
+<li><a class="" href="highlight-a-range-of-x-values-on-a-ggplot.html"><span class="header-section-number">7</span> Highlight a range of x-values on a ggplot</a></li>
+<li class="book-part">Stats</li>
+<li><a class="active" href="testing-for-normality.html"><span class="header-section-number">8</span> Testing for normality</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
+<li><a class="" href="symbols.html"><span class="header-section-number">B</span> Symbols</a></li>
+<li><a class="" href="conventions.html"><span class="header-section-number">C</span> Conventions</a></li>
+<li><a class="" href="license.html">License</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/psyteachr/template">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="testing-for-normality" class="section level1" number="8">
+<h1>
+<span class="header-section-number">8</span> Testing for normality<a class="anchor" aria-label="anchor" href="#testing-for-normality"><i class="fas fa-link"></i></a>
+</h1>
+<ul>
+<li>Lisa DeBruine (2021-02-01)</li>
+</ul>
+<p>You've probably been directed here because you asked someone about how to test the normality of predictors in an analysis. However, statistical tests like t-tests, ANOVAs, and other <a class="glossary" target="_blank" title="A mathematical model comparing how one or more independent variables affect a continuous dependent variable" href="https://psyteachr.github.io/glossary/g#general-linear-model">GLM</a>-based tests assume that the <a class="glossary" target="_blank" title="Defined as the deviation of an observation from a model's expected value." href="https://psyteachr.github.io/glossary/r#residual">residuals</a> will be normally distributed and it doesn't matter at all if the <a class="glossary" target="_blank" title="A variable whose value is used (in a model) to predict the value of a response variable." href="https://psyteachr.github.io/glossary/p#predictor-variable">predictors</a> and even the <a class="glossary" target="_blank" title="The target variable that is being analyzed, whose value is assumed to depend on other variables." href="https://psyteachr.github.io/glossary/d#dependent-variable">dependent variable</a> aren't.</p>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># for data wrangling</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/debruine/faux">faux</a></span><span class="op">)</span>      <span class="co"># for data simulation</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://afex.singmann.science/">afex</a></span><span class="op">)</span>      <span class="co"># for anova</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/">cowplot</a></span><span class="op">)</span>   <span class="co"># for dataviz</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">8675309</span><span class="op">)</span>  <span class="co"># to make sure simulation values don't vary between runs</span></code></pre></div>
+<p>In this blog post, I'm going to use data simulation to show you how you can visualise the normality of residuals with <a class="glossary" target="_blank" title="A scatterplot created by plotting two sets of quantiles against each other, used to check if data come from a specified distribution" href="https://psyteachr.github.io/glossary/q#q-q-plot">QQ plots</a>. We're going to simulate data from a totally hypothetical population of ferrets and cats. We're going to try to predict the energy levels of these pets from their weight. In my limited experience, tiny ferrets are way more energetic than big ferrets. I know nothing about cats.</p>
+<div class="figure">
+<img src="images/darwin_oy.png" alt=""><p class="caption">Tiny, energetic Darwin and her big, lazy brother, Oy</p>
+</div>
+<div id="simulate-data" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> Simulate Data<a class="anchor" aria-label="anchor" href="#simulate-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>We'll use <a href="https://debruine.github.io/faux/">faux</a> to simulate data based on data parameters like means, SDs and correlations for each group. At the moment, faux can only simulate multivariate normal distributions and then you can convert them to other distributions. So we'll simulate weights from a <a class="glossary" target="_blank" title="A symmetric distribution of data where values near the centre are most probable." href="https://psyteachr.github.io/glossary/n#normal-distribution">normal distribution</a> with a mean of 0 and SD of 1, and then convert these to a <a class="glossary" target="_blank" title="A distribution where all numbers in the range have an equal probability of being sampled" href="https://psyteachr.github.io/glossary/u#uniform-distribution">uniform distribution</a> for each pet type based on ranges I found online. Energy will be simulated from normal distributions with different means and SDs for cats and ferrets. Energy will be uncorrelated with weight for cats and negatively correlated for ferrets.</p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">faux</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/faux/man/sim_design.html">sim_design</a></span><span class="op">(</span>
+  within <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"weight"</span>, <span class="st">"energy"</span><span class="op">)</span><span class="op">)</span>,
+  between <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cat"</span>, <span class="st">"ferret"</span><span class="op">)</span><span class="op">)</span>,
+  n <span class="op">=</span> <span class="fl">50</span>,
+  mu <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>cat <span class="op">=</span> <span class="fl">0</span>, ferret <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,
+            energy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>cat <span class="op">=</span> <span class="fl">50</span>, energy <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span>,
+  sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>cat <span class="op">=</span> <span class="fl">1</span>, ferret <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+            energy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>cat <span class="op">=</span> <span class="fl">15</span>, energy <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span>,
+  r <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>cat <span class="op">=</span> <span class="fl">0</span>, ferret <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span><span class="op">)</span>,
+  plot <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>weight <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span>
+    <span class="va">species</span> <span class="op">==</span> <span class="st">"cat"</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/faux/man/norm2unif.html">norm2unif</a></span><span class="op">(</span><span class="va">weight</span>, <span class="fl">3.6</span>, <span class="fl">4.5</span><span class="op">)</span>,
+    <span class="va">species</span> <span class="op">==</span> <span class="st">"ferret"</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/faux/man/norm2unif.html">norm2unif</a></span><span class="op">(</span><span class="va">weight</span>, <span class="fl">0.7</span>, <span class="fl">2.0</span><span class="op">)</span>
+  <span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>N.B. If you're more used to <a href="https://debruine.github.io/tutorials/sim-data.html#intercept-model">simulating data using model parameters</a>, this way might make more sense to you, but it's often difficult to figure out what the <a class="glossary" target="_blank" title="A quantity characterizing a population." href="https://psyteachr.github.io/glossary/p#parameter">parameters</a> should be if you don't already have pilot data.</p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">50</span>
+
+<span class="co"># values approximated from an lm analysis</span>
+<span class="va">b_0</span>  <span class="op">&lt;-</span>  <span class="fl">92</span> <span class="co"># intercept</span>
+<span class="va">b_w</span>  <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">13</span> <span class="co"># fixed effect of weight</span>
+<span class="va">b_s</span>  <span class="op">&lt;-</span>  <span class="fl">85</span> <span class="co"># fixed effect of species</span>
+<span class="va">b_ws</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">26</span> <span class="co"># weight*species interaction</span>
+<span class="va">err_sd</span> <span class="op">&lt;-</span> <span class="fl">16</span> <span class="co"># SD of error term</span>
+
+<span class="co"># simulate populations of cats and ferrets </span>
+<span class="co"># with weights from uniform distributions</span>
+<span class="va">cat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+  id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"C"</span>, <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span>,
+  species <span class="op">=</span> <span class="st">"cat"</span>,
+  weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">3.6</span>, <span class="fl">4.5</span><span class="op">)</span>
+<span class="op">)</span>
+
+<span class="va">ferret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+  id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span>,
+  species <span class="op">=</span> <span class="st">"ferret"</span>,
+  weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">0.7</span>, <span class="fl">2.0</span><span class="op">)</span>
+<span class="op">)</span>
+
+<span class="co"># join data and calculate DV based on GLM</span>
+<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">cat</span>, <span class="va">ferret</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>
+    <span class="co"># effect-code species</span>
+    species.e <span class="op">=</span> <span class="fu">recode</span><span class="op">(</span><span class="va">species</span>, cat <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span>, ferret <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,
+    <span class="co"># simulate error term</span>
+    err <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="va">n</span>, <span class="fl">0</span>, <span class="va">err_sd</span><span class="op">)</span>,
+    <span class="co"># calculate DV</span>
+    energy <span class="op">=</span> <span class="va">b_0</span> <span class="op">+</span> <span class="va">species.e</span><span class="op">*</span><span class="va">b_s</span> <span class="op">+</span> <span class="va">weight</span><span class="op">*</span><span class="va">b_w</span> <span class="op">+</span> 
+             <span class="va">species.e</span><span class="op">*</span><span class="va">weight</span><span class="op">*</span><span class="va">b_ws</span> <span class="op">+</span> <span class="va">err</span>
+  <span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="04-01-normality_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>So weight is bimodal and made of two uniform distributions, while energy is bimodal and made of two normal distributions.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<img src="04-01-normality_files/figure-html/unnamed-chunk-4-1.png" alt="Distibutions overall and within species." width="100%"><p class="caption">
+Figure 8.1: Distibutions overall and within species.
+</p>
+</div>
+<p>If you run a Shapiro-Wilk test on these variables, you'd conclude they are <em>definitely</em> not normally distributed, but this doesn't matter at all!</p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">energy</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  data$energy
+## W = 0.95486, p-value = 0.001759</code></pre>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  data$weight
+## W = 0.82694, p-value = 1.821e-09</code></pre>
+</div>
+<div id="calculate-residuals" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> Calculate Residuals<a class="anchor" aria-label="anchor" href="#calculate-residuals"><i class="fas fa-link"></i></a>
+</h2>
+<p>We will predict energy from weight, species, and their interaction using a <a class="glossary" target="_blank" title="A mathematical model comparing how one or more independent variables affect a continuous dependent variable" href="https://psyteachr.github.io/glossary/g#general-linear-model">linear model</a>. We'll <a class="glossary" target="_blank" title="A coding scheme for categorical variables that contrasts each group mean with the mean of all the group means." href="https://psyteachr.github.io/glossary/e#effect-code">effect code</a> species to make the output more similar to what you'd get from ANOVA (and it doesn't really make sense to <a class="glossary" target="_blank" title="A coding scheme for categorical variables that creates (n_levels -1) dichotomous variables where each level of the categorical variable is contrasted to a reference level." href="https://psyteachr.github.io/glossary/t#treatment-code">treatment code</a> them, since neither cats nor ferrets are a meaningful "baseline").</p>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># effect-code species</span>
+<span class="va">data</span><span class="op">$</span><span class="va">species.e</span> <span class="op">&lt;-</span> <span class="fu">recode</span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">species</span>, cat <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span>, ferret <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
+
+<span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">energy</span> <span class="op">~</span> <span class="va">weight</span><span class="op">*</span><span class="va">species.e</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+std.error
+</th>
+<th style="text-align:right;">
+statistic
+</th>
+<th style="text-align:right;">
+p.value
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+85.414
+</td>
+<td style="text-align:right;">
+16.204
+</td>
+<td style="text-align:right;">
+5.271
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+weight
+</td>
+<td style="text-align:right;">
+-7.928
+</td>
+<td style="text-align:right;">
+4.674
+</td>
+<td style="text-align:right;">
+-1.696
+</td>
+<td style="text-align:right;">
+0.093
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+species.e
+</td>
+<td style="text-align:right;">
+76.821
+</td>
+<td style="text-align:right;">
+32.407
+</td>
+<td style="text-align:right;">
+2.370
+</td>
+<td style="text-align:right;">
+0.020
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+weight:species.e
+</td>
+<td style="text-align:right;">
+-18.107
+</td>
+<td style="text-align:right;">
+9.348
+</td>
+<td style="text-align:right;">
+-1.937
+</td>
+<td style="text-align:right;">
+0.056
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>You can use the <code><a href="https://rdrr.io/r/stats/residuals.html">resid()</a></code> function to get the <a class="glossary" target="_blank" title="" href="https://psyteachr.github.io/glossary/r#residuals">residual error</a> term from your model. This is the difference between the predicted value (based on the weight and species for each subject and the model parameters) and the actual value. Those values should be normally distributed.</p>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">err</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">resid</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span>
+
+<span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_density</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">err</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="04-01-normality_files/figure-html/unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<div id="shapiro-wilk" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">8.3</span> Shapiro-Wilk<a class="anchor" aria-label="anchor" href="#shapiro-wilk"><i class="fas fa-link"></i></a>
+</h2>
+<p>I don't recommend using statistical tests for normality. Essentially, they are underpowered in small samples and overpowered in large samples. <a href="https://towardsdatascience.com/stop-testing-for-normality-dba96bb73f90">Robert Greener has a good discussion of this.</a>. However, the residuals do "pass" the Shapiro-Wilk normality test.</p>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">err</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  err
+## W = 0.99579, p-value = 0.9905</code></pre>
+</div>
+<div id="qq-plots" class="section level2" number="8.4">
+<h2>
+<span class="header-section-number">8.4</span> QQ plots<a class="anchor" aria-label="anchor" href="#qq-plots"><i class="fas fa-link"></i></a>
+</h2>
+<p>It's better to assess normality visually, but it's quite hard to judge normality from a density plot, especially when you have small samples, so we can use a <a class="glossary" target="_blank" title="A scatterplot created by plotting two sets of quantiles against each other, used to check if data come from a specified distribution" href="https://psyteachr.github.io/glossary/q#q-q-plot">QQ plot</a> to visualise how close a distribution is to normal. This is a scatterplot created by plotting two sets of <a class="glossary" target="_blank" title="Cutoffs dividing the range of a distribution into continuous intervals with equal probabilities." href="https://psyteachr.github.io/glossary/q#quantile">quantiles</a> against each other, used to check if data come from a specified distribution (here the normal distribution).</p>
+<p>These data are simulated, so will show an almost perfect straight line. Real data are always a bit messier. But even here, the points at the extremes are often not exactly on the line. It takes practice to tell if a QQ-plot shows clear signs of non-normality.</p>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># ggplot function for more customisation</span>
+<span class="fu">qplot</span><span class="op">(</span>sample <span class="op">=</span> <span class="va">err</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">stat_qq_line</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"dodgerblue"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Theoretical distribution"</span>,
+       y <span class="op">=</span> <span class="st">"Sample distribution"</span>,
+       title <span class="op">=</span> <span class="st">"QQ Plot for Residual Error"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="04-01-normality_files/figure-html/unnamed-chunk-10-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>Our bimodal energy data are a good example of a QQ plot showing a non-normal distribution (see how the points move away from the line at the ends), but that doesn't matter for your model at all.</p>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">data</span>, <span class="fu">aes</span><span class="op">(</span>sample <span class="op">=</span> <span class="va">energy</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">stat_qq</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">stat_qq_line</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"dodgerblue"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Theoretical distribution"</span>,
+       y <span class="op">=</span> <span class="st">"Sample distribution"</span>,
+       title <span class="op">=</span> <span class="st">"QQ Plot for Energy"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="04-01-normality_files/figure-html/unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<div id="other-tests" class="section level2" number="8.5">
+<h2>
+<span class="header-section-number">8.5</span> Other tests<a class="anchor" aria-label="anchor" href="#other-tests"><i class="fas fa-link"></i></a>
+</h2>
+<p>So how do you get the residuals for other tests? All functions that return models in R should have a <code><a href="https://rdrr.io/r/stats/residuals.html">resid()</a></code> function. T-tests are a little trickier, but you can just convert them to their GLM equivalents (<a href="https://lindeloev.github.io/tests-as-linear/">Jonas Lindeløv has a great tutorial</a>) or use the formulas below.</p>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># simulated data to use below</span>
+<span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
+<span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<div id="one-sample-t-test" class="section level3" number="8.5.1">
+<h3>
+<span class="header-section-number">8.5.1</span> One-sample t-test<a class="anchor" aria-label="anchor" href="#one-sample-t-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>The residuals for a one-samples t-test are the scores minus the mean difference. (You don't <em>have to</em> subtract the mean difference, since the distribution won't change if you add a constant value.)</p>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># one-sample t-test against 0</span>
+<span class="va">mu</span> <span class="op">=</span> <span class="fl">0</span>
+<span class="va">t_o</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">A</span>, mu <span class="op">=</span> <span class="va">mu</span><span class="op">)</span>
+<span class="va">err_t</span> <span class="op">&lt;-</span> <span class="va">A</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span>
+<span class="va">plot_t</span> <span class="op">&lt;-</span> <span class="fu">qplot</span><span class="op">(</span>sample <span class="op">=</span> <span class="va">err_t</span><span class="op">)</span> <span class="op">+</span> <span class="fu">stat_qq_line</span><span class="op">(</span><span class="op">)</span>
+
+<span class="co"># lm equivalent to one-sample t-test</span>
+<span class="va">m_o</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">A</span> <span class="op">-</span> <span class="va">mu</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">err_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">resid</a></span><span class="op">(</span><span class="va">m_o</span><span class="op">)</span>
+<span class="va">plot_lm</span> <span class="op">&lt;-</span> <span class="fu">qplot</span><span class="op">(</span>sample <span class="op">=</span> <span class="va">err_lm</span><span class="op">)</span> <span class="op">+</span> <span class="fu">stat_qq_line</span><span class="op">(</span><span class="op">)</span>
+
+<span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">plot_t</span>, <span class="va">plot_lm</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"t"</span>, <span class="st">"lm"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="04-01-normality_files/figure-html/unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<div id="paired-samples-t-test" class="section level3" number="8.5.2">
+<h3>
+<span class="header-section-number">8.5.2</span> Paired samples t-test<a class="anchor" aria-label="anchor" href="#paired-samples-t-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>The residuals for a paired-samples t-test are the difference between the paired values, minus the mean difference.</p>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># paired samples t-test</span>
+<span class="va">t_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">A</span>, <span class="va">B</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">diff</span> <span class="op">&lt;-</span> <span class="va">A</span> <span class="op">-</span> <span class="va">B</span>
+<span class="va">err_t</span> <span class="op">&lt;-</span> <span class="va">diff</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">diff</span><span class="op">)</span>
+<span class="va">plot_t</span> <span class="op">&lt;-</span> <span class="fu">qplot</span><span class="op">(</span>sample <span class="op">=</span> <span class="va">err_t</span><span class="op">)</span> <span class="op">+</span> <span class="fu">stat_qq_line</span><span class="op">(</span><span class="op">)</span>
+
+<span class="co"># lm equivalent to paired-samples t-test</span>
+<span class="va">m_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">A</span><span class="op">-</span><span class="va">B</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">err_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">resid</a></span><span class="op">(</span><span class="va">m_p</span><span class="op">)</span>
+<span class="va">plot_lm</span> <span class="op">&lt;-</span> <span class="fu">qplot</span><span class="op">(</span>sample <span class="op">=</span> <span class="va">err_lm</span><span class="op">)</span> <span class="op">+</span> <span class="fu">stat_qq_line</span><span class="op">(</span><span class="op">)</span>
+
+<span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">plot_t</span>, <span class="va">plot_lm</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"t"</span>, <span class="st">"lm"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="04-01-normality_files/figure-html/unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<div id="independent-samples-t-test" class="section level3" number="8.5.3">
+<h3>
+<span class="header-section-number">8.5.3</span> Independent-samples t-test<a class="anchor" aria-label="anchor" href="#independent-samples-t-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>The residuals for an independent-samples t-test are the scores minus their own group mean.</p>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># independent-sample t-test</span>
+<span class="va">t_i</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">A</span>, <span class="va">B</span><span class="op">)</span>
+<span class="va">err_t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">A</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span>, <span class="va">B</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span><span class="op">)</span>
+<span class="va">plot_t</span> <span class="op">&lt;-</span> <span class="fu">qplot</span><span class="op">(</span>sample <span class="op">=</span> <span class="va">err_t</span><span class="op">)</span> <span class="op">+</span> <span class="fu">stat_qq_line</span><span class="op">(</span><span class="op">)</span>
+
+<span class="co"># lm equivalent to one-sample t-test</span>
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+  val <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">A</span>, <span class="va">B</span><span class="op">)</span>,
+  grp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, each <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>
+<span class="op">)</span>
+
+<span class="va">m_o</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">val</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">grp</span>, <span class="va">dat</span><span class="op">)</span>
+<span class="va">err_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">resid</a></span><span class="op">(</span><span class="va">m_o</span><span class="op">)</span>
+<span class="va">plot_lm</span> <span class="op">&lt;-</span> <span class="fu">qplot</span><span class="op">(</span>sample <span class="op">=</span> <span class="va">err_lm</span><span class="op">)</span> <span class="op">+</span> <span class="fu">stat_qq_line</span><span class="op">(</span><span class="op">)</span>
+
+<span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">plot_t</span>, <span class="va">plot_lm</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"t"</span>, <span class="st">"lm"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="04-01-normality_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<div id="anova" class="section level3" number="8.5.4">
+<h3>
+<span class="header-section-number">8.5.4</span> ANOVA<a class="anchor" aria-label="anchor" href="#anova"><i class="fas fa-link"></i></a>
+</h3>
+<p>You can use the <code><a href="https://rdrr.io/r/stats/residuals.html">resid()</a></code> function on the models output by ANOVAs or ANCOVAs.</p>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">m_aov</span> <span class="op">&lt;-</span> <span class="fu">afex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_4</a></span><span class="op">(</span><span class="va">energy</span> <span class="op">~</span> <span class="va">weight</span><span class="op">*</span><span class="va">species.e</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">id</span><span class="op">)</span>,
+  data <span class="op">=</span> <span class="va">data</span>,
+  factorize <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span>
+<span class="va">plot_aov</span> <span class="op">&lt;-</span> <span class="fu">qplot</span><span class="op">(</span>sample <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">resid</a></span><span class="op">(</span><span class="va">m_aov</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">stat_qq_line</span><span class="op">(</span><span class="op">)</span>
+
+<span class="va">m_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">energy</span> <span class="op">~</span> <span class="va">weight</span><span class="op">*</span><span class="va">species.e</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span>
+<span class="va">plot_lm</span> <span class="op">&lt;-</span> <span class="fu">qplot</span><span class="op">(</span>sample <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">resid</a></span><span class="op">(</span><span class="va">m_lm</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">stat_qq_line</span><span class="op">(</span><span class="op">)</span>
+
+<span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">plot_aov</span>, <span class="va">plot_lm</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"aov"</span>, <span class="st">"lm"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="04-01-normality_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>Dale Barr has a great blog post on <a href="https://datahowler.wordpress.com/2018/08/04/checking-model-assumptions-look-at-the-residuals-not-the-raw-data/">checking assumptions for multilevel data</a>.</p>
+</div>
+</div>
+<div id="glossary" class="section level2" number="8.6">
+<h2>
+<span class="header-section-number">8.6</span> Glossary<a class="anchor" aria-label="anchor" href="#glossary"><i class="fas fa-link"></i></a>
+</h2>
+<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:left;">
+definition
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://psyteachr.github.io/glossary/d.html#dependent-variable" class="glossary" target="_blank">dependent variable</a>
+</td>
+<td style="text-align:left;">
+The target variable that is being analyzed, whose value is assumed to depend on other variables.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://psyteachr.github.io/glossary/e.html#effect-code" class="glossary" target="_blank">effect code</a>
+</td>
+<td style="text-align:left;">
+A coding scheme for categorical variables that contrasts each group mean with the mean of all the group means.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://psyteachr.github.io/glossary/g.html#general-linear-model" class="glossary" target="_blank">general linear model</a>
+</td>
+<td style="text-align:left;">
+A mathematical model comparing how one or more independent variables affect a continuous dependent variable
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://psyteachr.github.io/glossary/n.html#normal-distribution" class="glossary" target="_blank">normal distribution</a>
+</td>
+<td style="text-align:left;">
+A symmetric distribution of data where values near the centre are most probable.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://psyteachr.github.io/glossary/p.html#parameter" class="glossary" target="_blank">parameter</a>
+</td>
+<td style="text-align:left;">
+A quantity characterizing a population.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://psyteachr.github.io/glossary/p.html#predictor-variable" class="glossary" target="_blank">predictor variable</a>
+</td>
+<td style="text-align:left;">
+A variable whose value is used (in a model) to predict the value of a response variable.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://psyteachr.github.io/glossary/q.html#q-q-plot" class="glossary" target="_blank">q q plot</a>
+</td>
+<td style="text-align:left;">
+A scatterplot created by plotting two sets of quantiles against each other, used to check if data come from a specified distribution
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://psyteachr.github.io/glossary/q.html#quantile" class="glossary" target="_blank">quantile</a>
+</td>
+<td style="text-align:left;">
+Cutoffs dividing the range of a distribution into continuous intervals with equal probabilities.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://psyteachr.github.io/glossary/r.html#residual" class="glossary" target="_blank">residual</a>
+</td>
+<td style="text-align:left;">
+Defined as the deviation of an observation from a model's expected value.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://psyteachr.github.io/glossary/r.html#residuals" class="glossary" target="_blank">residuals</a>
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://psyteachr.github.io/glossary/t.html#treatment-code" class="glossary" target="_blank">treatment code</a>
+</td>
+<td style="text-align:left;">
+A coding scheme for categorical variables that creates (n_levels -1) dichotomous variables where each level of the categorical variable is contrasted to a reference level.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://psyteachr.github.io/glossary/u.html#uniform-distribution" class="glossary" target="_blank">uniform distribution</a>
+</td>
+<td style="text-align:left;">
+A distribution where all numbers in the range have an equal probability of being sampled
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+
+
+
+<div class="chapter-nav">
+<div class="prev"><a href="highlight-a-range-of-x-values-on-a-ggplot.html"><span class="header-section-number">7</span> Highlight a range of x-values on a ggplot</a></div>
+<div class="next"><a href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#testing-for-normality"><span class="header-section-number">8</span> Testing for normality</a></li>
+<li><a class="nav-link" href="#simulate-data"><span class="header-section-number">8.1</span> Simulate Data</a></li>
+<li><a class="nav-link" href="#calculate-residuals"><span class="header-section-number">8.2</span> Calculate Residuals</a></li>
+<li><a class="nav-link" href="#shapiro-wilk"><span class="header-section-number">8.3</span> Shapiro-Wilk</a></li>
+<li><a class="nav-link" href="#qq-plots"><span class="header-section-number">8.4</span> QQ plots</a></li>
+<li>
+<a class="nav-link" href="#other-tests"><span class="header-section-number">8.5</span> Other tests</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#one-sample-t-test"><span class="header-section-number">8.5.1</span> One-sample t-test</a></li>
+<li><a class="nav-link" href="#paired-samples-t-test"><span class="header-section-number">8.5.2</span> Paired samples t-test</a></li>
+<li><a class="nav-link" href="#independent-samples-t-test"><span class="header-section-number">8.5.3</span> Independent-samples t-test</a></li>
+<li><a class="nav-link" href="#anova"><span class="header-section-number">8.5.4</span> ANOVA</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#glossary"><span class="header-section-number">8.6</span> Glossary</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/psyteachr/template/blob/master/book/04-01-normality.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/psyteachr/template/edit/master/book/04-01-normality.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    $(solveme[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    $(selects[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+$( document ).ready(function() {
+  var cite = ' ';
+  var psyteachr = ' <a href="https://psyteachr.github.io/"><img src="images/logos/psyteachr_logo.png" style="height: 31px; color: white;" alt="psyTeachR: Reproducible Research" /></a>';
+  var license = ' <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>';
+
+  $("footer div.row div:eq(1) p").html(
+    psyteachr + license + cite
+  );
+
+  // open rdrr links externally
+  $("a[href^='https://rdrr.io']").click(function(){
+    window.open(this.href);
+    return false;
+  });
+
+  // visible second sidebar in mobile
+  function move_sidebar() {
+    var w = window.innerWidth;
+    if (w < 992) {
+      $("#toc").appendTo($("#main-nav"));
+    } else {
+      $("#toc").appendTo($("div.sidebar-chapter"));
+    }
+  }
+  move_sidebar();
+  window.onresize = move_sidebar;
+});
+</script>
+
+</div>
+ <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Tutorials</strong>" was written by psyTeachR Team. It was last built on 2021-10-18.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

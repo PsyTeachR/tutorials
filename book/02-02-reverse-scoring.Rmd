@@ -1,0 +1,138 @@
+# How to reverse score questionnaire items
+
+- Dale Barr (January 2021)
+
+Sometimes it's necessary to reverse the scores given to questionnaire items. For instance, if your scale is the Dog Appreciation Scale (DAS) [I just made this up] you might have some items where 'strongly agree' is associated with appreciating dogs (and should be given the highest score) while other items where it is associated with loathing them (and should be given the lowest).
+
+
+```{r make-das, echo=FALSE}
+library("tidyverse")
+
+das <- tribble(
+  ~subj_id, ~item, ~score,
+  "S01", "I like dogs",                      5,
+  "S01", "Dogs are fun",                     5,
+  "S01", "Cats are better than dogs",        1,
+  "S01", "Dogs are helpful",                 4,
+  "S01", "Dogs are too noisy",               2,
+  "S01", "Dogs are too much responsibility", 2,
+  "S02", "I like dogs",                      3,
+  "S02", "Dogs are fun",                     4,
+  "S02", "Cats are better than dogs",        2,
+  "S02", "Dogs are helpful",                 4,
+  "S02", "Dogs are too noisy",               3,
+  "S02", "Dogs are too much responsibility", 5,
+  "S03", "I like dogs",                      1,
+  "S03", "Dogs are fun",                     3,
+  "S03", "Cats are better than dogs",        5,
+  "S03", "Dogs are helpful",                 2,
+  "S03", "Dogs are too noisy",               4,
+  "S03", "Dogs are too much responsibility", 5)
+```
+
+Let's say that the DAS scale has six items measuring dog appreciation. People respond to each of the six items on a 5 point likert scale, where 1=strongly disagree, 2=somewhat disagree, 3=neutral, 4=somewhat agree, 5=strongly agree.
+
+```{r dog-scale, echo=FALSE}
+das %>%
+  distinct(item) %>%
+  mutate(reverse_score = item %in%
+           c("Cats are better than dogs", "Dogs are too much responsibility",
+             "Dogs are too noisy")) %>%
+  knitr::kable(caption = "The Dog Appreciation Scale")
+```
+
+Here is some made-up questionnaire data with 6 items and 3 subjects, contained in the tibble named `das`. We want to reverse score the items "Cats are better than dogs", "Dogs are too noisy", and "Dogs are too much responsibility" before summing up the total for each subject.
+
+```{r das, echo=FALSE}
+das
+```
+
+`r hide("show me the code to create the table 'das'")`
+
+```{r make-das2, ref.label="make-das"}  
+```
+
+`r unhide()`
+
+First, we assume that you have your data in long format, like the table above. If you don't, then please see the materials on reshaping from wide to long, such as [this section from the MSC book](https://psyteachr.github.io/msc-data-skills/tidyr.html#pivot_longer).
+
+We are going to use a programming trick that we'll call "the N-plus-one-minus-X trick" to score the items that need to be reverse coded. This trick will work whenever you have a scale with N scale points that goes in integer steps from 1 to N (e.g., 1, 2, 3, 4, 5). You subtract Xs (each observed score) from N+1 to get the reversed value.
+
+*newscore = (number_of_scale_points + 1) - oldscore*
+
+So if you have a 5 point scale, it is:
+
+*newscore = 6 - oldscore*
+
+and a 7 point scale is
+
+*newscore = 8 - oldscore*.
+
+You can see this works using the following code:
+
+```{r show-it-works}
+oldscores <- 1:5
+newscores <- 6 - oldscores
+
+rbind(oldscores, newscores)
+```
+
+**Note: If your scale goes from 0 to N, then use N - X rather than (N + 1) - X to reverse score.**
+
+So we can see already that we need something like:
+
+```{r, eval=FALSE}
+das %>%
+  mutate(newscore = 6 - score)
+```
+
+but *only* for those items that need to be reverse scored. This is where `if_else()` comes in. Or, better said, where `if_else()` comes `%in%` (if you can pardon a bit of R humor).
+
+```{r reverse-score}
+das_coded <- das %>%
+  mutate(newscore = if_else(item %in% c("Cats are better than dogs",
+                                        "Dogs are too noisy",
+                                        "Dogs are too much responsibilitiy"),
+                            6 - score,
+                            score))
+```
+
+The code above adds a new variable `newscore` which is the result of the `if_else()` command and stores the resulting table in `das_coded`. This command has the following syntax:
+
+`if_else(condition, value_if_true, value_if_false)`.
+
+So, if the current value of item is found within the vector of options (that's what the `%in%` operator does), the first expression evaluates to `TRUE`, and `6-score` is returned; if the first expression evaluates to `FALSE`, then `score` is returned.
+
+But whenever you recode or score a variable, you should *ALWAYS* check that your code is correct, because typos are likely. The best way to do this is to run a little test in the console. You can just print out the data from `das_coded`, or if you have a lot of data, use `distinct()` to look at check the distinct values observed in the data.
+
+```{r check-it}
+das_coded %>%
+  distinct(item, score, newscore) %>%
+  print(n = +Inf) ## this makes sure *all* rows are printed, not just the first 20
+```
+
+Here we can see that "Cats are better than dogs" and "Dogs are too noisy" have been successfully reverse scored. We can also see that the items that should be forward scored, e.g., "I like dogs", are indeed forward scored (the scores don't change).
+
+But our reverse scoring of "Dogs are too much responsibility" has failed. Can you see the problem in our code (hint: typo).
+
+`r hide("no, I can't see the problem")`
+
+`responsibility` is mistyped as `responsibilitiy`
+
+`r unhide()`
+
+So the correct code is:
+
+```{r reverse-score2}
+das_coded <- das %>%
+  mutate(newscore = if_else(item %in% c("Cats are better than dogs",
+                                        "Dogs are too noisy",
+                                        "Dogs are too much responsibility"),
+                            6 - score,
+                            score))
+```
+
+```{r check-it2, ref.label="check-it"}
+```
+
+We've done it! Now we can proceed to analyze our data further.

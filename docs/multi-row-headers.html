@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 2 Multi-Row Headers | Tutorials</title>
+<meta name="author" content="psyTeachR Team">
+<meta name="description" content="Lisa DeBruine (2021-10-17) # required packages library(tidyverse) library(readxl) A student on our help forum once asked for help making a wide-format dataset long. When I tried to load the data,...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 2 Multi-Row Headers | Tutorials">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://psyteachr.github.io/tutorials/multi-row-headers.html">
+<meta property="og:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
+<meta property="og:description" content="Lisa DeBruine (2021-10-17) # required packages library(tidyverse) library(readxl) A student on our help forum once asked for help making a wide-format dataset long. When I tried to load the data,...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 2 Multi-Row Headers | Tutorials">
+<meta name="twitter:description" content="Lisa DeBruine (2021-10-17) # required packages library(tidyverse) library(readxl) A student on our help forum once asked for help making a wide-format dataset long. When I tried to load the data,...">
+<meta name="twitter:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6NP3MF25W3');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Tutorials</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li class="book-part">Data Wrangling</li>
+<li><a class="" href="multiple-import.html"><span class="header-section-number">1</span> Importing data from multiple files</a></li>
+<li><a class="active" href="multi-row-headers.html"><span class="header-section-number">2</span> Multi-Row Headers</a></li>
+<li><a class="" href="detecting-runs-in-a-sequence.html"><span class="header-section-number">3</span> Detecting "runs" in a sequence</a></li>
+<li><a class="" href="pipes.html"><span class="header-section-number">4</span> Pipes</a></li>
+<li class="book-part">Questionnaires</li>
+<li><a class="" href="converting-string-values-to-numeric-values-for-questionnaire-scoring.html"><span class="header-section-number">5</span> Converting string values to numeric values for questionnaire scoring</a></li>
+<li><a class="" href="how-to-reverse-score-questionnaire-items.html"><span class="header-section-number">6</span> How to reverse score questionnaire items</a></li>
+<li class="book-part">Plots</li>
+<li><a class="" href="highlight-a-range-of-x-values-on-a-ggplot.html"><span class="header-section-number">7</span> Highlight a range of x-values on a ggplot</a></li>
+<li class="book-part">Stats</li>
+<li><a class="" href="testing-for-normality.html"><span class="header-section-number">8</span> Testing for normality</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
+<li><a class="" href="symbols.html"><span class="header-section-number">B</span> Symbols</a></li>
+<li><a class="" href="conventions.html"><span class="header-section-number">C</span> Conventions</a></li>
+<li><a class="" href="license.html">License</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/psyteachr/template">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="multi-row-headers" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Multi-Row Headers<a class="anchor" aria-label="anchor" href="#multi-row-headers"><i class="fas fa-link"></i></a>
+</h1>
+<ul>
+<li>Lisa DeBruine (2021-10-17)</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># required packages</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></code></pre></div>
+<p>A student on our help forum once asked for help making a wide-format dataset long. When I tried to load the data, I realised the first three rows were all header rows. Here's the code I wrote to deal with it.</p>
+<p>First, I'll make a small CSV "file" below. In a typical case, you'd read the data in from a file.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">demo_csv</span> <span class="op">&lt;-</span> <span class="st">"SUB1, SUB1, SUB1, SUB1, SUB2, SUB2, SUB2, SUB2
+COND1, COND1, COND2, COND2, COND1, COND1, COND2, COND2
+X, Y, X, Y, X, Y, X, Y
+10, 15, 6, 2, 42, 4, 32, 5
+4, 43, 7, 34, 56, 43, 2, 33
+77, 12, 14, 75, 36, 85, 3, 2"</span></code></pre></div>
+<p>If you try to read in this data, you'll get a message about the duplicate column names and the resulting table will have "fixed" column headers and the next two columns headers as the first two rows.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="va">demo_csv</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;">
+SUB1...1
+</th>
+<th style="text-align:left;">
+SUB1...2
+</th>
+<th style="text-align:left;">
+SUB1...3
+</th>
+<th style="text-align:left;">
+SUB1...4
+</th>
+<th style="text-align:left;">
+SUB2...5
+</th>
+<th style="text-align:left;">
+SUB2...6
+</th>
+<th style="text-align:left;">
+SUB2...7
+</th>
+<th style="text-align:left;">
+SUB2...8
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+Y
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+42
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+32
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+43
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+34
+</td>
+<td style="text-align:left;">
+56
+</td>
+<td style="text-align:left;">
+43
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+77
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+75
+</td>
+<td style="text-align:left;">
+36
+</td>
+<td style="text-align:left;">
+85
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Instead, you should read in just the header rows by setting <code>n_max</code> equal to the number of header rows and <code>col_names</code> to <code>FALSE</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">data_head</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="va">demo_csv</span>, 
+                      n_max <span class="op">=</span> <span class="fl">3</span>, 
+                      col_names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<p>You will get a table that looks like this:</p>
+<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;">
+X1
+</th>
+<th style="text-align:left;">
+X2
+</th>
+<th style="text-align:left;">
+X3
+</th>
+<th style="text-align:left;">
+X4
+</th>
+<th style="text-align:left;">
+X5
+</th>
+<th style="text-align:left;">
+X6
+</th>
+<th style="text-align:left;">
+X7
+</th>
+<th style="text-align:left;">
+X8
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+SUB1
+</td>
+<td style="text-align:left;">
+SUB1
+</td>
+<td style="text-align:left;">
+SUB1
+</td>
+<td style="text-align:left;">
+SUB1
+</td>
+<td style="text-align:left;">
+SUB2
+</td>
+<td style="text-align:left;">
+SUB2
+</td>
+<td style="text-align:left;">
+SUB2
+</td>
+<td style="text-align:left;">
+SUB2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+Y
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>You can then make new header names by pasting together the names in the three rows by summarising across all the columns with the <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code> function and collapsing them using "_". Use <code><a href="https://rdrr.io/r/base/unlist.html">unlist()</a></code> and <code><a href="https://rdrr.io/r/base/unname.html">unname()</a></code> to convert the result from a table to a vector.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">new_names</span> <span class="op">&lt;-</span> <span class="va">data_head</span> <span class="op">%&gt;%</span>
+  <span class="fu">summarise</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span>.fns <span class="op">=</span> <span class="va">paste</span>, collapse <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="va">new_names</span></code></pre></div>
+<pre><code>## [1] "SUB1_COND1_X" "SUB1_COND1_Y" "SUB1_COND2_X" "SUB1_COND2_Y" "SUB2_COND1_X"
+## [6] "SUB2_COND1_Y" "SUB2_COND2_X" "SUB2_COND2_Y"</code></pre>
+<p>Now you can read in the data without the three header rows. Use <code>skip</code> to skip the headers and set <code>col_names</code> to the new names.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="va">demo_csv</span>, 
+                 skip <span class="op">=</span> <span class="fl">3</span>, 
+                 col_names <span class="op">=</span> <span class="va">new_names</span>,
+                 show_col_types <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:right;">
+SUB1_COND1_X
+</th>
+<th style="text-align:right;">
+SUB1_COND1_Y
+</th>
+<th style="text-align:right;">
+SUB1_COND2_X
+</th>
+<th style="text-align:right;">
+SUB1_COND2_Y
+</th>
+<th style="text-align:right;">
+SUB2_COND1_X
+</th>
+<th style="text-align:right;">
+SUB2_COND1_Y
+</th>
+<th style="text-align:right;">
+SUB2_COND2_X
+</th>
+<th style="text-align:right;">
+SUB2_COND2_Y
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+42
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+56
+</td>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+33
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+77
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>If you have an excel file that merges the duplicate headers across rows, it's a little trickier, but still do-able.</p>
+<div class="inline-figure"><img src="images/multirow-excel.png"></div>
+<p>The first steps is the same: read in the first three rows.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">data_head</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/readxl/man/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/3headers_demo.xlsx"</span>,
+                        n_max <span class="op">=</span> <span class="fl">3</span>, 
+                        col_names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;">
+...1
+</th>
+<th style="text-align:left;">
+...2
+</th>
+<th style="text-align:left;">
+...3
+</th>
+<th style="text-align:left;">
+...4
+</th>
+<th style="text-align:left;">
+...5
+</th>
+<th style="text-align:left;">
+...6
+</th>
+<th style="text-align:left;">
+...7
+</th>
+<th style="text-align:left;">
+...8
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+SUB1
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+SUB2
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+Y
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The code below starts at the second column and fills in any missing data with the value in the previous column.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">data_head</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">prev</span> <span class="op">&lt;-</span> <span class="va">data_head</span><span class="op">[</span>, <span class="va">i</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>
+  <span class="va">this</span> <span class="op">&lt;-</span> <span class="va">data_head</span><span class="op">[</span>, <span class="va">i</span><span class="op">]</span>
+  <span class="va">missing</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">this</span><span class="op">)</span>
+  <span class="va">this</span><span class="op">[</span><span class="va">missing</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">prev</span><span class="op">[</span><span class="va">missing</span>, <span class="op">]</span>
+  <span class="va">data_head</span><span class="op">[</span>, <span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">this</span>
+<span class="op">}</span></code></pre></div>
+<p>Now you can continue generating the pasted name the same as above.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">new_names</span> <span class="op">&lt;-</span> <span class="va">data_head</span> <span class="op">%&gt;%</span>
+  <span class="fu">summarise</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span>.fns <span class="op">=</span> <span class="va">paste</span>, collapse <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="va">new_names</span></code></pre></div>
+<pre><code>## [1] "SUB1_COND1_X" "SUB1_COND1_Y" "SUB1_COND2_X" "SUB1_COND2_Y" "SUB2_COND1_X"
+## [6] "SUB2_COND1_Y" "SUB2_COND2_X" "SUB2_COND2_Y"</code></pre>
+<p>If your data are set up with multiple headers, you'll probably want to change the shape of the data. Here's a quick example how to use <code>pivot_longer()</code> and <code>pivot_wider()</code> to do this with variable names like above.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/readxl/man/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/3headers_demo.xlsx"</span>, 
+                   skip <span class="op">=</span> <span class="fl">3</span>, 
+                   col_names <span class="op">=</span> <span class="va">new_names</span><span class="op">)</span>
+
+<span class="va">data_long</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">%&gt;%</span>
+  <span class="co"># add a row ID column if one doesn't exist already</span>
+  <span class="fu">mutate</span><span class="op">(</span>trial_id <span class="op">=</span> <span class="fu">row_number</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="co"># make a row for each data column</span>
+  <span class="fu">pivot_longer</span><span class="op">(</span>
+    cols <span class="op">=</span> <span class="op">-</span><span class="va">trial_id</span>, <span class="co"># everything except trial_id</span>
+    names_to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sub_id"</span>, <span class="st">"condition"</span>, <span class="st">"coord"</span><span class="op">)</span>,
+    names_sep <span class="op">=</span> <span class="st">"_"</span>,
+    values_to <span class="op">=</span> <span class="st">"val"</span>
+  <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="co"># make x and y coord columns</span>
+  <span class="fu">pivot_wider</span><span class="op">(</span>
+    names_from <span class="op">=</span> <span class="va">coord</span>,
+    values_from <span class="op">=</span> <span class="va">val</span>
+  <span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:right;">
+trial_id
+</th>
+<th style="text-align:left;">
+sub_id
+</th>
+<th style="text-align:left;">
+condition
+</th>
+<th style="text-align:right;">
+X
+</th>
+<th style="text-align:right;">
+Y
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+SUB1
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:right;">
+0.8316380
+</td>
+<td style="text-align:right;">
+0.7881552
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+SUB1
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:right;">
+0.3941482
+</td>
+<td style="text-align:right;">
+0.2056488
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+SUB2
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:right;">
+0.9332829
+</td>
+<td style="text-align:right;">
+0.1530898
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+SUB2
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:right;">
+0.6189847
+</td>
+<td style="text-align:right;">
+0.9400281
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+SUB1
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:right;">
+0.4147148
+</td>
+<td style="text-align:right;">
+0.1366791
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+SUB1
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:right;">
+0.9805130
+</td>
+<td style="text-align:right;">
+0.7493469
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+SUB2
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:right;">
+0.1048907
+</td>
+<td style="text-align:right;">
+0.6573472
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+SUB2
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:right;">
+0.9579583
+</td>
+<td style="text-align:right;">
+0.3430333
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+SUB1
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:right;">
+0.5577673
+</td>
+<td style="text-align:right;">
+0.0956297
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+SUB1
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:right;">
+0.3045316
+</td>
+<td style="text-align:right;">
+0.3540656
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+SUB2
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:right;">
+0.3621907
+</td>
+<td style="text-align:right;">
+0.8460132
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+SUB2
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:right;">
+0.0167339
+</td>
+<td style="text-align:right;">
+0.1886913
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+SUB1
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:right;">
+0.4326746
+</td>
+<td style="text-align:right;">
+0.8276863
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+SUB1
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:right;">
+0.2845026
+</td>
+<td style="text-align:right;">
+0.6236266
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+SUB2
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:right;">
+0.0439374
+</td>
+<td style="text-align:right;">
+0.5379287
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+SUB2
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:right;">
+0.0712748
+</td>
+<td style="text-align:right;">
+0.3511542
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+SUB1
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:right;">
+0.6545546
+</td>
+<td style="text-align:right;">
+0.6501679
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+SUB1
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:right;">
+0.9202481
+</td>
+<td style="text-align:right;">
+0.2525272
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+SUB2
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:right;">
+0.8117072
+</td>
+<td style="text-align:right;">
+0.3455603
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+SUB2
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:right;">
+0.7073851
+</td>
+<td style="text-align:right;">
+0.4249118
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+SUB1
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:right;">
+0.0679236
+</td>
+<td style="text-align:right;">
+0.6978207
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+SUB1
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:right;">
+0.3979061
+</td>
+<td style="text-align:right;">
+0.6922928
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+SUB2
+</td>
+<td style="text-align:left;">
+COND1
+</td>
+<td style="text-align:right;">
+0.5282960
+</td>
+<td style="text-align:right;">
+0.1093352
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+SUB2
+</td>
+<td style="text-align:left;">
+COND2
+</td>
+<td style="text-align:right;">
+0.6622162
+</td>
+<td style="text-align:right;">
+0.5567239
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    $(solveme[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    $(selects[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+$( document ).ready(function() {
+  var cite = ' ';
+  var psyteachr = ' <a href="https://psyteachr.github.io/"><img src="images/logos/psyteachr_logo.png" style="height: 31px; color: white;" alt="psyTeachR: Reproducible Research" /></a>';
+  var license = ' <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>';
+
+  $("footer div.row div:eq(1) p").html(
+    psyteachr + license + cite
+  );
+
+  // open rdrr links externally
+  $("a[href^='https://rdrr.io']").click(function(){
+    window.open(this.href);
+    return false;
+  });
+
+  // visible second sidebar in mobile
+  function move_sidebar() {
+    var w = window.innerWidth;
+    if (w < 992) {
+      $("#toc").appendTo($("#main-nav"));
+    } else {
+      $("#toc").appendTo($("div.sidebar-chapter"));
+    }
+  }
+  move_sidebar();
+  window.onresize = move_sidebar;
+});
+</script><div class="chapter-nav">
+<div class="prev"><a href="multiple-import.html"><span class="header-section-number">1</span> Importing data from multiple files</a></div>
+<div class="next"><a href="detecting-runs-in-a-sequence.html"><span class="header-section-number">3</span> Detecting "runs" in a sequence</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#multi-row-headers"><span class="header-section-number">2</span> Multi-Row Headers</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/psyteachr/template/blob/master/book/01-02-multirow-headers.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/psyteachr/template/edit/master/book/01-02-multirow-headers.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Tutorials</strong>" was written by psyTeachR Team. It was last built on 2021-10-18.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

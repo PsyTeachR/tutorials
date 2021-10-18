@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 How to reverse score questionnaire items | Tutorials</title>
+<meta name="author" content="psyTeachR Team">
+<meta name="description" content="Dale Barr (January 2021) Sometimes it's necessary to reverse the scores given to questionnaire items. For instance, if your scale is the Dog Appreciation Scale (DAS) [I just made this up] you...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 6 How to reverse score questionnaire items | Tutorials">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://psyteachr.github.io/tutorials/how-to-reverse-score-questionnaire-items.html">
+<meta property="og:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
+<meta property="og:description" content="Dale Barr (January 2021) Sometimes it's necessary to reverse the scores given to questionnaire items. For instance, if your scale is the Dog Appreciation Scale (DAS) [I just made this up] you...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 6 How to reverse score questionnaire items | Tutorials">
+<meta name="twitter:description" content="Dale Barr (January 2021) Sometimes it's necessary to reverse the scores given to questionnaire items. For instance, if your scale is the Dog Appreciation Scale (DAS) [I just made this up] you...">
+<meta name="twitter:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6NP3MF25W3');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Tutorials</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li class="book-part">Data Wrangling</li>
+<li><a class="" href="multiple-import.html"><span class="header-section-number">1</span> Importing data from multiple files</a></li>
+<li><a class="" href="multi-row-headers.html"><span class="header-section-number">2</span> Multi-Row Headers</a></li>
+<li><a class="" href="detecting-runs-in-a-sequence.html"><span class="header-section-number">3</span> Detecting "runs" in a sequence</a></li>
+<li><a class="" href="pipes.html"><span class="header-section-number">4</span> Pipes</a></li>
+<li class="book-part">Questionnaires</li>
+<li><a class="" href="converting-string-values-to-numeric-values-for-questionnaire-scoring.html"><span class="header-section-number">5</span> Converting string values to numeric values for questionnaire scoring</a></li>
+<li><a class="active" href="how-to-reverse-score-questionnaire-items.html"><span class="header-section-number">6</span> How to reverse score questionnaire items</a></li>
+<li class="book-part">Plots</li>
+<li><a class="" href="highlight-a-range-of-x-values-on-a-ggplot.html"><span class="header-section-number">7</span> Highlight a range of x-values on a ggplot</a></li>
+<li class="book-part">Stats</li>
+<li><a class="" href="testing-for-normality.html"><span class="header-section-number">8</span> Testing for normality</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
+<li><a class="" href="symbols.html"><span class="header-section-number">B</span> Symbols</a></li>
+<li><a class="" href="conventions.html"><span class="header-section-number">C</span> Conventions</a></li>
+<li><a class="" href="license.html">License</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/psyteachr/template">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="how-to-reverse-score-questionnaire-items" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> How to reverse score questionnaire items<a class="anchor" aria-label="anchor" href="#how-to-reverse-score-questionnaire-items"><i class="fas fa-link"></i></a>
+</h1>
+<ul>
+<li>Dale Barr (January 2021)</li>
+</ul>
+<p>Sometimes it's necessary to reverse the scores given to questionnaire items. For instance, if your scale is the Dog Appreciation Scale (DAS) [I just made this up] you might have some items where 'strongly agree' is associated with appreciating dogs (and should be given the highest score) while other items where it is associated with loathing them (and should be given the lowest).</p>
+<p>Let's say that the DAS scale has six items measuring dog appreciation. People respond to each of the six items on a 5 point likert scale, where 1=strongly disagree, 2=somewhat disagree, 3=neutral, 4=somewhat agree, 5=strongly agree.</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:dog-scale">Table 6.1: </span>The Dog Appreciation Scale
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+item
+</th>
+<th style="text-align:left;">
+reverse_score
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+I like dogs
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dogs are fun
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cats are better than dogs
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dogs are helpful
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dogs are too noisy
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dogs are too much responsibility
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Here is some made-up questionnaire data with 6 items and 3 subjects, contained in the tibble named <code>das</code>. We want to reverse score the items "Cats are better than dogs", "Dogs are too noisy", and "Dogs are too much responsibility" before summing up the total for each subject.</p>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+subj_id
+</th>
+<th style="text-align:left;">
+item
+</th>
+<th style="text-align:right;">
+score
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+S01
+</td>
+<td style="text-align:left;">
+I like dogs
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S01
+</td>
+<td style="text-align:left;">
+Dogs are fun
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S01
+</td>
+<td style="text-align:left;">
+Cats are better than dogs
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S01
+</td>
+<td style="text-align:left;">
+Dogs are helpful
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S01
+</td>
+<td style="text-align:left;">
+Dogs are too noisy
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S01
+</td>
+<td style="text-align:left;">
+Dogs are too much responsibility
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S02
+</td>
+<td style="text-align:left;">
+I like dogs
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S02
+</td>
+<td style="text-align:left;">
+Dogs are fun
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S02
+</td>
+<td style="text-align:left;">
+Cats are better than dogs
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S02
+</td>
+<td style="text-align:left;">
+Dogs are helpful
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S02
+</td>
+<td style="text-align:left;">
+Dogs are too noisy
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S02
+</td>
+<td style="text-align:left;">
+Dogs are too much responsibility
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S03
+</td>
+<td style="text-align:left;">
+I like dogs
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S03
+</td>
+<td style="text-align:left;">
+Dogs are fun
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S03
+</td>
+<td style="text-align:left;">
+Cats are better than dogs
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S03
+</td>
+<td style="text-align:left;">
+Dogs are helpful
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S03
+</td>
+<td style="text-align:left;">
+Dogs are too noisy
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S03
+</td>
+<td style="text-align:left;">
+Dogs are too much responsibility
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="webex-solution">
+<button>
+show me the code to create the table 'das'
+</button>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span>
+
+<span class="va">das</span> <span class="op">&lt;-</span> <span class="fu">tribble</span><span class="op">(</span>
+  <span class="op">~</span><span class="va">subj_id</span>, <span class="op">~</span><span class="va">item</span>, <span class="op">~</span><span class="va">score</span>,
+  <span class="st">"S01"</span>, <span class="st">"I like dogs"</span>,                      <span class="fl">5</span>,
+  <span class="st">"S01"</span>, <span class="st">"Dogs are fun"</span>,                     <span class="fl">5</span>,
+  <span class="st">"S01"</span>, <span class="st">"Cats are better than dogs"</span>,        <span class="fl">1</span>,
+  <span class="st">"S01"</span>, <span class="st">"Dogs are helpful"</span>,                 <span class="fl">4</span>,
+  <span class="st">"S01"</span>, <span class="st">"Dogs are too noisy"</span>,               <span class="fl">2</span>,
+  <span class="st">"S01"</span>, <span class="st">"Dogs are too much responsibility"</span>, <span class="fl">2</span>,
+  <span class="st">"S02"</span>, <span class="st">"I like dogs"</span>,                      <span class="fl">3</span>,
+  <span class="st">"S02"</span>, <span class="st">"Dogs are fun"</span>,                     <span class="fl">4</span>,
+  <span class="st">"S02"</span>, <span class="st">"Cats are better than dogs"</span>,        <span class="fl">2</span>,
+  <span class="st">"S02"</span>, <span class="st">"Dogs are helpful"</span>,                 <span class="fl">4</span>,
+  <span class="st">"S02"</span>, <span class="st">"Dogs are too noisy"</span>,               <span class="fl">3</span>,
+  <span class="st">"S02"</span>, <span class="st">"Dogs are too much responsibility"</span>, <span class="fl">5</span>,
+  <span class="st">"S03"</span>, <span class="st">"I like dogs"</span>,                      <span class="fl">1</span>,
+  <span class="st">"S03"</span>, <span class="st">"Dogs are fun"</span>,                     <span class="fl">3</span>,
+  <span class="st">"S03"</span>, <span class="st">"Cats are better than dogs"</span>,        <span class="fl">5</span>,
+  <span class="st">"S03"</span>, <span class="st">"Dogs are helpful"</span>,                 <span class="fl">2</span>,
+  <span class="st">"S03"</span>, <span class="st">"Dogs are too noisy"</span>,               <span class="fl">4</span>,
+  <span class="st">"S03"</span>, <span class="st">"Dogs are too much responsibility"</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
+</div>
+<p>First, we assume that you have your data in long format, like the table above. If you don't, then please see the materials on reshaping from wide to long, such as <a href="https://psyteachr.github.io/msc-data-skills/tidyr.html#pivot_longer">this section from the MSC book</a>.</p>
+<p>We are going to use a programming trick that we'll call "the N-plus-one-minus-X trick" to score the items that need to be reverse coded. This trick will work whenever you have a scale with N scale points that goes in integer steps from 1 to N (e.g., 1, 2, 3, 4, 5). You subtract Xs (each observed score) from N+1 to get the reversed value.</p>
+<p><em>newscore = (number_of_scale_points + 1) - oldscore</em></p>
+<p>So if you have a 5 point scale, it is:</p>
+<p><em>newscore = 6 - oldscore</em></p>
+<p>and a 7 point scale is</p>
+<p><em>newscore = 8 - oldscore</em>.</p>
+<p>You can see this works using the following code:</p>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">oldscores</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>
+<span class="va">newscores</span> <span class="op">&lt;-</span> <span class="fl">6</span> <span class="op">-</span> <span class="va">oldscores</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">oldscores</span>, <span class="va">newscores</span><span class="op">)</span></code></pre></div>
+<pre><code>##           [,1] [,2] [,3] [,4] [,5]
+## oldscores    1    2    3    4    5
+## newscores    5    4    3    2    1</code></pre>
+<p><strong>Note: If your scale goes from 0 to N, then use N - X rather than (N + 1) - X to reverse score.</strong></p>
+<p>So we can see already that we need something like:</p>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">das</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>newscore <span class="op">=</span> <span class="fl">6</span> <span class="op">-</span> <span class="va">score</span><span class="op">)</span></code></pre></div>
+<p>but <em>only</em> for those items that need to be reverse scored. This is where <code>if_else()</code> comes in. Or, better said, where <code>if_else()</code> comes <code><a href="https://rdrr.io/r/base/match.html">%in%</a></code> (if you can pardon a bit of R humor).</p>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">das_coded</span> <span class="op">&lt;-</span> <span class="va">das</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>newscore <span class="op">=</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">item</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Cats are better than dogs"</span>,
+                                        <span class="st">"Dogs are too noisy"</span>,
+                                        <span class="st">"Dogs are too much responsibilitiy"</span><span class="op">)</span>,
+                            <span class="fl">6</span> <span class="op">-</span> <span class="va">score</span>,
+                            <span class="va">score</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>The code above adds a new variable <code>newscore</code> which is the result of the <code>if_else()</code> command and stores the resulting table in <code>das_coded</code>. This command has the following syntax:</p>
+<p><code>if_else(condition, value_if_true, value_if_false)</code>.</p>
+<p>So, if the current value of item is found within the vector of options (that's what the <code><a href="https://rdrr.io/r/base/match.html">%in%</a></code> operator does), the first expression evaluates to <code>TRUE</code>, and <code>6-score</code> is returned; if the first expression evaluates to <code>FALSE</code>, then <code>score</code> is returned.</p>
+<p>But whenever you recode or score a variable, you should <em>ALWAYS</em> check that your code is correct, because typos are likely. The best way to do this is to run a little test in the console. You can just print out the data from <code>das_coded</code>, or if you have a lot of data, use <code>distinct()</code> to look at check the distinct values observed in the data.</p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">das_coded</span> <span class="op">%&gt;%</span>
+  <span class="fu">distinct</span><span class="op">(</span><span class="va">item</span>, <span class="va">score</span>, <span class="va">newscore</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="op">+</span><span class="cn">Inf</span><span class="op">)</span> <span class="co">## this makes sure *all* rows are printed, not just the first 20</span></code></pre></div>
+<pre><code>## # A tibble: 16 × 3
+##    item                             score newscore
+##    &lt;chr&gt;                            &lt;dbl&gt;    &lt;dbl&gt;
+##  1 I like dogs                          5        5
+##  2 Dogs are fun                         5        5
+##  3 Cats are better than dogs            1        5
+##  4 Dogs are helpful                     4        4
+##  5 Dogs are too noisy                   2        4
+##  6 Dogs are too much responsibility     2        2
+##  7 I like dogs                          3        3
+##  8 Dogs are fun                         4        4
+##  9 Cats are better than dogs            2        4
+## 10 Dogs are too noisy                   3        3
+## 11 Dogs are too much responsibility     5        5
+## 12 I like dogs                          1        1
+## 13 Dogs are fun                         3        3
+## 14 Cats are better than dogs            5        1
+## 15 Dogs are helpful                     2        2
+## 16 Dogs are too noisy                   4        2</code></pre>
+<p>Here we can see that "Cats are better than dogs" and "Dogs are too noisy" have been successfully reverse scored. We can also see that the items that should be forward scored, e.g., "I like dogs", are indeed forward scored (the scores don't change).</p>
+<p>But our reverse scoring of "Dogs are too much responsibility" has failed. Can you see the problem in our code (hint: typo).</p>
+<div class="webex-solution">
+<button>
+no, I can't see the problem
+</button>
+<p><code>responsibility</code> is mistyped as <code>responsibilitiy</code></p>
+</div>
+<p>So the correct code is:</p>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">das_coded</span> <span class="op">&lt;-</span> <span class="va">das</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>newscore <span class="op">=</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">item</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Cats are better than dogs"</span>,
+                                        <span class="st">"Dogs are too noisy"</span>,
+                                        <span class="st">"Dogs are too much responsibility"</span><span class="op">)</span>,
+                            <span class="fl">6</span> <span class="op">-</span> <span class="va">score</span>,
+                            <span class="va">score</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">das_coded</span> <span class="op">%&gt;%</span>
+  <span class="fu">distinct</span><span class="op">(</span><span class="va">item</span>, <span class="va">score</span>, <span class="va">newscore</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="op">+</span><span class="cn">Inf</span><span class="op">)</span> <span class="co">## this makes sure *all* rows are printed, not just the first 20</span></code></pre></div>
+<pre><code>## # A tibble: 16 × 3
+##    item                             score newscore
+##    &lt;chr&gt;                            &lt;dbl&gt;    &lt;dbl&gt;
+##  1 I like dogs                          5        5
+##  2 Dogs are fun                         5        5
+##  3 Cats are better than dogs            1        5
+##  4 Dogs are helpful                     4        4
+##  5 Dogs are too noisy                   2        4
+##  6 Dogs are too much responsibility     2        4
+##  7 I like dogs                          3        3
+##  8 Dogs are fun                         4        4
+##  9 Cats are better than dogs            2        4
+## 10 Dogs are too noisy                   3        3
+## 11 Dogs are too much responsibility     5        1
+## 12 I like dogs                          1        1
+## 13 Dogs are fun                         3        3
+## 14 Cats are better than dogs            5        1
+## 15 Dogs are helpful                     2        2
+## 16 Dogs are too noisy                   4        2</code></pre>
+<p>We've done it! Now we can proceed to analyze our data further.</p>
+
+</div>
+
+
+
+<div class="chapter-nav">
+<div class="prev"><a href="converting-string-values-to-numeric-values-for-questionnaire-scoring.html"><span class="header-section-number">5</span> Converting string values to numeric values for questionnaire scoring</a></div>
+<div class="next"><a href="highlight-a-range-of-x-values-on-a-ggplot.html"><span class="header-section-number">7</span> Highlight a range of x-values on a ggplot</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#how-to-reverse-score-questionnaire-items"><span class="header-section-number">6</span> How to reverse score questionnaire items</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/psyteachr/template/blob/master/book/02-02-reverse-scoring.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/psyteachr/template/edit/master/book/02-02-reverse-scoring.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    $(solveme[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    $(selects[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+$( document ).ready(function() {
+  var cite = ' ';
+  var psyteachr = ' <a href="https://psyteachr.github.io/"><img src="images/logos/psyteachr_logo.png" style="height: 31px; color: white;" alt="psyTeachR: Reproducible Research" /></a>';
+  var license = ' <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>';
+
+  $("footer div.row div:eq(1) p").html(
+    psyteachr + license + cite
+  );
+
+  // open rdrr links externally
+  $("a[href^='https://rdrr.io']").click(function(){
+    window.open(this.href);
+    return false;
+  });
+
+  // visible second sidebar in mobile
+  function move_sidebar() {
+    var w = window.innerWidth;
+    if (w < 992) {
+      $("#toc").appendTo($("#main-nav"));
+    } else {
+      $("#toc").appendTo($("div.sidebar-chapter"));
+    }
+  }
+  move_sidebar();
+  window.onresize = move_sidebar;
+});
+</script>
+
+</div>
+ <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Tutorials</strong>" was written by psyTeachR Team. It was last built on 2021-10-18.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

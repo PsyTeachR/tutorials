@@ -1,0 +1,143 @@
+# Multi-Row Headers
+
+- Lisa DeBruine (2021-10-17)
+
+
+```{r load-libraries, message=FALSE}
+# required packages
+library(tidyverse)
+library(readxl)
+```
+
+A student on our help forum once asked for help making a wide-format dataset long. When I tried to load the data, I realised the first three rows were all header rows. Here's the code I wrote to deal with it.
+
+First, I'll make a small CSV "file" below. In a typical case, you'd read the data in from a file.
+
+```{r data}
+demo_csv <- "SUB1, SUB1, SUB1, SUB1, SUB2, SUB2, SUB2, SUB2
+COND1, COND1, COND2, COND2, COND1, COND1, COND2, COND2
+X, Y, X, Y, X, Y, X, Y
+10, 15, 6, 2, 42, 4, 32, 5
+4, 43, 7, 34, 56, 43, 2, 33
+77, 12, 14, 75, 36, 85, 3, 2"
+```
+
+If you try to read in this data, you'll get a message about the duplicate column names and the resulting table will have "fixed" column headers and the next two columns headers as the first two rows.
+
+```{r get-data-bad, error=TRUE, message = FALSE}
+data <- read_csv(demo_csv)
+```
+
+```{r, echo = F, results='asis'}
+kable(data) %>%
+  kable_styling()
+```
+
+Instead, you should read in just the header rows by setting `n_max` equal to the number of header rows and `col_names` to `FALSE`.
+
+```{r get-headers, message = FALSE}
+data_head <- read_csv(demo_csv, 
+                      n_max = 3, 
+                      col_names = FALSE)
+```
+
+You will get a table that looks like this:
+
+```{r, echo = F, results='asis'}
+kable(data_head) %>%
+  kable_styling()
+```
+
+You can then make new header names by pasting together the names in the three rows by summarising across all the columns with the `paste()` function and collapsing them using "_". Use `unlist()` and `unname()` to convert the result from a table to a vector.
+
+```{r new-names}
+new_names <- data_head %>%
+  summarise(across(.fns = paste, collapse = "_")) %>%
+  unlist() %>% unname()
+
+new_names
+```
+
+Now you can read in the data without the three header rows. Use `skip` to skip the headers and set `col_names` to the new names.
+
+```{r get-data, mess}
+data <- read_csv(demo_csv, 
+                 skip = 3, 
+                 col_names = new_names,
+                 show_col_types = FALSE)
+```
+
+
+```{r, echo = F, results='asis'}
+kable(data) %>%
+  kable_styling()
+```
+
+If you have an excel file that merges the duplicate headers across rows, it's a little trickier, but still do-able. 
+
+![](images/multirow-excel.png)
+
+The first steps is the same: read in the first three rows.
+
+```{r, message = FALSE}
+data_head <- read_excel("data/3headers_demo.xlsx",
+                        n_max = 3, 
+                        col_names = FALSE)
+```
+
+```{r, echo = F, results='asis'}
+kable(data_head) %>%
+  kable_styling()
+```
+
+The code below starts at the second column and fills in any missing data with the value in the previous column.
+
+```{r}
+for (i in 2:ncol(data_head)) {
+  prev <- data_head[, i-1]
+  this <- data_head[, i]
+  missing <- is.na(this)
+  this[missing, ] <- prev[missing, ]
+  data_head[, i] <- this
+}
+```
+
+Now you can continue generating the pasted name the same as above.
+
+```{r new-names-2}
+new_names <- data_head %>%
+  summarise(across(.fns = paste, collapse = "_")) %>%
+  unlist() %>% unname()
+
+new_names
+```
+
+If your data are set up with multiple headers, you'll probably want to change the shape of the data. Here's a quick example how to use `pivot_longer()` and `pivot_wider()` to do this with variable names like above.
+
+```{r wide-to-long}
+data <- read_excel("data/3headers_demo.xlsx", 
+                   skip = 3, 
+                   col_names = new_names)
+
+data_long <- data %>%
+  # add a row ID column if one doesn't exist already
+  mutate(trial_id = row_number()) %>%
+  # make a row for each data column
+  pivot_longer(
+    cols = -trial_id, # everything except trial_id
+    names_to = c("sub_id", "condition", "coord"),
+    names_sep = "_",
+    values_to = "val"
+  ) %>%
+  # make x and y coord columns
+  pivot_wider(
+    names_from = coord,
+    values_from = val
+  )
+```
+
+```{r, echo = F, results='asis'}
+kable(data_long) %>%
+  kable_styling()
+```
+
