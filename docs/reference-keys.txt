@@ -8,9 +8,9 @@ multiple-import
 multi-row-headers
 detecting-runs-in-a-sequence
 pipes
-converting-string-values-to-numeric-values-for-questionnaire-scoring
-how-to-reverse-score-questionnaire-items
-highlight-a-range-of-x-values-on-a-ggplot
+converting-strings-to-numbers
+reverse-scoring
+highlight-a-range-of-x-values
 testing-for-normality
 simulate-data
 calculate-residuals

@@ -7,8 +7,8 @@
 library(tidyverse)
 ```
 
-
-<img src="images/pipe_sticker.png" style="width: 200px; float: right;">
+<div class="small_right"><img src="images/pipe_sticker.png" 
+     alt="Pipe" /></div>
 
 Pipes are a way to order your code in a more readable format. 
 
@@ -57,53 +57,53 @@ data <- rename(data_spread, A_mean = A, B_mean = B)
 <tbody>
   <tr>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.5695018 </td>
-   <td style="text-align:right;"> 3.076134 </td>
+   <td style="text-align:right;"> -0.5554196 </td>
+   <td style="text-align:right;"> 1.682461 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 1.9333683 </td>
-   <td style="text-align:right;"> 3.948379 </td>
+   <td style="text-align:right;"> 0.2713619 </td>
+   <td style="text-align:right;"> 3.269693 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.2416639 </td>
-   <td style="text-align:right;"> 1.399102 </td>
+   <td style="text-align:right;"> 2.1827391 </td>
+   <td style="text-align:right;"> 2.679896 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> -0.2533322 </td>
-   <td style="text-align:right;"> 4.201012 </td>
+   <td style="text-align:right;"> 1.0744802 </td>
+   <td style="text-align:right;"> 2.695665 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 1.4095406 </td>
-   <td style="text-align:right;"> 2.814342 </td>
+   <td style="text-align:right;"> 0.6466331 </td>
+   <td style="text-align:right;"> 2.468615 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 0.1889601 </td>
-   <td style="text-align:right;"> 1.558649 </td>
+   <td style="text-align:right;"> 0.8320378 </td>
+   <td style="text-align:right;"> 2.195331 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> -0.4420792 </td>
-   <td style="text-align:right;"> 2.563272 </td>
+   <td style="text-align:right;"> 1.7929535 </td>
+   <td style="text-align:right;"> 2.392173 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 0.4390727 </td>
-   <td style="text-align:right;"> 2.438536 </td>
+   <td style="text-align:right;"> 1.0395825 </td>
+   <td style="text-align:right;"> 3.758767 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 0.4891867 </td>
-   <td style="text-align:right;"> 2.381490 </td>
+   <td style="text-align:right;"> -0.0718552 </td>
+   <td style="text-align:right;"> 3.201503 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 1.1447648 </td>
-   <td style="text-align:right;"> 2.561238 </td>
+   <td style="text-align:right;"> 0.0423192 </td>
+   <td style="text-align:right;"> 2.259744 </td>
   </tr>
 </tbody>
 </table>

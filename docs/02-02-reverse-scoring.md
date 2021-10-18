@@ -1,4 +1,4 @@
-# How to reverse score questionnaire items
+# Reverse scoring
 
 - Dale Barr (January 2021)
 

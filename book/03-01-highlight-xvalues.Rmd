@@ -1,4 +1,4 @@
-# Highlight a range of x-values on a ggplot
+# Highlight a range of x-values
 
 - Dale Barr (March 23, 2020)
 

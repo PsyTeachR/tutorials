@@ -1,4 +1,4 @@
-# Converting string values to numeric values for questionnaire scoring
+# Converting strings to numbers
 
 - Dale Barr (August 18, 2021)
 

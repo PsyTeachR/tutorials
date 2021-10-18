@@ -6,8 +6,8 @@
 library(tidyverse)
 ```
 
-
-<img src="images/pipe_sticker.png" style="width: 200px; float: right;">
+<div class="small_right"><img src="images/pipe_sticker.png" 
+     alt="Pipe" /></div>
 
 Pipes are a way to order your code in a more readable format. 
 
