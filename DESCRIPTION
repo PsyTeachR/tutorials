@@ -1,4 +1,4 @@
-Package: tutorials
+Package: tutorials-v2
 Title: PsyTeachR Tutorials
 Version: 1.0
 Authors@R:
@@ -31,3 +31,5 @@ Remotes:
     psyteachr/glossary
 Depends:
     tidyverse
+URL: https://github.com/PsyTeachR/tutorials-v2
+BugReports: https://github.com/PsyTeachR/tutorials-v2/issues
