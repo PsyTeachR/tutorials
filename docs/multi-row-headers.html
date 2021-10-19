@@ -99,7 +99,7 @@ X, Y, X, Y, X, Y, X, Y
 77, 12, 14, 75, 36, 85, 3, 2"</span></code></pre></div>
 <p>If you try to read in this data, you'll get a message about the duplicate column names and the resulting table will have "fixed" column headers and the next two columns headers as the first two rows.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="va">demo_csv</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">demo_csv</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:left;">
@@ -1304,7 +1304,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Tutorials</strong>" was written by psyTeachR Team. It was last built on 2021-10-18.</p>
+    <p>"<strong>Tutorials</strong>" was written by psyTeachR Team. It was last built on 2021-10-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

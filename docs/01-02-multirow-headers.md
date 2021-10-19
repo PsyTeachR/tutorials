@@ -28,7 +28,7 @@ If you try to read in this data, you'll get a message about the duplicate column
 
 
 ```r
-data <- read_csv(demo_csv)
+data <- read_csv(I(demo_csv))
 ```
 
 <table class="table" style="margin-left: auto; margin-right: auto;">

@@ -25,7 +25,7 @@ X, Y, X, Y, X, Y, X, Y
 If you try to read in this data, you'll get a message about the duplicate column names and the resulting table will have "fixed" column headers and the next two columns headers as the first two rows.
 
 ```{r get-data-bad, error=TRUE, message = FALSE}
-data <- read_csv(demo_csv)
+data <- read_csv(I(demo_csv))
 ```
 
 ```{r, echo = F, results='asis'}
