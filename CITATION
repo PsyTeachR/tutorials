@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this book, please cite it as below:"
 authors:
-- family-names: "psyTeachR Team"
+- family-names: "{psyTeachR Team}"
 title: "psyTeachR Tutorials"
 version: 1.0
 date-released: 2021-10-18
