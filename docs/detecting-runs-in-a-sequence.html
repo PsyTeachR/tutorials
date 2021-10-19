@@ -107,10 +107,9 @@
   <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">select</span><span class="op">(</span><span class="va">subject</span>, <span class="va">trial</span>, <span class="va">stimulus</span><span class="op">)</span></code></pre></div>
 <p>Let's say you want to find the start and stop frames where <code>Z</code> appears in <code>stimulus</code>, and do this independently for each combination of <code>subject</code> and <code>trial</code>. Here's how <code>stimulus</code> looks for subject 1 and trial 1.</p>
-<pre><code>##  [1] "a" "a" "a" "b" "b" "b" "b" "c" "c" "c" "c" "d" "d" "d" "Z" "Z" "Z" "d" "d"
-## [20] "d" "d" "c" "c" "b" "b" "b" "a" "a" "a" "a" "Z" "Z" "Z" "d" "d" "d" "a" "a"
-## [39] "a"</code></pre>
-<p>So here you can see that the first run of Zs is from frame 15 to 17, 33 and the second is from 31 to 33. We want to write a function that processes the data for each trial and results in a table like this:</p>
+<pre><code>##  [1] "c" "c" "a" "a" "a" "d" "d" "b" "b" "b" "b" "Z" "Z" "Z" "b" "b" "a" "a" "a"
+## [20] "d" "d" "c" "c" "c" "Z" "Z" "Z" "b" "b" "b" "c" "c"</code></pre>
+<p>So here you can see that the first run of Zs is from frame 12 to 14, 27 and the second is from 25 to 27. We want to write a function that processes the data for each trial and results in a table like this:</p>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
 <thead><tr>
@@ -142,10 +141,10 @@ end_frame
 1
 </td>
 <td style="text-align:right;">
-15
+12
 </td>
 <td style="text-align:right;">
-17
+14
 </td>
 </tr>
 <tr>
@@ -159,10 +158,10 @@ end_frame
 2
 </td>
 <td style="text-align:right;">
-31
+25
 </td>
 <td style="text-align:right;">
-33
+27
 </td>
 </tr>
 </tbody>
@@ -199,7 +198,21 @@ is_target
 1
 </td>
 <td style="text-align:left;">
-a
+c
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+c
 </td>
 <td style="text-align:left;">
 FALSE
@@ -241,7 +254,7 @@ FALSE
 1
 </td>
 <td style="text-align:left;">
-b
+a
 </td>
 <td style="text-align:left;">
 FALSE
@@ -255,21 +268,7 @@ FALSE
 1
 </td>
 <td style="text-align:left;">
-b
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-b
+d
 </td>
 <td style="text-align:left;">
 FALSE
@@ -290,12 +289,11 @@ FALSE
 <span class="va">s1t1</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/rle.html">rle</a></span><span class="op">(</span><span class="va">s1t1</span><span class="op">)</span></code></pre></div>
-<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [13] FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [25] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE
-## [37] FALSE FALSE FALSE
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
+## [13]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [25]  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE
 ## Run Length Encoding
-##   lengths: int [1:5] 14 3 13 3 6
+##   lengths: int [1:5] 11 3 10 3 5
 ##   values : logi [1:5] FALSE TRUE FALSE TRUE FALSE</code></pre>
 <p>If that doesn't make sense, look at the help for <code><a href="https://rdrr.io/r/base/rle.html">rle()</a></code> (type <code><a href="https://rdrr.io/r/base/rle.html">?rle</a></code> in the console). Now we're ready to write our function, <code>detect_runs()</code>.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
@@ -333,10 +331,10 @@ end_fr
 1
 </td>
 <td style="text-align:right;">
-15
+12
 </td>
 <td style="text-align:right;">
-17
+14
 </td>
 </tr>
 <tr>
@@ -344,10 +342,10 @@ end_fr
 2
 </td>
 <td style="text-align:right;">
-31
+25
 </td>
 <td style="text-align:right;">
-33
+27
 </td>
 </tr>
 </tbody>
@@ -384,6 +382,62 @@ runstbl
 1
 </td>
 <td style="text-align:left;">
+FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
+</td>
+<td style="text-align:left;">
+1, 2, 12, 25, 14, 27
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
+</td>
+<td style="text-align:left;">
+1, 2, 13, 27, 15, 29
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
+</td>
+<td style="text-align:left;">
+1, 2, 9, 23, 11, 25
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE
+</td>
+<td style="text-align:left;">
+1, 2, 12, 26, 14, 28
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
 FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
 </td>
 <td style="text-align:left;">
@@ -392,72 +446,16 @@ FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FAL
 </tr>
 <tr>
 <td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
-</td>
-<td style="text-align:left;">
-1, 2, 16, 30, 18, 32
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:left;">
-FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
-</td>
-<td style="text-align:left;">
-1, 2, 12, 27, 14, 29
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE
-</td>
-<td style="text-align:left;">
-1, 2, 13, 29, 15, 31
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
-</td>
-<td style="text-align:left;">
-1, 2, 12, 24, 14, 26
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
 2
 </td>
 <td style="text-align:right;">
 3
 </td>
 <td style="text-align:left;">
-FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
+FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
 </td>
 <td style="text-align:left;">
-1, 2, 14, 25, 16, 27
+1, 2, 16, 32, 18, 34
 </td>
 </tr>
 </tbody>
@@ -501,74 +499,6 @@ end_fr
 1
 </td>
 <td style="text-align:right;">
-15
-</td>
-<td style="text-align:right;">
-17
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-31
-</td>
-<td style="text-align:right;">
-33
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-16
-</td>
-<td style="text-align:right;">
-18
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-30
-</td>
-<td style="text-align:right;">
-32
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
 12
 </td>
 <td style="text-align:right;">
@@ -580,7 +510,41 @@ end_fr
 1
 </td>
 <td style="text-align:right;">
-3
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+27
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
 </td>
 <td style="text-align:right;">
 2
@@ -590,6 +554,40 @@ end_fr
 </td>
 <td style="text-align:right;">
 29
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+25
 </td>
 </tr>
 </tbody>
