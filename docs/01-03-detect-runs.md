@@ -32,11 +32,12 @@ Let's say you want to find the start and stop frames where `Z` appears in `stimu
 
 
 ```
-##  [1] "c" "c" "a" "a" "b" "b" "b" "d" "d" "d" "Z" "Z" "Z" "d" "d" "c" "c" "c" "c"
-## [20] "a" "a" "b" "b" "b" "Z" "Z" "Z" "b" "b" "b" "b" "d" "d" "d" "d"
+##  [1] "a" "a" "a" "b" "b" "b" "b" "c" "c" "c" "c" "d" "d" "d" "Z" "Z" "Z" "d" "d"
+## [20] "d" "d" "c" "c" "b" "b" "b" "a" "a" "a" "a" "Z" "Z" "Z" "d" "d" "d" "a" "a"
+## [39] "a"
 ```
 
-So here you can see that the first run of Zs is from frame 11 to 13, 27 and the second is from 25 to 27. We want to write a function that processes the data for each trial and results in a table like this:
+So here you can see that the first run of Zs is from frame 15 to 17, 33 and the second is from 31 to 33. We want to write a function that processes the data for each trial and results in a table like this:
 
 <div class="kable-table">
 
@@ -55,15 +56,15 @@ So here you can see that the first run of Zs is from frame 11 to 13, 27 and the 
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 17 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 25 </td>
-   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:right;"> 33 </td>
   </tr>
 </tbody>
 </table>
@@ -95,13 +96,13 @@ head(runsdata_tgt)
   <tr>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> c </td>
+   <td style="text-align:left;"> a </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> c </td>
+   <td style="text-align:left;"> a </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
@@ -113,7 +114,7 @@ head(runsdata_tgt)
   <tr>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> a </td>
+   <td style="text-align:left;"> b </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
@@ -154,11 +155,12 @@ rle(s1t1)
 ```
 
 ```
-##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE
-## [13]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [25]  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [13] FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [25] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE
+## [37] FALSE FALSE FALSE
 ## Run Length Encoding
-##   lengths: int [1:5] 10 3 11 3 8
+##   lengths: int [1:5] 14 3 13 3 6
 ##   values : logi [1:5] FALSE TRUE FALSE TRUE FALSE
 ```
 
@@ -200,13 +202,13 @@ detect_runs(tibble(lvec = s1t1))
 <tbody>
   <tr>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 17 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 25 </td>
-   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:right;"> 33 </td>
   </tr>
 </tbody>
 </table>
@@ -238,38 +240,38 @@ head(result)
   <tr>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE </td>
-   <td style="text-align:left;"> 1, 2, 11, 25, 13, 27 </td>
+   <td style="text-align:left;"> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE </td>
+   <td style="text-align:left;"> 1, 2, 15, 31, 17, 33 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:left;"> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE </td>
-   <td style="text-align:left;"> 1, 2, 13, 30, 15, 32 </td>
+   <td style="text-align:left;"> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE </td>
+   <td style="text-align:left;"> 1, 2, 16, 30, 18, 32 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE </td>
-   <td style="text-align:left;"> 1, 2, 15, 30, 17, 32 </td>
+   <td style="text-align:left;"> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE </td>
+   <td style="text-align:left;"> 1, 2, 12, 27, 14, 29 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 2 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE </td>
-   <td style="text-align:left;"> 1, 2, 13, 27, 15, 29 </td>
+   <td style="text-align:left;"> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE </td>
+   <td style="text-align:left;"> 1, 2, 13, 29, 15, 31 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 2 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:left;"> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE </td>
-   <td style="text-align:left;"> 1, 2, 13, 28, 15, 30 </td>
+   <td style="text-align:left;"> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE </td>
+   <td style="text-align:left;"> 1, 2, 12, 24, 14, 26 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 2 </td>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE </td>
-   <td style="text-align:left;"> 1, 2, 12, 30, 14, 32 </td>
+   <td style="text-align:left;"> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE </td>
+   <td style="text-align:left;"> 1, 2, 14, 25, 16, 27 </td>
   </tr>
 </tbody>
 </table>
@@ -304,43 +306,43 @@ head(data)
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 13 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 25 </td>
-   <td style="text-align:right;"> 27 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 15 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 30 </td>
-   <td style="text-align:right;"> 32 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 15 </td>
    <td style="text-align:right;"> 17 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:right;"> 33 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 18 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
    <td style="text-align:right;"> 2 </td>
    <td style="text-align:right;"> 30 </td>
    <td style="text-align:right;"> 32 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:right;"> 14 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 29 </td>
   </tr>
 </tbody>
 </table>

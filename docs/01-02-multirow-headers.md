@@ -16,19 +16,19 @@ First, I'll make a small CSV "file" below. In a typical case, you'd read the dat
 
 
 ```r
-demo_csv <- "SUB1, SUB1, SUB1, SUB1, SUB2, SUB2, SUB2, SUB2
+demo_csv <- I("SUB1, SUB1, SUB1, SUB1, SUB2, SUB2, SUB2, SUB2
 COND1, COND1, COND2, COND2, COND1, COND1, COND2, COND2
 X, Y, X, Y, X, Y, X, Y
 10, 15, 6, 2, 42, 4, 32, 5
 4, 43, 7, 34, 56, 43, 2, 33
-77, 12, 14, 75, 36, 85, 3, 2"
+77, 12, 14, 75, 36, 85, 3, 2")
 ```
 
 If you try to read in this data, you'll get a message about the duplicate column names and the resulting table will have "fixed" column headers and the next two columns headers as the first two rows.
 
 
 ```r
-data <- read_csv(I(demo_csv))
+data <- read_csv(demo_csv)
 ```
 
 <table class="table" style="margin-left: auto; margin-right: auto;">

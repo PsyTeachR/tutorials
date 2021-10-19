@@ -57,53 +57,53 @@ data <- rename(data_spread, A_mean = A, B_mean = B)
 <tbody>
   <tr>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.3708118 </td>
-   <td style="text-align:right;"> 2.901872 </td>
+   <td style="text-align:right;"> -0.3707013 </td>
+   <td style="text-align:right;"> 2.515674 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.2976983 </td>
-   <td style="text-align:right;"> 3.536954 </td>
+   <td style="text-align:right;"> 0.6970321 </td>
+   <td style="text-align:right;"> 1.380033 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.9406839 </td>
-   <td style="text-align:right;"> 1.773053 </td>
+   <td style="text-align:right;"> 0.6848371 </td>
+   <td style="text-align:right;"> 2.773076 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 0.9882248 </td>
-   <td style="text-align:right;"> 3.648239 </td>
+   <td style="text-align:right;"> 0.4670074 </td>
+   <td style="text-align:right;"> 1.866025 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 0.5744494 </td>
-   <td style="text-align:right;"> 2.073828 </td>
+   <td style="text-align:right;"> 1.2133511 </td>
+   <td style="text-align:right;"> 3.039570 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 0.6138201 </td>
-   <td style="text-align:right;"> 3.208048 </td>
+   <td style="text-align:right;"> -0.4325094 </td>
+   <td style="text-align:right;"> 2.072769 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 0.1774554 </td>
-   <td style="text-align:right;"> 3.599054 </td>
+   <td style="text-align:right;"> -0.4733096 </td>
+   <td style="text-align:right;"> 1.439949 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 0.2021582 </td>
-   <td style="text-align:right;"> 3.029871 </td>
+   <td style="text-align:right;"> -0.8027246 </td>
+   <td style="text-align:right;"> 2.430137 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 0.2113152 </td>
-   <td style="text-align:right;"> 3.389527 </td>
+   <td style="text-align:right;"> 1.4198421 </td>
+   <td style="text-align:right;"> 2.628911 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 0.8396611 </td>
-   <td style="text-align:right;"> 2.369699 </td>
+   <td style="text-align:right;"> -0.7364546 </td>
+   <td style="text-align:right;"> 2.545786 </td>
   </tr>
 </tbody>
 </table>

@@ -91,15 +91,15 @@
 <p>A student on our help forum once asked for help making a wide-format dataset long. When I tried to load the data, I realised the first three rows were all header rows. Here's the code I wrote to deal with it.</p>
 <p>First, I'll make a small CSV "file" below. In a typical case, you'd read the data in from a file.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">demo_csv</span> <span class="op">&lt;-</span> <span class="st">"SUB1, SUB1, SUB1, SUB1, SUB2, SUB2, SUB2, SUB2
+<code class="sourceCode R"><span class="va">demo_csv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="st">"SUB1, SUB1, SUB1, SUB1, SUB2, SUB2, SUB2, SUB2
 COND1, COND1, COND2, COND2, COND1, COND1, COND2, COND2
 X, Y, X, Y, X, Y, X, Y
 10, 15, 6, 2, 42, 4, 32, 5
 4, 43, 7, 34, 56, 43, 2, 33
-77, 12, 14, 75, 36, 85, 3, 2"</span></code></pre></div>
+77, 12, 14, 75, 36, 85, 3, 2"</span><span class="op">)</span></code></pre></div>
 <p>If you try to read in this data, you'll get a message about the duplicate column names and the resulting table will have "fixed" column headers and the next two columns headers as the first two rows.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">demo_csv</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="va">demo_csv</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:left;">
