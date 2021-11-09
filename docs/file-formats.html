@@ -1,0 +1,2624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 1 Importing data from different file formats into R | Tutorials</title>
+<meta name="author" content="psyTeachR Team">
+<meta name="description" content="Freda Wan (November 4, 2021)   .table {   width: 80%; } This tutorial covers basic functions to import data from different formats and access them as tibbles.  1.1 At a glance File type Extension...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 1 Importing data from different file formats into R | Tutorials">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://psyteachr.github.io/tutorials/file-formats.html">
+<meta property="og:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
+<meta property="og:description" content="Freda Wan (November 4, 2021)   .table {   width: 80%; } This tutorial covers basic functions to import data from different formats and access them as tibbles.  1.1 At a glance File type Extension...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 1 Importing data from different file formats into R | Tutorials">
+<meta name="twitter:description" content="Freda Wan (November 4, 2021)   .table {   width: 80%; } This tutorial covers basic functions to import data from different formats and access them as tibbles.  1.1 At a glance File type Extension...">
+<meta name="twitter:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-6NP3MF25W3');
+  </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Tutorials</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li class="book-part">Data Wrangling</li>
+<li><a class="active" href="file-formats.html"><span class="header-section-number">1</span> Importing data from different file formats into R</a></li>
+<li><a class="" href="multiple-import.html"><span class="header-section-number">2</span> Importing data from multiple files</a></li>
+<li><a class="" href="multi-row-headers.html"><span class="header-section-number">3</span> Multi-Row Headers</a></li>
+<li><a class="" href="detecting-runs-in-a-sequence.html"><span class="header-section-number">4</span> Detecting "runs" in a sequence</a></li>
+<li><a class="" href="pipes.html"><span class="header-section-number">5</span> Pipes</a></li>
+<li class="book-part">Questionnaires</li>
+<li><a class="" href="converting-strings-to-numbers.html"><span class="header-section-number">6</span> Converting strings to numbers</a></li>
+<li><a class="" href="reverse-scoring.html"><span class="header-section-number">7</span> Reverse scoring</a></li>
+<li class="book-part">Plots</li>
+<li><a class="" href="highlight-a-range-of-x-values.html"><span class="header-section-number">8</span> Highlight a range of x-values</a></li>
+<li class="book-part">Stats</li>
+<li><a class="" href="testing-for-normality.html"><span class="header-section-number">9</span> Testing for normality</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
+<li><a class="" href="symbols.html"><span class="header-section-number">B</span> Symbols</a></li>
+<li><a class="" href="conventions.html"><span class="header-section-number">C</span> Conventions</a></li>
+<li><a class="" href="license.html">License</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/psyteachr/tutorials">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="file-formats" class="section level1">
+<h1>
+<span class="header-section-number">1</span> Importing data from different file formats into R<a class="anchor" aria-label="anchor" href="#file-formats"><i class="fas fa-link"></i></a>
+</h1>
+<ul>
+<li>Freda Wan (November 4, 2021)</li>
+</ul>
+ <br><style type="text/css">
+ .table {
+    width: 80%;
+}
+</style>
+<p>This tutorial covers basic functions to import data from different formats and access them as tibbles.</p>
+<div id="at-a-glance" class="section level2">
+<h2>
+<span class="header-section-number">1.1</span> At a glance<a class="anchor" aria-label="anchor" href="#at-a-glance"><i class="fas fa-link"></i></a>
+</h2>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="left">File type</th>
+<th align="center">Extension</th>
+<th align="center">package::function</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">CSV</td>
+<td align="center">.csv</td>
+<td align="center"><a href="file-formats.html#ref-csv">readr::read_csv()</a></td>
+</tr>
+<tr class="even">
+<td align="left">Excel</td>
+<td align="center">.xls or .xlsx</td>
+<td align="center"><a href="file-formats.html#ref-xls">readxl:read_excel()</a></td>
+</tr>
+<tr class="odd">
+<td align="left">Plain text</td>
+<td align="center">.txt</td>
+<td align="center"><a href="file-formats.html#ref-txt">readr::read_lines()</a></td>
+</tr>
+<tr class="even">
+<td align="left">SPSS</td>
+<td align="center">.sav</td>
+<td align="center"><a href="file-formats.html#ref-spss">haven::read_sav()</a></td>
+</tr>
+<tr class="odd">
+<td align="left">Binary R data</td>
+<td align="center">.rds</td>
+<td align="center"><a href="file-formats.html#ref-rds">readr::read_rds()</a></td>
+</tr>
+<tr class="even">
+<td align="left">JSON</td>
+<td align="center">.json</td>
+<td align="center"><a href="file-formats.html#ref-json">jsonlite::fromJSON()</a></td>
+</tr>
+</tbody>
+</table></div>
+<p> </p>
+</div>
+<div id="ref-csv" class="section level2">
+<h2>
+<span class="header-section-number">1.2</span> 1. CSV<a class="anchor" aria-label="anchor" href="#ref-csv"><i class="fas fa-link"></i></a>
+</h2>
+<p>Most will be familiar with importing common-separated values (CSV) files using the <code>read_csv()</code> function offered in Tidyverse's 'readr' package. But what if your data is separated by tabs, semicolons, or other characters such as "|"? It is helpful to know that similar functions in 'readr' can readily help you import your data into R.</p>
+<ul>
+<li>For tab-separated files (.tsv), use <code>read_tsv()</code>.<br>
+</li>
+<li>For semicolon-separated files, where the comma is the decimal point not the separator, use <code>read_csv2()</code>.</li>
+</ul>
+<p>Here is the syntax.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#library(tidyverse)</span>
+<span class="va">tbl_csv</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/filename.csv"</span><span class="op">)</span>
+<span class="va">tbl_csv2</span> <span class="op">&lt;-</span> <span class="fu">read_csv2</span><span class="op">(</span><span class="st">"data/filename.csv"</span><span class="op">)</span>
+<span class="va">tbl_tsv</span> <span class="op">&lt;-</span> <span class="fu">read_tsv</span><span class="op">(</span><span class="st">"data/filename.tsv"</span><span class="op">)</span></code></pre></div>
+<div id="other-delimiters" class="section level3">
+<h3>
+<span class="header-section-number">1.2.1</span> Other delimiters<a class="anchor" aria-label="anchor" href="#other-delimiters"><i class="fas fa-link"></i></a>
+</h3>
+<p>If your data are delimited by other characters such as "|", use <code>read_delim()</code> and specify the delimiter.</p>
+<p>For example, if the text file looks like the dummy data below, we can see that "|" is the delimiter. (To try out the code below, you can copy the text, save it to a file and name it <code>delim_data.txt</code>.)</p>
+<pre><code>ParticipantID|Condition1|Condition2|Condition3|Control
+130059284|0.4|0.01|0.2|0
+290100722|0.3|0.02|0.3|1
+387005398|0.5|0.01|0.4|0</code></pre>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dat_delim</span> <span class="op">&lt;-</span> <span class="fu">read_delim</span><span class="op">(</span><span class="st">"data/delim_data.txt"</span>, delim <span class="op">=</span> <span class="st">"|"</span><span class="op">)</span>  </code></pre></div>
+<pre><code>## Rows: 3 Columns: 5</code></pre>
+<pre><code>## ── Column specification ─────────────────────────────────────────────────────────
+## Delimiter: "|"
+## dbl (5): ParticipantID, Condition1, Condition2, Condition3, Control</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+R is now able to read the data as a tibble:
+<div class="inline-table"><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:center;">
+ParticipantID
+</th>
+<th style="text-align:center;">
+Condition1
+</th>
+<th style="text-align:center;">
+Condition2
+</th>
+<th style="text-align:center;">
+Condition3
+</th>
+<th style="text-align:center;">
+Control
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+130059284
+</td>
+<td style="text-align:center;">
+0.4
+</td>
+<td style="text-align:center;">
+0.01
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+290100722
+</td>
+<td style="text-align:center;">
+0.3
+</td>
+<td style="text-align:center;">
+0.02
+</td>
+<td style="text-align:center;">
+0.3
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+387005398
+</td>
+<td style="text-align:center;">
+0.5
+</td>
+<td style="text-align:center;">
+0.01
+</td>
+<td style="text-align:center;">
+0.4
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="changing-the-data-type-for-each-column" class="section level3">
+<h3>
+<span class="header-section-number">1.2.2</span> Changing the data type for each column<a class="anchor" aria-label="anchor" href="#changing-the-data-type-for-each-column"><i class="fas fa-link"></i></a>
+</h3>
+<p>Sometimes we want to specify the data type for each column. When we load the data, R generates a message (as above) to indicate the data type of each column. In our case, R has recognised all 5 columns as doubles or <code>dbl</code>, which is a class of numeric data, similar to float in other programming languages.</p>
+<p>Let's say we want <code>ParticipantID</code> as characters and <code>Control</code> as boolean (i.e., TRUE or FALSE, known as logical in R), we can add the <code>col_types</code> argument.</p>
+<p>In the code below, <code>col_types = "c???l"</code> specifies that for our 5 columns, we want to change the data type of <code>ParticipantID</code> to character and <code>Control</code> to logical. Since we don't need to change the data type for Condition1, Condition2, and Condition3, we use <code><a href="https://rdrr.io/r/utils/Question.html">?</a></code> to allow R to guess.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dat_delim_col_types</span> <span class="op">&lt;-</span> <span class="fu">read_delim</span><span class="op">(</span><span class="st">"data/delim_data.txt"</span>, delim <span class="op">=</span> <span class="st">"|"</span>, col_types <span class="op">=</span> <span class="st">"c???l"</span><span class="op">)</span>  
+<span class="fu"><a href="https://rdrr.io/r/stats/spectrum.html">spec</a></span><span class="op">(</span><span class="va">dat_delim_col_types</span><span class="op">)</span> <span class="co"># check column data types</span></code></pre></div>
+<pre><code>## cols(
+##   ParticipantID = col_character(),
+##   Condition1 = col_double(),
+##   Condition2 = col_double(),
+##   Condition3 = col_double(),
+##   Control = col_logical()
+## )</code></pre>
+<p>You can specify the data type you want by using one character to represent each column. The column types are: <code>c = character, i = integer, n = number, d = double, l = logical, f = factor, D = date, T = date time, t = time,</code> <code>? = guess, or _/- to skip the column</code>.</p>
+<p>The argument <code>col_types</code> is also used in other functions in this tutorial, including <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel()</a></code> for Excel data and <code>read_table()</code> for reading text as a tibble.</p>
+</div>
+<div id="write-data-to-csv" class="section level3">
+<h3>
+<span class="header-section-number">1.2.3</span> Write data to CSV<a class="anchor" aria-label="anchor" href="#write-data-to-csv"><i class="fas fa-link"></i></a>
+</h3>
+<p>After loading data from various file formats and having cleaned and wrangled the data, you may want to save the tibble to .csv. This would allow you to view the data later or share the file with others without having to run the whole R script again.</p>
+<p>Here is the syntax.</p>
+<p><code>write_csv(cleaned_data, "cleaned_data.csv")</code></p>
+<p>Read more about 'readr' package and see the <a href="https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf">cheat sheet here</a>. Related packages include 'readxl' (detailed below) and 'googlesheets4' which allows you to read data from and write data to Google Sheets.</p>
+<p> </p>
+</div>
+</div>
+<div id="ref-xls" class="section level2">
+<h2>
+<span class="header-section-number">1.3</span> 2. Excel (.xls or .xlsx)<a class="anchor" aria-label="anchor" href="#ref-xls"><i class="fas fa-link"></i></a>
+</h2>
+<p>We use the 'readxl' package, part of Tidyverse, to read Excel data into R. Try out the 'readxl' functions below either using your data or download the <a href="data/Demo.xlsx">Demo.xlsx file here</a> (111KB). The data have been adapted from a public domain dataset, Chocolate Bar Ratings (<a href="file-formats.html#ref-choc">Tatman, 2017</a>), which contains expert ratings of 1700 chocolate bars.</p>
+<p>For demonstration purposes, the demo file contains 3 sheets, sorted by chocolate makers' company names starting A to G (Sheet 1), H to Q (Sheet 2), and R to Z (Sheet 3). You can access sheets either by name or by index.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Suggested: install 'readxl' and load separately</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span> 
+<span class="va">dat_excel</span><span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/Demo.xlsx"</span><span class="op">)</span> <span class="co"># by default, this loads Sheet 1 only. </span></code></pre></div>
+<div class="inline-table"><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:center;">
+Company
+(Maker-if known)
+</th>
+<th style="text-align:center;">
+Specific Bean Origin
+or Bar Name
+</th>
+<th style="text-align:center;">
+REF
+</th>
+<th style="text-align:center;">
+Review
+Date
+</th>
+<th style="text-align:center;">
+Cocoa
+Percent
+</th>
+<th style="text-align:center;">
+Company
+Location
+</th>
+<th style="text-align:center;">
+Rating
+</th>
+<th style="text-align:center;">
+Bean
+Type
+</th>
+<th style="text-align:center;">
+Broad Bean
+Origin
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+A. Morin
+</td>
+<td style="text-align:center;">
+Agua Grande
+</td>
+<td style="text-align:center;">
+1876
+</td>
+<td style="text-align:center;">
+2016
+</td>
+<td style="text-align:center;">
+0.63
+</td>
+<td style="text-align:center;">
+France
+</td>
+<td style="text-align:center;">
+3.75
+</td>
+<td style="text-align:center;">
+¬†
+</td>
+<td style="text-align:center;">
+Sao Tome
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+A. Morin
+</td>
+<td style="text-align:center;">
+Kpime
+</td>
+<td style="text-align:center;">
+1676
+</td>
+<td style="text-align:center;">
+2015
+</td>
+<td style="text-align:center;">
+0.70
+</td>
+<td style="text-align:center;">
+France
+</td>
+<td style="text-align:center;">
+2.75
+</td>
+<td style="text-align:center;">
+¬†
+</td>
+<td style="text-align:center;">
+Togo
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+A. Morin
+</td>
+<td style="text-align:center;">
+Atsane
+</td>
+<td style="text-align:center;">
+1676
+</td>
+<td style="text-align:center;">
+2015
+</td>
+<td style="text-align:center;">
+0.70
+</td>
+<td style="text-align:center;">
+France
+</td>
+<td style="text-align:center;">
+3.00
+</td>
+<td style="text-align:center;">
+¬†
+</td>
+<td style="text-align:center;">
+Togo
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+A. Morin
+</td>
+<td style="text-align:center;">
+Akata
+</td>
+<td style="text-align:center;">
+1680
+</td>
+<td style="text-align:center;">
+2015
+</td>
+<td style="text-align:center;">
+0.70
+</td>
+<td style="text-align:center;">
+France
+</td>
+<td style="text-align:center;">
+3.50
+</td>
+<td style="text-align:center;">
+¬†
+</td>
+<td style="text-align:center;">
+Togo
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+A. Morin
+</td>
+<td style="text-align:center;">
+Quilla
+</td>
+<td style="text-align:center;">
+1704
+</td>
+<td style="text-align:center;">
+2015
+</td>
+<td style="text-align:center;">
+0.70
+</td>
+<td style="text-align:center;">
+France
+</td>
+<td style="text-align:center;">
+3.50
+</td>
+<td style="text-align:center;">
+¬†
+</td>
+<td style="text-align:center;">
+Peru
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+A. Morin
+</td>
+<td style="text-align:center;">
+Carenero
+</td>
+<td style="text-align:center;">
+1315
+</td>
+<td style="text-align:center;">
+2014
+</td>
+<td style="text-align:center;">
+0.70
+</td>
+<td style="text-align:center;">
+France
+</td>
+<td style="text-align:center;">
+2.75
+</td>
+<td style="text-align:center;">
+Criollo
+</td>
+<td style="text-align:center;">
+Venezuela
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>If you check <code>dat_excel</code> (using either <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> from base R or <code><a href="https://pillar.r-lib.org/reference/glimpse.html">dplyr::glimpse()</a></code>), you will see that if you don't specify the sheet, only the first sheet is loaded.</p>
+<p>Use the 'readr' function <code><a href="https://readxl.tidyverse.org/reference/excel_sheets.html">excel_sheets()</a></code> to get a list of sheet names.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://readxl.tidyverse.org/reference/excel_sheets.html">excel_sheets</a></span><span class="op">(</span><span class="st">"data/Demo.xlsx"</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "Companies_A_to_G" "Companies_H_to_Q" "Companies_R_to_Z"</code></pre>
+<p>Then, you can specify which sheet you want to load, by sheet name or index.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sheet_by_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/Demo.xlsx"</span>, sheet <span class="op">=</span> <span class="st">"Companies_H_to_Q"</span><span class="op">)</span> <span class="co">#load sheet 2 by name</span>
+<span class="va">sheet_by_index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/Demo.xlsx"</span>, sheet <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="co">#load sheet by index</span></code></pre></div>
+<div id="dealing-with-formulas-and-formatted-cells" class="section level3">
+<h3>
+<span class="header-section-number">1.3.1</span> Dealing with formulas and formatted cells<a class="anchor" aria-label="anchor" href="#dealing-with-formulas-and-formatted-cells"><i class="fas fa-link"></i></a>
+</h3>
+<p>Sometimes you may encounter Excel data that contain formulas written in VBA macros or highlighted cells in yellow or in bold.</p>
+<p>If you want to extract the formulas or formatted cells from Excel, there are R functions that could help. The 'tidyxl' package has the function <code>tidyxl::xlsx_cells()</code> which reads the property of each cell in an Excel spreadsheet, such as the data type, formatting, whether it is a formula, the cell's font, height and width. Please refer to the <a href="https://cran.r-project.org/web/packages/tidyxl/vignettes/tidyxl.html">'tidyxl' vignette</a>.</p>
+<p>However, proceed with caution! Spreadsheet errors, either due to human mistakes or Excel's autocorrect functions, have raised reproducibility concerns in behavioural science and genetics research (see <a href="file-formats.html#ref-alexander">Alexander, 2013</a>; <a href="file-formats.html#ref-lewis">Lewis, 2021</a>). If you see strange behaviour from your Excel data, check the file: Are the formulas referring to the correct cells? Has a large number been autocorrected into a date? When in doubt, open the file in Excel to check.</p>
+<p> </p>
+</div>
+</div>
+<div id="ref-txt" class="section level2">
+<h2>
+<span class="header-section-number">1.4</span> 3. Plain text (.txt)<a class="anchor" aria-label="anchor" href="#ref-txt"><i class="fas fa-link"></i></a>
+</h2>
+<p>When your data are in .txt files, you can either use readLines() from base or readr::read_lines() from Tidyverse. Here, we use the latter, as it runs faster for large datasets.</p>
+<p>As an example, we use a simple dataset from <a href="file-formats.html#ref-stigliani">Stigliani and Grill-Spector (2018)</a>, a neuroscience study. You can <a href="https://osf.io/vzy8h/download">click here</a> to download the data directly (392 bytes).</p>
+<p>First, we read in the file to see what it contains.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#load the tidyverse package</span>
+<span class="va">readr_text</span> <span class="op">&lt;-</span> <span class="fu">read_lines</span><span class="op">(</span><span class="op">(</span><span class="st">"data/Exp1_Run1.txt"</span><span class="op">)</span>, n_max<span class="op">=</span><span class="fl">10</span><span class="op">)</span>
+<span class="va">readr_text</span></code></pre></div>
+<pre><code>##  [1] "Exp1 conditions: 2s, 4s, 8s, 15s, 30s"
+##  [2] "Run duration (s): 276"                
+##  [3] ""                                     
+##  [4] "Trial Condition Onset Duration Image" 
+##  [5] "1 8s 12 8 scrambled-260.jpg"          
+##  [6] "2 2s 32 2 scrambled-191.jpg"          
+##  [7] "3 4s 46 4 scrambled-481.jpg"          
+##  [8] "4 30s 75 30 scrambled-996.jpg"        
+##  [9] "5 15s 117 15 scrambled-355.jpg"       
+## [10] "6 8s 144 8 scrambled-47.jpg"</code></pre>
+<p>The <code>n_max</code> argument above specifies how many lines of data you would like to read. We can see that we need to skip the first 3 lines for the data to form a tibble. We use <code>read_table()</code> to create the tibble.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dat_txt</span> <span class="op">&lt;-</span> <span class="fu">read_table</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/Exp1_Run1.txt"</span>, skip <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="co"># skip first 3 lines</span></code></pre></div>
+<div class="inline-table"><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:center;">
+Trial
+</th>
+<th style="text-align:center;">
+Condition
+</th>
+<th style="text-align:center;">
+Onset
+</th>
+<th style="text-align:center;">
+Duration
+</th>
+<th style="text-align:center;">
+Image
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+8s
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+scrambled-260.jpg
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2s
+</td>
+<td style="text-align:center;">
+32
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+scrambled-191.jpg
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4s
+</td>
+<td style="text-align:center;">
+46
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+scrambled-481.jpg
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+30s
+</td>
+<td style="text-align:center;">
+75
+</td>
+<td style="text-align:center;">
+30
+</td>
+<td style="text-align:center;">
+scrambled-996.jpg
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+15s
+</td>
+<td style="text-align:center;">
+117
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+scrambled-355.jpg
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+8s
+</td>
+<td style="text-align:center;">
+144
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+scrambled-47.jpg
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+15s
+</td>
+<td style="text-align:center;">
+177
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+scrambled-520.jpg
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+2s
+</td>
+<td style="text-align:center;">
+204
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+scrambled-512.jpg
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+4s
+</td>
+<td style="text-align:center;">
+218
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+scrambled-262.jpg
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+30s
+</td>
+<td style="text-align:center;">
+234
+</td>
+<td style="text-align:center;">
+30
+</td>
+<td style="text-align:center;">
+scrambled-201.jpg
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>By default, the argument <code>col_names</code> is set to TRUE, so that the first row of text input will be imported as column names. If you set it to FALSE, the column names will be generated automatically as X1, X2, X3, etc.</p>
+<p>If you want to rename columns in the same line of code, you can enter a character vector for <code>col_names</code>. For example:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dat_txt_new_column_names</span> <span class="op">&lt;-</span> <span class="fu">read_table</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data/Exp1_Run1.txt"</span>, skip <span class="op">=</span> <span class="fl">4</span>, col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Trial_new"</span>, <span class="st">"Condition_new"</span>, <span class="st">"Onset_new"</span>, <span class="st">"Duration_new"</span>, <span class="st">"Image_new"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#since we are renaming the columns, we skip 4 lines</span></code></pre></div>
+The column names will become:
+<div class="inline-table"><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:center;">
+Trial_new
+</th>
+<th style="text-align:center;">
+Condition_new
+</th>
+<th style="text-align:center;">
+Onset_new
+</th>
+<th style="text-align:center;">
+Duration_new
+</th>
+<th style="text-align:center;">
+Image_new
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+8s
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+scrambled-260.jpg
+</td>
+</tr></tbody>
+</table></div>
+<p>Of course, another way to rename columns would be using <code><a href="https://dplyr.tidyverse.org/reference/rename.html">dplyr::rename(data, new_name = old_column_name)</a></code> or <code>dplyr::rename_with(data, function)</code>. For example, running the following will turn all column names to upper case. Try it yourself and see.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dat_txt_upper</span> <span class="op">&lt;-</span> <span class="fu">rename_with</span><span class="op">(</span><span class="va">dat_txt</span>, <span class="va">toupper</span><span class="op">)</span></code></pre></div>
+<p> </p>
+</div>
+<div id="ref-spss" class="section level2">
+<h2>
+<span class="header-section-number">1.5</span> 4. SPSS data (.sav)<a class="anchor" aria-label="anchor" href="#ref-spss"><i class="fas fa-link"></i></a>
+</h2>
+<p>We will use the 'haven' package, which is part of Tidyverse, to import SPSS data into a tibble.</p>
+<p>The example below uses SPSS data from <a href="file-formats.html#ref-norman">Norman et al.(2021)</a>, Study 2, which examines adult identity. You can <a href="https://osf.io/a6hxy/download">click here</a> to download the data directly (564KB).</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Suggested: install the package 'haven' and load it in addition to Tidyverse. </span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://haven.tidyverse.org">haven</a></span><span class="op">)</span>
+<span class="va">dat_sav</span> <span class="op">&lt;-</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://haven.tidyverse.org/reference/read_spss.html">read_sav</a></span><span class="op">(</span><span class="st">"data/EA Across Age Data.sav"</span><span class="op">)</span></code></pre></div>
+<p>The tibble <code>dat_sav</code> has 173 columns and 658 rows. If you only need to load a subset of columns, the <code>col_select</code> argument allows you to select columns by index or by column name. Below is an example of using <code>col_select</code> and what the output looks like. This would be an alternative to <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select()</a></code>.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#load the first 8 columns</span>
+<span class="va">dat_select_by_index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://haven.tidyverse.org/reference/read_spss.html">read_sav</a></span><span class="op">(</span><span class="st">"data/EA Across Age Data.sav"</span>, col_select<span class="op">=</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:center;">
+StartDate
+</th>
+<th style="text-align:center;">
+EndDate
+</th>
+<th style="text-align:center;">
+Progress
+</th>
+<th style="text-align:center;">
+Duration_<em>in_seconds</em>
+</th>
+<th style="text-align:center;">
+IC
+</th>
+<th style="text-align:center;">
+IDEA_1_1
+</th>
+<th style="text-align:center;">
+IDEA_1_2
+</th>
+<th style="text-align:center;">
+IDEA_1_3
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+2019-10-02 18:00:53
+</td>
+<td style="text-align:center;">
+2019-10-02 18:12:17
+</td>
+<td style="text-align:center;">
+100
+</td>
+<td style="text-align:center;">
+684
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2019-10-12 13:18:40
+</td>
+<td style="text-align:center;">
+2019-10-12 13:30:16
+</td>
+<td style="text-align:center;">
+100
+</td>
+<td style="text-align:center;">
+696
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2019-10-12 15:03:10
+</td>
+<td style="text-align:center;">
+2019-10-12 15:12:03
+</td>
+<td style="text-align:center;">
+100
+</td>
+<td style="text-align:center;">
+533
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2019-10-12 15:02:12
+</td>
+<td style="text-align:center;">
+2019-10-12 15:12:55
+</td>
+<td style="text-align:center;">
+100
+</td>
+<td style="text-align:center;">
+642
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2019-10-12 15:22:10
+</td>
+<td style="text-align:center;">
+2019-10-12 15:37:06
+</td>
+<td style="text-align:center;">
+100
+</td>
+<td style="text-align:center;">
+895
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2019-10-12 15:43:36
+</td>
+<td style="text-align:center;">
+2019-10-12 15:53:44
+</td>
+<td style="text-align:center;">
+100
+</td>
+<td style="text-align:center;">
+608
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+</tbody>
+</table></div>
+<p> </p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#load columns with name starting with "IDEA"</span>
+<span class="va">dat_select_by_colname</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://haven.tidyverse.org/reference/read_spss.html">read_sav</a></span><span class="op">(</span><span class="st">"data/EA Across Age Data.sav"</span>, 
+                                  col_select <span class="op">=</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"IDEA"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:99%; ">
+<div class="inline-table"><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:center;">
+IDEA_1_1
+</th>
+<th style="text-align:center;">
+IDEA_1_2
+</th>
+<th style="text-align:center;">
+IDEA_1_3
+</th>
+<th style="text-align:center;">
+IDEA_1_4
+</th>
+<th style="text-align:center;">
+IDEA_1_5
+</th>
+<th style="text-align:center;">
+IDEA_1_6
+</th>
+<th style="text-align:center;">
+IDEA_1_7
+</th>
+<th style="text-align:center;">
+IDEA_1_8
+</th>
+<th style="text-align:center;">
+IDEA_1_9
+</th>
+<th style="text-align:center;">
+IDEA_1_10
+</th>
+<th style="text-align:center;">
+IDEA_1_11
+</th>
+<th style="text-align:center;">
+IDEA_1_12
+</th>
+<th style="text-align:center;">
+IDEA_1_13
+</th>
+<th style="text-align:center;">
+IDEA_1_14
+</th>
+<th style="text-align:center;">
+IDEA_1_15
+</th>
+<th style="text-align:center;">
+IDEA_2_1
+</th>
+<th style="text-align:center;">
+IDEA_2_2
+</th>
+<th style="text-align:center;">
+IDEA_2_3
+</th>
+<th style="text-align:center;">
+IDEA_2_4
+</th>
+<th style="text-align:center;">
+IDEA_2_5
+</th>
+<th style="text-align:center;">
+IDEA_2_6
+</th>
+<th style="text-align:center;">
+IDEA_2_7
+</th>
+<th style="text-align:center;">
+IDEA_2_8
+</th>
+<th style="text-align:center;">
+IDEA_2_9
+</th>
+<th style="text-align:center;">
+IDEA_2_10
+</th>
+<th style="text-align:center;">
+IDEA_2_11
+</th>
+<th style="text-align:center;">
+IDEA_2_12
+</th>
+<th style="text-align:center;">
+IDEA_2_13
+</th>
+<th style="text-align:center;">
+IDEA_2_14
+</th>
+<th style="text-align:center;">
+IDEA_2_15
+</th>
+<th style="text-align:center;">
+IDEA_2_16
+</th>
+<th style="text-align:center;">
+IDEA_Total
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+3.419355
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+3.225807
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3.612903
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3.419355
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3.741935
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3.161290
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="related" class="section level4">
+<h4>
+<span class="header-section-number">1.5.0.1</span> Related<a class="anchor" aria-label="anchor" href="#related"><i class="fas fa-link"></i></a>
+</h4>
+<p>If you encounter .por files, which are ASCII text data files generated by SPSS, use the <code><a href="https://haven.tidyverse.org/reference/read_spss.html">haven::read_por()</a></code> function.</p>
+<p>The 'haven' package can also read Stata and SAS files into R. <a href="https://haven.tidyverse.org">Read more</a></p>
+<p> </p>
+</div>
+</div>
+<div id="ref-rds" class="section level2">
+<h2>
+<span class="header-section-number">1.6</span> 5. Binary R data (.rds)<a class="anchor" aria-label="anchor" href="#ref-rds"><i class="fas fa-link"></i></a>
+</h2>
+<p>RDS files store datasets in a compressed format to save storage space. Additionally, RDS preserves data types such as dates and factors, so we don't need to worry about redefining data types after reading the file into R.</p>
+<p>To read .rds files, use either <code><a href="https://rdrr.io/r/base/readRDS.html">readRDS()</a></code> from baseR or <code>read_rds()</code> from Tidyverse's 'readr' package. We use Tidyverse in the example below.</p>
+<p>The example below uses data from <a href="file-formats.html#ref-lukavsky">Lukavsky (2018)</a>, Experiment 1. The study investigates participants' ability to recognise what they have seen in their central and peripheral vision. You can <a href="https://osf.io/dy5hv/download">click here</a> to download the data directly (185KB).</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#library(tidyverse)</span>
+<span class="va">dat_binary</span> <span class="op">&lt;-</span> <span class="fu">read_rds</span><span class="op">(</span><span class="st">"data/exp1.rds"</span><span class="op">)</span> </code></pre></div>
+<p>You will see that this dataset has over 5300 rows and 26 columns. Here is what the first 6 lines look like.</p>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:99%; ">
+<div class="inline-table"><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:center;">
+id
+</th>
+<th style="text-align:center;">
+version
+</th>
+<th style="text-align:center;">
+block
+</th>
+<th style="text-align:center;">
+trial
+</th>
+<th style="text-align:center;">
+image
+</th>
+<th style="text-align:center;">
+response
+</th>
+<th style="text-align:center;">
+rt
+</th>
+<th style="text-align:center;">
+fix_ok
+</th>
+<th style="text-align:center;">
+new_sample
+</th>
+<th style="text-align:center;">
+d
+</th>
+<th style="text-align:center;">
+mx
+</th>
+<th style="text-align:center;">
+my
+</th>
+<th style="text-align:center;">
+extra_trials
+</th>
+<th style="text-align:center;">
+sofa
+</th>
+<th style="text-align:center;">
+focus
+</th>
+<th style="text-align:center;">
+code_in
+</th>
+<th style="text-align:center;">
+code_out
+</th>
+<th style="text-align:center;">
+category_in
+</th>
+<th style="text-align:center;">
+category_out
+</th>
+<th style="text-align:center;">
+image_in
+</th>
+<th style="text-align:center;">
+image_out
+</th>
+<th style="text-align:center;">
+code_target
+</th>
+<th style="text-align:center;">
+category_target
+</th>
+<th style="text-align:center;">
+image_target
+</th>
+<th style="text-align:center;">
+conflicting
+</th>
+<th style="text-align:center;">
+correct
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+NB29_MS02.jpg
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0.778776
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+11.08871
+</td>
+<td style="text-align:center;">
+8.599976
+</td>
+<td style="text-align:center;">
+-7.000000
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0.200060
+</td>
+<td style="text-align:center;">
+in
+</td>
+<td style="text-align:center;">
+N
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+NB
+</td>
+<td style="text-align:center;">
+MS
+</td>
+<td style="text-align:center;">
+NB29
+</td>
+<td style="text-align:center;">
+MS02
+</td>
+<td style="text-align:center;">
+N
+</td>
+<td style="text-align:center;">
+NB
+</td>
+<td style="text-align:center;">
+NB29
+</td>
+<td style="text-align:center;">
+TRUE
+</td>
+<td style="text-align:center;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+NF26_NF03.jpg
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0.271486
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+14.81656
+</td>
+<td style="text-align:center;">
+11.200012
+</td>
+<td style="text-align:center;">
+9.700012
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0.199956
+</td>
+<td style="text-align:center;">
+in
+</td>
+<td style="text-align:center;">
+N
+</td>
+<td style="text-align:center;">
+N
+</td>
+<td style="text-align:center;">
+NF
+</td>
+<td style="text-align:center;">
+NF
+</td>
+<td style="text-align:center;">
+NF26
+</td>
+<td style="text-align:center;">
+NF03
+</td>
+<td style="text-align:center;">
+N
+</td>
+<td style="text-align:center;">
+NF
+</td>
+<td style="text-align:center;">
+NF26
+</td>
+<td style="text-align:center;">
+FALSE
+</td>
+<td style="text-align:center;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+NM16_NB13.jpg
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0.315025
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+21.95861
+</td>
+<td style="text-align:center;">
+-19.700012
+</td>
+<td style="text-align:center;">
+-9.700012
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0.200115
+</td>
+<td style="text-align:center;">
+in
+</td>
+<td style="text-align:center;">
+N
+</td>
+<td style="text-align:center;">
+N
+</td>
+<td style="text-align:center;">
+NM
+</td>
+<td style="text-align:center;">
+NB
+</td>
+<td style="text-align:center;">
+NM16
+</td>
+<td style="text-align:center;">
+NB13
+</td>
+<td style="text-align:center;">
+N
+</td>
+<td style="text-align:center;">
+NM
+</td>
+<td style="text-align:center;">
+NM16
+</td>
+<td style="text-align:center;">
+FALSE
+</td>
+<td style="text-align:center;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+MP09_NR18.jpg
+</td>
+<td style="text-align:center;">
+-1
+</td>
+<td style="text-align:center;">
+0.354698
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+19.93792
+</td>
+<td style="text-align:center;">
+4.599976
+</td>
+<td style="text-align:center;">
+19.400024
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0.200100
+</td>
+<td style="text-align:center;">
+in
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+N
+</td>
+<td style="text-align:center;">
+MP
+</td>
+<td style="text-align:center;">
+NR
+</td>
+<td style="text-align:center;">
+MP09
+</td>
+<td style="text-align:center;">
+NR18
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+MP
+</td>
+<td style="text-align:center;">
+MP09
+</td>
+<td style="text-align:center;">
+TRUE
+</td>
+<td style="text-align:center;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+MH13_NB16.jpg
+</td>
+<td style="text-align:center;">
+-1
+</td>
+<td style="text-align:center;">
+0.218628
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+14.11525
+</td>
+<td style="text-align:center;">
+5.000000
+</td>
+<td style="text-align:center;">
+13.200012
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0.200121
+</td>
+<td style="text-align:center;">
+in
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+N
+</td>
+<td style="text-align:center;">
+MH
+</td>
+<td style="text-align:center;">
+NB
+</td>
+<td style="text-align:center;">
+MH13
+</td>
+<td style="text-align:center;">
+NB16
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+MH
+</td>
+<td style="text-align:center;">
+MH13
+</td>
+<td style="text-align:center;">
+TRUE
+</td>
+<td style="text-align:center;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+MM18_NM10.jpg
+</td>
+<td style="text-align:center;">
+-1
+</td>
+<td style="text-align:center;">
+0.514552
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+37.04375
+</td>
+<td style="text-align:center;">
+-31.799988
+</td>
+<td style="text-align:center;">
+-19.000000
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0.200095
+</td>
+<td style="text-align:center;">
+in
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+N
+</td>
+<td style="text-align:center;">
+MM
+</td>
+<td style="text-align:center;">
+NM
+</td>
+<td style="text-align:center;">
+MM18
+</td>
+<td style="text-align:center;">
+NM10
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+MM
+</td>
+<td style="text-align:center;">
+MM18
+</td>
+<td style="text-align:center;">
+TRUE
+</td>
+<td style="text-align:center;">
+TRUE
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p> </p>
+</div>
+<div id="ref-json" class="section level2">
+<h2>
+<span class="header-section-number">1.7</span> 6. JSON<a class="anchor" aria-label="anchor" href="#ref-json"><i class="fas fa-link"></i></a>
+</h2>
+<p>JSON files store nested lists or data in a tree-like structure. We will use the 'jsonlite' package to view and access the data in R.</p>
+<p>You can download an <a href="data/example.json">example.json</a> file here (4KB). The data are sourced from the <a href="https://www.iucnredlist.org">International Union for Conservation of Nature Red List of Threatened Species</a>.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install the 'jsonlite' package first</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://arxiv.org/abs/1403.2805">jsonlite</a></span><span class="op">)</span>
+<span class="va">dat_json</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html">fromJSON</a></span><span class="op">(</span>txt<span class="op">=</span><span class="st">"data/example.json"</span>, simplifyDataFrame <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure">From the RStudio Viewer you would see that the data contain information about 4 animals. <img src="data/dat_json_screenshot.jpg" width="750">
+</div>
+<p>You can also navigate the data using <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> from base or simply type <code>dat_json$"Panthera leo"</code>. The dollar sign <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> refers to a variable or column. In RStudio, as you type in <code>data_object_name$</code>, the available variables or columns will be shown for your choice.</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat_json</span><span class="op">)</span> <span class="co">#gets names of what's in the object</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat_json</span><span class="op">$</span><span class="va">`Panthera tigris`</span><span class="op">)</span> <span class="co"># get variable names one level down. Use `` or "" for variable names containing spaces. </span></code></pre></div>
+<pre><code>## [1] "Panthera leo"    "Panthera tigris" "Canis simensis"  "Canis rufus"    
+##  [1] "common name"                   "population trend"             
+##  [3] "number of mature individuals"  "system"                       
+##  [5] "generation length, in years"   "habitat type"                 
+##  [7] "Extant in"                     "threats"                      
+##  [9] "conservation actions in place" "link"</code></pre>
+<p>Use <code>as_tibble()</code> to put the data into a tibble for further processing.</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tiger_conservation</span> <span class="op">&lt;-</span> <span class="va">dat_json</span><span class="op">$</span><span class="va">`Panthera tigris`</span><span class="op">$</span><span class="va">`conservation actions in place`</span> <span class="op">%&gt;%</span> <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;">
+in-place land/water protection
+</th>
+<th style="text-align:left;">
+in-place species management
+</th>
+<th style="text-align:left;">
+in-place education
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:left;">
+occurs in at least one protected area
+</td>
+<td style="text-align:left;">
+harvest management plan; successfully reintroduced or introduced benignly; subject to ex-situ conservation
+</td>
+<td style="text-align:left;">
+subject to recent education and awareness programmes; included in international legislation; subject to any international management / trade controls
+</td>
+</tr></tbody>
+</table></div>
+<p>You can transpose the tibble so it is easier to read.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tiger_conversation_long_view</span> <span class="op">&lt;-</span> <span class="va">tiger_conservation</span> <span class="op">%&gt;%</span> <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">everything</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+in-place land/water protection
+</td>
+<td style="text-align:left;">
+occurs in at least one protected area
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+in-place species management
+</td>
+<td style="text-align:left;">
+harvest management plan; successfully reintroduced or introduced benignly; subject to ex-situ conservation
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+in-place education
+</td>
+<td style="text-align:left;">
+subject to recent education and awareness programmes; included in international legislation; subject to any international management / trade controls
+</td>
+</tr>
+</tbody>
+</table></div>
+<p> </p>
+</div>
+<div id="reference" class="section level2">
+<h2>
+<span class="header-section-number">1.8</span> Reference<a class="anchor" aria-label="anchor" href="#reference"><i class="fas fa-link"></i></a>
+</h2>
+<p>Alexander, R. (2013, April 20). Reinhart, Rogoff... and Herndon: The student who caught out the profs. BBC. <a href="https://www.bbc.com/news/magazine-22223190" id="ref-alexander">https://www.bbc.com/news/magazine-22223190</a></p>
+<p>International Union for Conservation of Nature. (n.d.). The IUCN Red List of Threatened Species. <a href="https://www.iucnredlist.org">https://www.iucnredlist.org</a></p>
+<p>Lewis, D. (2021, August 25). Autocorrect errors in Excel still creating genomics headache. Nature. <a href="https://www.nature.com/articles/d41586-021-02211-4" id="ref-lewis">https://www.nature.com/articles/d41586-021-02211-4</a></p>
+<p>Lukavsky, J. (2018, December 5). Scene categorization in the presence of a distractor. Retrieved from <a href="https://osf.io/849wm" id="ref-lukavsky">osf.io/849wm</a></p>
+<p>Norman, K., Hernandez, L., &amp; Obeid, R. (2021, January 12). Study 2. Who Am I? Gender Differences in Identity Exploration During the Transition into Adulthood. Retrieved from <a href="https://osf.io/agfvz" id="ref-norman">osf.io/agfvz</a></p>
+<p>Stigliani, A., &amp; Grill-Spector, K. (2018, July 5). Temporal Channels. <a href="https://doi.org/10.17605/OSF.IO/MW5PK" id="ref-stigliani">https://doi.org/10.17605/OSF.IO/MW5PK</a></p>
+<p>Tatman, R. (2017). Chocolate Bar Ratings. Kaggle Datasets. <a href="https://www.kaggle.com/rtatman/chocolate-bar-ratings" id="ref-choc">https://www.kaggle.com/rtatman/chocolate-bar-ratings</a></p>
+
+</div>
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    $(solveme[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    $(selects[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+$( document ).ready(function() {
+  var cite = ' ';
+  var psyteachr = ' <a href="https://psyteachr.github.io/"><img src="images/logos/psyteachr_logo.png" style="height: 31px; color: white;" alt="psyTeachR: Reproducible Research" /></a>';
+  var license = ' <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>';
+
+  $("footer div.row div:eq(1) p").html(
+    psyteachr + license + cite
+  );
+
+  // open rdrr links externally
+  $("a[href^='https://rdrr.io']").click(function(){
+    window.open(this.href);
+    return false;
+  });
+
+  // visible second sidebar in mobile
+  function move_sidebar() {
+    var w = window.innerWidth;
+    if (w < 992) {
+      $("#toc").appendTo($("#main-nav"));
+    } else {
+      $("#toc").appendTo($("div.sidebar-chapter"));
+    }
+  }
+  move_sidebar();
+  window.onresize = move_sidebar;
+});
+</script><div class="chapter-nav">
+<div class="prev"><a href="index.html">Overview</a></div>
+<div class="next"><a href="multiple-import.html"><span class="header-section-number">2</span> Importing data from multiple files</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#file-formats"><span class="header-section-number">1</span> Importing data from different file formats into R</a></li>
+<li><a class="nav-link" href="#at-a-glance"><span class="header-section-number">1.1</span> At a glance</a></li>
+<li>
+<a class="nav-link" href="#ref-csv"><span class="header-section-number">1.2</span> 1. CSV</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#other-delimiters"><span class="header-section-number">1.2.1</span> Other delimiters</a></li>
+<li><a class="nav-link" href="#changing-the-data-type-for-each-column"><span class="header-section-number">1.2.2</span> Changing the data type for each column</a></li>
+<li><a class="nav-link" href="#write-data-to-csv"><span class="header-section-number">1.2.3</span> Write data to CSV</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#ref-xls"><span class="header-section-number">1.3</span> 2. Excel (.xls or .xlsx)</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#dealing-with-formulas-and-formatted-cells"><span class="header-section-number">1.3.1</span> Dealing with formulas and formatted cells</a></li></ul>
+</li>
+<li><a class="nav-link" href="#ref-txt"><span class="header-section-number">1.4</span> 3. Plain text (.txt)</a></li>
+<li><a class="nav-link" href="#ref-spss"><span class="header-section-number">1.5</span> 4. SPSS data (.sav)</a></li>
+<li><a class="nav-link" href="#ref-rds"><span class="header-section-number">1.6</span> 5. Binary R data (.rds)</a></li>
+<li><a class="nav-link" href="#ref-json"><span class="header-section-number">1.7</span> 6. JSON</a></li>
+<li><a class="nav-link" href="#reference"><span class="header-section-number">1.8</span> Reference</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/psyteachr/tutorials/blob/master/book/01-01-general-import.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/psyteachr/tutorials/edit/master/book/01-01-general-import.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Tutorials</strong>" was written by psyTeachR Team. It was last built on 2021-11-09.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

@@ -4,30 +4,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 2 Multi-Row Headers | Tutorials</title>
+<title>Chapter 3 Multi-Row Headers | Tutorials</title>
 <meta name="author" content="psyTeachR Team">
 <meta name="description" content="Lisa DeBruine (2021-10-17) # required packages library(tidyverse) library(readxl) A student on our help forum once asked for help making a wide-format dataset long. When I tried to load the data,...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 2 Multi-Row Headers | Tutorials">
+<meta property="og:title" content="Chapter 3 Multi-Row Headers | Tutorials">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://psyteachr.github.io/tutorials/multi-row-headers.html">
 <meta property="og:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
 <meta property="og:description" content="Lisa DeBruine (2021-10-17) # required packages library(tidyverse) library(readxl) A student on our help forum once asked for help making a wide-format dataset long. When I tried to load the data,...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 2 Multi-Row Headers | Tutorials">
+<meta name="twitter:title" content="Chapter 3 Multi-Row Headers | Tutorials">
 <meta name="twitter:description" content="Lisa DeBruine (2021-10-17) # required packages library(tidyverse) library(readxl) A student on our help forum once asked for help making a wide-format dataset long. When I tried to load the data,...">
 <meta name="twitter:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-6NP3MF25W3');
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-6NP3MF25W3');
+  </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/style.css">
 </head>
@@ -53,17 +53,18 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Overview</a></li>
 <li class="book-part">Data Wrangling</li>
-<li><a class="" href="multiple-import.html"><span class="header-section-number">1</span> Importing data from multiple files</a></li>
-<li><a class="active" href="multi-row-headers.html"><span class="header-section-number">2</span> Multi-Row Headers</a></li>
-<li><a class="" href="detecting-runs-in-a-sequence.html"><span class="header-section-number">3</span> Detecting "runs" in a sequence</a></li>
-<li><a class="" href="pipes.html"><span class="header-section-number">4</span> Pipes</a></li>
+<li><a class="" href="file-formats.html"><span class="header-section-number">1</span> Importing data from different file formats into R</a></li>
+<li><a class="" href="multiple-import.html"><span class="header-section-number">2</span> Importing data from multiple files</a></li>
+<li><a class="active" href="multi-row-headers.html"><span class="header-section-number">3</span> Multi-Row Headers</a></li>
+<li><a class="" href="detecting-runs-in-a-sequence.html"><span class="header-section-number">4</span> Detecting "runs" in a sequence</a></li>
+<li><a class="" href="pipes.html"><span class="header-section-number">5</span> Pipes</a></li>
 <li class="book-part">Questionnaires</li>
-<li><a class="" href="converting-strings-to-numbers.html"><span class="header-section-number">5</span> Converting strings to numbers</a></li>
-<li><a class="" href="reverse-scoring.html"><span class="header-section-number">6</span> Reverse scoring</a></li>
+<li><a class="" href="converting-strings-to-numbers.html"><span class="header-section-number">6</span> Converting strings to numbers</a></li>
+<li><a class="" href="reverse-scoring.html"><span class="header-section-number">7</span> Reverse scoring</a></li>
 <li class="book-part">Plots</li>
-<li><a class="" href="highlight-a-range-of-x-values.html"><span class="header-section-number">7</span> Highlight a range of x-values</a></li>
+<li><a class="" href="highlight-a-range-of-x-values.html"><span class="header-section-number">8</span> Highlight a range of x-values</a></li>
 <li class="book-part">Stats</li>
-<li><a class="" href="testing-for-normality.html"><span class="header-section-number">8</span> Testing for normality</a></li>
+<li><a class="" href="testing-for-normality.html"><span class="header-section-number">9</span> Testing for normality</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="" href="symbols.html"><span class="header-section-number">B</span> Symbols</a></li>
@@ -77,20 +78,20 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="multi-row-headers" class="section level1" number="2">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="multi-row-headers" class="section level1">
 <h1>
-<span class="header-section-number">2</span> Multi-Row Headers<a class="anchor" aria-label="anchor" href="#multi-row-headers"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3</span> Multi-Row Headers<a class="anchor" aria-label="anchor" href="#multi-row-headers"><i class="fas fa-link"></i></a>
 </h1>
 <ul>
 <li>Lisa DeBruine (2021-10-17)</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># required packages</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></code></pre></div>
 <p>A student on our help forum once asked for help making a wide-format dataset long. When I tried to load the data, I realised the first three rows were all header rows. Here's the code I wrote to deal with it.</p>
 <p>First, I'll make a small CSV "file" below. In a typical case, you'd read the data in from a file.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">demo_csv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="st">"SUB1, SUB1, SUB1, SUB1, SUB2, SUB2, SUB2, SUB2
 COND1, COND1, COND2, COND2, COND1, COND1, COND2, COND2
 X, Y, X, Y, X, Y, X, Y
@@ -98,7 +99,7 @@ X, Y, X, Y, X, Y, X, Y
 4, 43, 7, 34, 56, 43, 2, 33
 77, 12, 14, 75, 36, 85, 3, 2"</span><span class="op">)</span></code></pre></div>
 <p>If you try to read in this data, you'll get a message about the duplicate column names and the resulting table will have "fixed" column headers and the next two columns headers as the first two rows.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="va">demo_csv</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -261,7 +262,7 @@ Y
 </tbody>
 </table></div>
 <p>Instead, you should read in just the header rows by setting <code>n_max</code> equal to the number of header rows and <code>col_names</code> to <code>FALSE</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data_head</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="va">demo_csv</span>, 
                       n_max <span class="op">=</span> <span class="fl">3</span>, 
                       col_names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
@@ -375,7 +376,7 @@ Y
 </tbody>
 </table></div>
 <p>You can then make new header names by pasting together the names in the three rows by summarising across all the columns with the <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code> function and collapsing them using "_". Use <code><a href="https://rdrr.io/r/base/unlist.html">unlist()</a></code> and <code><a href="https://rdrr.io/r/base/unname.html">unname()</a></code> to convert the result from a table to a vector.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">new_names</span> <span class="op">&lt;-</span> <span class="va">data_head</span> <span class="op">%&gt;%</span>
   <span class="fu">summarise</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span>.fns <span class="op">=</span> <span class="va">paste</span>, collapse <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span><span class="op">(</span><span class="op">)</span>
@@ -384,7 +385,7 @@ Y
 <pre><code>## [1] "SUB1_COND1_X" "SUB1_COND1_Y" "SUB1_COND2_X" "SUB1_COND2_Y" "SUB2_COND1_X"
 ## [6] "SUB2_COND1_Y" "SUB2_COND2_X" "SUB2_COND2_Y"</code></pre>
 <p>Now you can read in the data without the three header rows. Use <code>skip</code> to skip the headers and set <code>col_names</code> to the new names.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="va">demo_csv</span>, 
                  skip <span class="op">=</span> <span class="fl">3</span>, 
                  col_names <span class="op">=</span> <span class="va">new_names</span>,
@@ -500,8 +501,8 @@ SUB2_COND2_Y
 <p>If you have an excel file that merges the duplicate headers across rows, it's a little trickier, but still do-able.</p>
 <div class="inline-figure"><img src="images/multirow-excel.png"></div>
 <p>The first steps is the same: read in the first three rows.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data_head</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/readxl/man/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/3headers_demo.xlsx"</span>,
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">data_head</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/3headers_demo.xlsx"</span>,
                         n_max <span class="op">=</span> <span class="fl">3</span>, 
                         col_names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
@@ -613,7 +614,7 @@ Y
 </tbody>
 </table></div>
 <p>The code below starts at the second column and fills in any missing data with the value in the previous column.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">data_head</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">prev</span> <span class="op">&lt;-</span> <span class="va">data_head</span><span class="op">[</span>, <span class="va">i</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>
   <span class="va">this</span> <span class="op">&lt;-</span> <span class="va">data_head</span><span class="op">[</span>, <span class="va">i</span><span class="op">]</span>
@@ -622,7 +623,7 @@ Y
   <span class="va">data_head</span><span class="op">[</span>, <span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">this</span>
 <span class="op">}</span></code></pre></div>
 <p>Now you can continue generating the pasted name the same as above.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">new_names</span> <span class="op">&lt;-</span> <span class="va">data_head</span> <span class="op">%&gt;%</span>
   <span class="fu">summarise</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span>.fns <span class="op">=</span> <span class="va">paste</span>, collapse <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span><span class="op">(</span><span class="op">)</span>
@@ -631,8 +632,8 @@ Y
 <pre><code>## [1] "SUB1_COND1_X" "SUB1_COND1_Y" "SUB1_COND2_X" "SUB1_COND2_Y" "SUB2_COND1_X"
 ## [6] "SUB2_COND1_Y" "SUB2_COND2_X" "SUB2_COND2_Y"</code></pre>
 <p>If your data are set up with multiple headers, you'll probably want to change the shape of the data. Here's a quick example how to use <code>pivot_longer()</code> and <code>pivot_wider()</code> to do this with variable names like above.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/readxl/man/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/3headers_demo.xlsx"</span>, 
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/3headers_demo.xlsx"</span>, 
                    skip <span class="op">=</span> <span class="fl">3</span>, 
                    col_names <span class="op">=</span> <span class="va">new_names</span><span class="op">)</span>
 
@@ -1283,16 +1284,16 @@ $( document ).ready(function() {
   window.onresize = move_sidebar;
 });
 </script><div class="chapter-nav">
-<div class="prev"><a href="multiple-import.html"><span class="header-section-number">1</span> Importing data from multiple files</a></div>
-<div class="next"><a href="detecting-runs-in-a-sequence.html"><span class="header-section-number">3</span> Detecting "runs" in a sequence</a></div>
+<div class="prev"><a href="multiple-import.html"><span class="header-section-number">2</span> Importing data from multiple files</a></div>
+<div class="next"><a href="detecting-runs-in-a-sequence.html"><span class="header-section-number">4</span> Detecting "runs" in a sequence</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#multi-row-headers"><span class="header-section-number">2</span> Multi-Row Headers</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#multi-row-headers"><span class="header-section-number">3</span> Multi-Row Headers</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/psyteachr/tutorials/blob/master/book/01-02-multirow-headers.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/psyteachr/tutorials/edit/master/book/01-02-multirow-headers.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/psyteachr/tutorials/blob/master/book/01-03-multirow-headers.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/psyteachr/tutorials/edit/master/book/01-03-multirow-headers.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -1304,7 +1305,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Tutorials</strong>" was written by psyTeachR Team. It was last built on 2021-10-19.</p>
+    <p>"<strong>Tutorials</strong>" was written by psyTeachR Team. It was last built on 2021-11-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -4,30 +4,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 4 Pipes | Tutorials</title>
+<title>Chapter 5 Pipes | Tutorials</title>
 <meta name="author" content="psyTeachR Team">
 <meta name="description" content="Lisa DeBruine (2018-12-22) library(tidyverse)  Pipes are a way to order your code in a more readable format. Let's say you have a small data table with 10 participant IDs, two columns with...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 4 Pipes | Tutorials">
+<meta property="og:title" content="Chapter 5 Pipes | Tutorials">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://psyteachr.github.io/tutorials/pipes.html">
 <meta property="og:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
 <meta property="og:description" content="Lisa DeBruine (2018-12-22) library(tidyverse)  Pipes are a way to order your code in a more readable format. Let's say you have a small data table with 10 participant IDs, two columns with...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 4 Pipes | Tutorials">
+<meta name="twitter:title" content="Chapter 5 Pipes | Tutorials">
 <meta name="twitter:description" content="Lisa DeBruine (2018-12-22) library(tidyverse)  Pipes are a way to order your code in a more readable format. Let's say you have a small data table with 10 participant IDs, two columns with...">
 <meta name="twitter:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-6NP3MF25W3');
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-6NP3MF25W3');
+  </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/style.css">
 </head>
@@ -53,17 +53,18 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Overview</a></li>
 <li class="book-part">Data Wrangling</li>
-<li><a class="" href="multiple-import.html"><span class="header-section-number">1</span> Importing data from multiple files</a></li>
-<li><a class="" href="multi-row-headers.html"><span class="header-section-number">2</span> Multi-Row Headers</a></li>
-<li><a class="" href="detecting-runs-in-a-sequence.html"><span class="header-section-number">3</span> Detecting "runs" in a sequence</a></li>
-<li><a class="active" href="pipes.html"><span class="header-section-number">4</span> Pipes</a></li>
+<li><a class="" href="file-formats.html"><span class="header-section-number">1</span> Importing data from different file formats into R</a></li>
+<li><a class="" href="multiple-import.html"><span class="header-section-number">2</span> Importing data from multiple files</a></li>
+<li><a class="" href="multi-row-headers.html"><span class="header-section-number">3</span> Multi-Row Headers</a></li>
+<li><a class="" href="detecting-runs-in-a-sequence.html"><span class="header-section-number">4</span> Detecting "runs" in a sequence</a></li>
+<li><a class="active" href="pipes.html"><span class="header-section-number">5</span> Pipes</a></li>
 <li class="book-part">Questionnaires</li>
-<li><a class="" href="converting-strings-to-numbers.html"><span class="header-section-number">5</span> Converting strings to numbers</a></li>
-<li><a class="" href="reverse-scoring.html"><span class="header-section-number">6</span> Reverse scoring</a></li>
+<li><a class="" href="converting-strings-to-numbers.html"><span class="header-section-number">6</span> Converting strings to numbers</a></li>
+<li><a class="" href="reverse-scoring.html"><span class="header-section-number">7</span> Reverse scoring</a></li>
 <li class="book-part">Plots</li>
-<li><a class="" href="highlight-a-range-of-x-values.html"><span class="header-section-number">7</span> Highlight a range of x-values</a></li>
+<li><a class="" href="highlight-a-range-of-x-values.html"><span class="header-section-number">8</span> Highlight a range of x-values</a></li>
 <li class="book-part">Stats</li>
-<li><a class="" href="testing-for-normality.html"><span class="header-section-number">8</span> Testing for normality</a></li>
+<li><a class="" href="testing-for-normality.html"><span class="header-section-number">9</span> Testing for normality</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="" href="symbols.html"><span class="header-section-number">B</span> Symbols</a></li>
@@ -77,14 +78,14 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="pipes" class="section level1" number="4">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="pipes" class="section level1">
 <h1>
-<span class="header-section-number">4</span> Pipes<a class="anchor" aria-label="anchor" href="#pipes"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5</span> Pipes<a class="anchor" aria-label="anchor" href="#pipes"><i class="fas fa-link"></i></a>
 </h1>
 <ul>
 <li>Lisa DeBruine (2018-12-22)</li>
 </ul>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
 <div class="small_right">
 <img src="images/pipe_sticker.png" alt="Pipe">
@@ -92,7 +93,7 @@
 <p>Pipes are a way to order your code in a more readable format.</p>
 <p>Let's say you have a small data table with 10 participant IDs, two columns with variable type A, and 2 columns with variable type B. You want to calculate the mean of the A variables and the mean of the B variables and return a table with 10 rows (1 for each participant) and 3 columns (<code>id</code>, <code>A_mean</code> and <code>B_mean</code>).</p>
 <p>One way you could do this is by creating a new object at every step and using that object in the next step. This is pretty clear, but you've created 6 unnecessary data objects in your environment. This can get confusing in very long scripts.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># make a data table with 10 subjects</span>
 <span class="va">data_original</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>
   id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,
@@ -137,10 +138,10 @@ B_mean
 1
 </td>
 <td style="text-align:right;">
--0.3816161
+1.0213531
 </td>
 <td style="text-align:right;">
-2.594959
+3.070759
 </td>
 </tr>
 <tr>
@@ -148,10 +149,10 @@ B_mean
 2
 </td>
 <td style="text-align:right;">
--0.0692477
+1.3713433
 </td>
 <td style="text-align:right;">
-2.744289
+1.955274
 </td>
 </tr>
 <tr>
@@ -159,10 +160,10 @@ B_mean
 3
 </td>
 <td style="text-align:right;">
-0.5367487
+0.4599578
 </td>
 <td style="text-align:right;">
-1.885325
+2.543362
 </td>
 </tr>
 <tr>
@@ -170,10 +171,10 @@ B_mean
 4
 </td>
 <td style="text-align:right;">
-1.5283672
+0.5168985
 </td>
 <td style="text-align:right;">
-1.137623
+1.808155
 </td>
 </tr>
 <tr>
@@ -181,10 +182,10 @@ B_mean
 5
 </td>
 <td style="text-align:right;">
-0.9517424
+0.3966923
 </td>
 <td style="text-align:right;">
-3.880599
+2.648510
 </td>
 </tr>
 <tr>
@@ -192,10 +193,10 @@ B_mean
 6
 </td>
 <td style="text-align:right;">
-0.4114278
+1.0044901
 </td>
 <td style="text-align:right;">
-2.088647
+1.705642
 </td>
 </tr>
 <tr>
@@ -203,10 +204,10 @@ B_mean
 7
 </td>
 <td style="text-align:right;">
--0.0745328
+0.3324087
 </td>
 <td style="text-align:right;">
-3.396610
+2.524094
 </td>
 </tr>
 <tr>
@@ -214,10 +215,10 @@ B_mean
 8
 </td>
 <td style="text-align:right;">
-0.8861854
+0.1155317
 </td>
 <td style="text-align:right;">
-1.444083
+2.539899
 </td>
 </tr>
 <tr>
@@ -225,10 +226,10 @@ B_mean
 9
 </td>
 <td style="text-align:right;">
--0.4335284
+0.9215463
 </td>
 <td style="text-align:right;">
-3.434836
+1.772999
 </td>
 </tr>
 <tr>
@@ -236,10 +237,10 @@ B_mean
 10
 </td>
 <td style="text-align:right;">
-0.4492202
+0.1345184
 </td>
 <td style="text-align:right;">
-2.095334
+2.507023
 </td>
 </tr>
 </tbody>
@@ -248,10 +249,10 @@ B_mean
 You <em>can</em> name each object <code>data</code> and keep replacing the old data object with the new one at each step. This will keep you environment clean, but I don't recommend it because it makes it too easy to accidentally run your code out of order when you are running line-by-line for development or debugging.
 </p>
 <p>One way to avoid extra objects is to nest your functions, literally replacing each data object with the code that generated it in the previous step. This can be fine for very short chains.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mean_petal_width</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Width</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p>But it gets extremely confusing for long chains:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># do not ever do this!!</span>
 <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">rename</span><span class="op">(</span>
   <span class="fu">spread</span><span class="op">(</span>
@@ -273,7 +274,7 @@ You <em>can</em> name each object <code>data</code> and keep replacing the old d
     <span class="va">var</span>, <span class="va">mean</span><span class="op">)</span>, 
   A_mean <span class="op">=</span> <span class="va">A</span>, B_mean <span class="op">=</span> <span class="va">B</span><span class="op">)</span></code></pre></div>
 <p>The pipe lets you "pipe" the result of each function into the next function, allowing you to put your code in a logical order without creating too many extra objects.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># calculate mean of A and B variables for each participant</span>
 <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>
   id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,
@@ -322,16 +323,16 @@ You can debug a pipe by running just the first few functions by highlighting fro
 
 
 <div class="chapter-nav">
-<div class="prev"><a href="detecting-runs-in-a-sequence.html"><span class="header-section-number">3</span> Detecting "runs" in a sequence</a></div>
-<div class="next"><a href="converting-strings-to-numbers.html"><span class="header-section-number">5</span> Converting strings to numbers</a></div>
+<div class="prev"><a href="detecting-runs-in-a-sequence.html"><span class="header-section-number">4</span> Detecting "runs" in a sequence</a></div>
+<div class="next"><a href="converting-strings-to-numbers.html"><span class="header-section-number">6</span> Converting strings to numbers</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#pipes"><span class="header-section-number">4</span> Pipes</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#pipes"><span class="header-section-number">5</span> Pipes</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/psyteachr/tutorials/blob/master/book/01-04-pipes.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/psyteachr/tutorials/edit/master/book/01-04-pipes.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/psyteachr/tutorials/blob/master/book/01-05-pipes.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/psyteachr/tutorials/edit/master/book/01-05-pipes.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -546,7 +547,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Tutorials</strong>" was written by psyTeachR Team. It was last built on 2021-10-19.</p>
+    <p>"<strong>Tutorials</strong>" was written by psyTeachR Team. It was last built on 2021-11-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

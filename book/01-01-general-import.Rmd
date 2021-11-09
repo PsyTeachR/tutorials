@@ -1,0 +1,274 @@
+# Importing data from different file formats into R {#file-formats}
+
+- Freda Wan (November 4, 2021)
+
+&thinsp;  
+<style type="text/css">
+ .table {
+    width: 80%;
+}
+</style>
+
+This tutorial covers basic functions to import data from different formats and access them as tibbles. 
+
+## At a glance
+
+File type        Extension           package::function
+----------     -------------     ----------------------------
+   CSV            .csv           [readr::read_csv()](#ref-csv)
+  Excel        .xls or .xlsx     [readxl:read_excel()](#ref-xls)
+Plain text        .txt           [readr::read_lines()](#ref-txt)
+  SPSS            .sav           [haven::read_sav()](#ref-spss)
+Binary R data     .rds           [readr::read_rds()](#ref-rds)
+   JSON          .json           [jsonlite::fromJSON()](#ref-json)
+
+&thinsp;  
+
+## 1. CSV{#ref-csv}
+
+Most will be familiar with importing common-separated values (CSV) files using the `read_csv()` function offered in Tidyverse's 'readr' package. But what if your data is separated by tabs, semicolons, or other characters such as "|"? It is helpful to know that similar functions in 'readr' can readily help you import your data into R. 
+
+- For tab-separated files (.tsv), use `read_tsv()`.  
+- For semicolon-separated files, where the comma is the decimal point not the separator, use `read_csv2()`.  
+
+Here is the syntax. 
+
+```{r, warning=FALSE, message=TRUE, eval=FALSE}
+#library(tidyverse)
+tbl_csv <- read_csv("data/filename.csv")
+tbl_csv2 <- read_csv2("data/filename.csv")
+tbl_tsv <- read_tsv("data/filename.tsv")
+```
+
+### Other delimiters  
+
+If your data are delimited by other characters such as "|", use `read_delim()` and specify the delimiter.  
+
+For example, if the text file looks like the dummy data below, we can see that "|" is the delimiter. (To try out the code below, you can copy the text, save it to a file and name it `delim_data.txt`.) 
+```
+ParticipantID|Condition1|Condition2|Condition3|Control
+130059284|0.4|0.01|0.2|0
+290100722|0.3|0.02|0.3|1
+387005398|0.5|0.01|0.4|0
+```
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+library(tidyverse)  
+```
+```{r, warning=FALSE}
+dat_delim <- read_delim("data/delim_data.txt", delim = "|")  
+```
+R is now able to read the data as a tibble: 
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+knitr::kable(dat_delim, align = "c") %>% kableExtra::kable_styling("striped")
+```
+
+### Changing the data type for each column
+
+Sometimes we want to specify the data type for each column. When we load the data, R generates a message (as above) to indicate the data type of each column. In our case, R has recognised all 5 columns as doubles or `dbl`, which is a class of numeric data, similar to float in other programming languages.  
+
+Let's say we want `ParticipantID` as characters and `Control` as boolean (i.e., TRUE or FALSE, known as logical in R), we can add the `col_types` argument. 
+
+In the code below, `col_types = "c???l"` specifies that for our 5 columns, we want to change the data type of `ParticipantID` to character and `Control` to logical. Since we don't need to change the data type for Condition1, Condition2, and Condition3, we use `?` to allow R to guess.
+
+```{r, warning=FALSE}
+dat_delim_col_types <- read_delim("data/delim_data.txt", delim = "|", col_types = "c???l")  
+spec(dat_delim_col_types) # check column data types
+```
+You can specify the data type you want by using one character to represent each column. The column types are: `c = character, i = integer, n = number, d = double, l = logical, f = factor, D = date, T = date time, t = time,` `? = guess, or _/- to skip the column`.  
+
+The argument `col_types` is also used in other functions in this tutorial, including `read_excel()` for Excel data and `read_table()` for reading text as a tibble.  
+
+### Write data to CSV
+
+After loading data from various file formats and having cleaned and wrangled the data, you may want to save the tibble to .csv. This would allow you to view the data later or share the file with others without having to run the whole R script again.  
+
+Here is the syntax. 
+
+`write_csv(cleaned_data, "cleaned_data.csv")`
+
+Read more about 'readr' package and see the [cheat sheet here](https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf). Related packages include 'readxl' (detailed below) and 'googlesheets4' which allows you to read data from and write data to Google Sheets.  
+
+&nbsp;  
+
+## 2. Excel (.xls or .xlsx){#ref-xls}  
+
+We use the 'readxl' package, part of Tidyverse, to read Excel data into R. Try out the 'readxl' functions below either using your data or download the [Demo.xlsx file here](data/Demo.xlsx) (111KB). The data have been adapted from a public domain dataset, Chocolate Bar Ratings ([Tatman, 2017](#ref-choc)), which contains expert ratings of 1700 chocolate bars.    
+
+For demonstration purposes, the demo file contains 3 sheets, sorted by chocolate makers' company names starting A to G (Sheet 1), H to Q (Sheet 2), and R to Z (Sheet 3). You can access sheets either by name or by index. 
+
+```{r, warning=FALSE, message=FALSE}
+# Suggested: install 'readxl' and load separately
+library(readxl) 
+dat_excel<- readxl::read_excel("data/Demo.xlsx") # by default, this loads Sheet 1 only. 
+```
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+knitr::kable(head(dat_excel), align = "c") %>% kableExtra::kable_styling("striped")
+```
+If you check `dat_excel` (using either `summary()` from base R or `dplyr::glimpse()`), you will see that if you don't specify the sheet, only the first sheet is loaded. 
+
+Use the 'readr' function `excel_sheets()` to get a list of sheet names. 
+```{r, warning=FALSE, message=FALSE}
+excel_sheets("data/Demo.xlsx")
+```
+
+Then, you can specify which sheet you want to load, by sheet name or index. 
+```{r, warning=FALSE, message=FALSE}
+sheet_by_name <- read_excel("data/Demo.xlsx", sheet = "Companies_H_to_Q") #load sheet 2 by name
+sheet_by_index <- read_excel("data/Demo.xlsx", sheet = 3) #load sheet by index
+```
+
+### Dealing with formulas and formatted cells
+
+Sometimes you may encounter Excel data that contain formulas written in VBA macros or highlighted cells in yellow or in bold. 
+
+If you want to extract the formulas or formatted cells from Excel, there are R functions that could help. The 'tidyxl' package has the function `tidyxl::xlsx_cells()` which reads the property of each cell in an Excel spreadsheet, such as the data type, formatting, whether it is a formula, the cell's font, height and width. Please refer to the ['tidyxl' vignette](https://cran.r-project.org/web/packages/tidyxl/vignettes/tidyxl.html). 
+
+However, proceed with caution! Spreadsheet errors, either due to human mistakes or Excel's autocorrect functions, have raised reproducibility concerns in behavioural science and genetics research (see [Alexander, 2013](#ref-alexander); [Lewis, 2021](#ref-lewis)). If you see strange behaviour from your Excel data, check the file: Are the formulas referring to the correct cells? Has a large number been autocorrected into a date? When in doubt, open the file in Excel to check.  
+
+&nbsp;  
+
+## 3. Plain text (.txt){#ref-txt}
+
+When your data are in .txt files, you can either use readLines() from base or readr::read_lines() from Tidyverse. Here, we use the latter, as it runs faster for large datasets.  
+
+As an example, we use a simple dataset from [Stigliani and Grill-Spector (2018)](#ref-stigliani), a neuroscience study. You can [click here](https://osf.io/vzy8h/download) to download the data directly (392 bytes).  
+
+First, we read in the file to see what it contains. 
+
+```{r}
+#load the tidyverse package
+readr_text <- read_lines(("data/Exp1_Run1.txt"), n_max=10)
+readr_text
+```
+The `n_max` argument above specifies how many lines of data you would like to read. We can see that we need to skip the first 3 lines for the data to form a tibble. We use `read_table()` to create the tibble. 
+
+```{r, warning=FALSE, message=FALSE}
+dat_txt <- read_table(file = "data/Exp1_Run1.txt", skip = 3) # skip first 3 lines
+```
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+knitr::kable(dat_txt, align = "c") %>% kableExtra::kable_styling("striped")
+```
+By default, the argument `col_names` is set to TRUE, so that the first row of text input will be imported as column names. If you set it to FALSE, the column names will be generated automatically as X1, X2, X3, etc. 
+
+If you want to rename columns in the same line of code, you can enter a character vector for `col_names`. For example: 
+```{r, warning=FALSE, message=FALSE}
+dat_txt_new_column_names <- read_table(file = "data/Exp1_Run1.txt", skip = 4, col_names = c("Trial_new", "Condition_new", "Onset_new", "Duration_new", "Image_new"))
+#since we are renaming the columns, we skip 4 lines
+```
+The column names will become: 
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+knitr::kable(head(dat_txt_new_column_names, n=1), align = "c") %>% kableExtra::kable_styling("striped")
+```
+Of course, another way to rename columns would be using `dplyr::rename(data, new_name = old_column_name)` or `dplyr::rename_with(data, function)`. For example, running the following will turn all column names to upper case. Try it yourself and see. 
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+dat_txt_upper <- rename_with(dat_txt, toupper)
+```
+
+&nbsp;  
+
+## 4. SPSS data (.sav){#ref-spss}
+
+We will use the 'haven' package, which is part of Tidyverse, to import SPSS data into a tibble.  
+
+The example below uses SPSS data from [Norman et al.(2021)](#ref-norman), Study 2, which examines adult identity. You can [click here](https://osf.io/a6hxy/download) to download the data directly (564KB).  
+
+```{r, warning=FALSE, message= FALSE, echo=TRUE}
+# Suggested: install the package 'haven' and load it in addition to Tidyverse. 
+library(haven)
+dat_sav <- haven::read_sav("data/EA Across Age Data.sav")
+```
+The tibble `dat_sav` has 173 columns and 658 rows. If you only need to load a subset of columns, the `col_select` argument allows you to select columns by index or by column name. Below is an example of using `col_select` and what the output looks like. This would be an alternative to `dplyr::select()`.  
+```{r, warning=FALSE, message= FALSE}
+#load the first 8 columns
+dat_select_by_index <- read_sav("data/EA Across Age Data.sav", col_select=(1:8))
+```
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+knitr::kable(head(dat_select_by_index), align = "c") %>% kableExtra::kable_styling("striped") 
+```
+&thinsp;  
+```{r, warning=FALSE, message=FALSE}
+#load columns with name starting with "IDEA"
+dat_select_by_colname <- read_sav("data/EA Across Age Data.sav", 
+                                  col_select = starts_with("IDEA"))
+```
+```{r, echo=FALSE, warning=FALSE, message= FALSE}
+library(tidyverse)
+knitr::kable(head(dat_select_by_colname), align="c") %>% kableExtra::kable_styling("striped") %>% kableExtra::scroll_box(width = "99%")
+```
+
+#### Related 
+If you encounter .por files, which are ASCII text data files generated by SPSS, use the `haven::read_por()` function.  
+
+The 'haven' package can also read Stata and SAS files into R. [Read more](https://haven.tidyverse.org)
+
+&nbsp;  
+
+## 5. Binary R data (.rds){#ref-rds}
+
+RDS files store datasets in a compressed format to save storage space. Additionally, RDS preserves data types such as dates and factors, so we don't need to worry about redefining data types after reading the file into R. 
+
+To read .rds files, use either `readRDS()` from baseR or `read_rds()` from Tidyverse's 'readr' package. We use Tidyverse in the example below. 
+
+The example below uses data from [Lukavsky (2018)](#ref-lukavsky), Experiment 1. The study investigates participants' ability to recognise what they have seen in their central and peripheral vision. You can [click here](https://osf.io/dy5hv/download) to download the data directly (185KB). 
+
+```{r, warning=FALSE, message=FALSE}
+#library(tidyverse)
+dat_binary <- read_rds("data/exp1.rds") 
+```
+You will see that this dataset has over 5300 rows and 26 columns. Here is what the first 6 lines look like. 
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+knitr::kable(head(dat_binary), align = "c") %>% kableExtra::kable_styling("striped") %>% kableExtra::scroll_box(width = "99%")
+```
+&nbsp;  
+
+## 6. JSON{#ref-json}
+
+JSON files store nested lists or data in a tree-like structure. We will use the 'jsonlite' package to view and access the data in R. 
+
+You can download an [example.json](data/example.json) file here (4KB). The data are sourced from the [International Union for Conservation of Nature Red List of Threatened Species](https://www.iucnredlist.org).  
+
+```{r, warning=FALSE, message=FALSE}
+# install the 'jsonlite' package first
+library(jsonlite)
+dat_json <- fromJSON(txt="data/example.json", simplifyDataFrame = FALSE)
+```
+From the RStudio Viewer you would see that the data contain information about 4 animals. ![](data/dat_json_screenshot.jpg){width=750px}
+
+You can also navigate the data using `names()` from base or simply type `dat_json$"Panthera leo"`. The dollar sign `$` refers to a variable or column. In RStudio, as you type in `data_object_name$`, the available variables or columns will be shown for your choice. 
+```{r, message=FALSE, warning=FALSE}
+names(dat_json) #gets names of what's in the object
+names(dat_json$`Panthera tigris`) # get variable names one level down. Use `` or "" for variable names containing spaces. 
+```
+Use `as_tibble()` to put the data into a tibble for further processing. 
+```{r, messages = FALSE, warning=FALSE}
+tiger_conservation <- dat_json$`Panthera tigris`$`conservation actions in place` %>% as_tibble()
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+knitr::kable(tiger_conservation) %>% kableExtra::kable_styling("striped")
+```
+You can transpose the tibble so it is easier to read.
+```{r}
+tiger_conversation_long_view <- tiger_conservation %>% pivot_longer(cols = everything())
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+knitr::kable(tiger_conversation_long_view) %>% kableExtra::kable_styling("striped")
+```
+&nbsp;  
+
+## Reference
+
+Alexander, R. (2013, April 20). Reinhart, Rogoff... and Herndon: The student who caught out the profs. BBC. [https://www.bbc.com/news/magazine-22223190](https://www.bbc.com/news/magazine-22223190){#ref-alexander}  
+
+International Union for Conservation of Nature. (n.d.). The IUCN Red List of Threatened Species. [https://www.iucnredlist.org](https://www.iucnredlist.org)  
+
+Lewis, D. (2021, August 25). Autocorrect errors in Excel still creating genomics headache. Nature. [https://www.nature.com/articles/d41586-021-02211-4](https://www.nature.com/articles/d41586-021-02211-4){#ref-lewis}  
+
+Lukavsky, J. (2018, December 5). Scene categorization in the presence of a distractor. Retrieved from [osf.io/849wm](https://osf.io/849wm){#ref-lukavsky}  
+
+Norman, K., Hernandez, L., & Obeid, R. (2021, January 12). Study 2. Who Am I? Gender Differences in Identity Exploration During the Transition into Adulthood. Retrieved from [osf.io/agfvz](https://osf.io/agfvz){#ref-norman}  
+
+Stigliani, A., & Grill-Spector, K. (2018, July 5). Temporal Channels. [https://doi.org/10.17605/OSF.IO/MW5PK](https://doi.org/10.17605/OSF.IO/MW5PK){#ref-stigliani}  
+
+Tatman, R. (2017). Chocolate Bar Ratings. Kaggle Datasets.  [https://www.kaggle.com/rtatman/chocolate-bar-ratings](https://www.kaggle.com/rtatman/chocolate-bar-ratings){#ref-choc}  
+

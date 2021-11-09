@@ -1,0 +1,67 @@
+{
+    "Panthera leo": {
+        "common name": "lion",
+        "population trend": "decreasing",
+        "number of mature individuals": "23000-39000",
+        "system": "terrestrial",
+        "generation length, in years": "6.98",
+        "habitat type": "grassland, shrubland, savanna, forest, desert",
+        "extant in": "Angola; Benin; Botswana; Burkina Faso; Cameroon; Central African Republic; Chad; Congo, The Democratic Republic of the; Eswatini; Ethiopia; India; Kenya; Malawi; Mozambique; Namibia; Niger; Nigeria; Senegal; Somalia; South Africa; South Sudan; Sudan; Tanzania, United Republic of; Uganda; Zambia; Zimbabwe",
+        "threats": {
+            "residential and commercial development": "housing and urban areas",
+            "agriculture and aquaculture": "annual and perennial non-timber crops; livestock farming and ranching",
+            "biological resource use": "hunting and trapping; logging and wood harvesting",
+            "human intrusion and disturbance": "war, civil unrest and military exercises",
+            "pollution": "Agricultural and forestry effluents"
+        },
+        "conservation actions in place": {
+            "in-place land/water protection": "occurs in at least one protected area",
+            "in-place species management": "harvest management plan; successfully reintroduced or introduced benignly; subject to ex-situ conservation",
+            "in-place education": "subject to recent education and awareness programmes; included in international legislation; subject to any international management / trade controls"
+        },
+        "link": "https://www.iucnredlist.org/species/15951/115130419"
+    },
+    "Panthera tigris": {
+        "common name": "tiger",
+        "population trend": "decreasing",
+        "number of mature individuals": "2154-3159",
+        "system": "terrestrial",
+        "generation length, in years": "6.5-10",
+        "habitat type": "shrubland, forest, grassland",
+        "Extant in":"Bangladesh; Bhutan; China (Heilongjiang, Yunnan, Jilin, Tibet [or Xizang]); India; Indonesia (Sumatera); Lao People's Democratic Republic; Malaysia (Peninsular Malaysia); Myanmar; Nepal; Russian Federation; Thailand",
+        "threats": {
+            "residential and commercial development": "housing and urban areas; commercial and industrial areas; tourism and recreation areas",
+            "agriculture and aquaculture": "annual and perennial non-timber crops; wood and pulp plantations; livestock farming and ranching; marine and freshwater aquaculture",
+            "energy production and mining": "mining and quarrying",
+            "biological resource use": "hunting and trapping; logging and wood harvesting",
+            "human intrusion and disturbance": "recreational activities; war, civil unrest and military exercises",
+            "natural system modifications": "fire and fire suppression; dams and water management/use"
+        },
+        "conservation actions in place": {
+            "in-place land/water protection": "occurs in at least one protected area",
+            "in-place species management": "harvest management plan; successfully reintroduced or introduced benignly; subject to ex-situ conservation",
+            "in-place education": "subject to recent education and awareness programmes; included in international legislation; subject to any international management / trade controls"
+        },
+        "link":"https://www.iucnredlist.org/species/15955/50659951"
+    },
+    "Canis simensis": {
+        "common name": "Ethiopian wolf",
+        "population trend": "decreasing",
+        "number of mature individuals": "197",
+        "system": "terrestrial",
+        "generation length, in years": "4.5",
+        "habitat type": "shrubland, grassland, wetlands, rocky areas",
+        "extant in": "Ethiopia",
+        "link": "https://www.iucnredlist.org/species/3748/10051312"
+    },
+    "Canis rufus": {
+        "common name": "red wolf",
+        "population trend": "decreasing",
+        "number of mature individuals": "20-30",
+        "system": "terrestrial",
+        "generation length, in years": "Unknown",
+        "habitat type": "forest, shrubland, wetlands, artificial/terrestrial",
+        "extant in": "USA (North Carolina)",
+        "link": "https://www.iucnredlist.org/species/3747/163509841"
+    }
+}

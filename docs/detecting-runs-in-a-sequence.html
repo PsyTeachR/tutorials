@@ -4,30 +4,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 3 Detecting "runs" in a sequence | Tutorials</title>
+<title>Chapter 4 Detecting "runs" in a sequence | Tutorials</title>
 <meta name="author" content="psyTeachR Team">
 <meta name="description" content="Dale Barr (October 30, 2019) Let's say you have a table like below, and you want to find the start and end frames where you have a run of Z amidst a, b, c, d. Here is code that sets up this kind...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 3 Detecting " runs in a sequence tutorials>
+<meta property="og:title" content="Chapter 4 Detecting " runs in a sequence tutorials>
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://psyteachr.github.io/tutorials/detecting-runs-in-a-sequence.html">
 <meta property="og:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
 <meta property="og:description" content="Dale Barr (October 30, 2019) Let's say you have a table like below, and you want to find the start and end frames where you have a run of Z amidst a, b, c, d. Here is code that sets up this kind...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 3 Detecting " runs in a sequence tutorials>
+<meta name="twitter:title" content="Chapter 4 Detecting " runs in a sequence tutorials>
 <meta name="twitter:description" content="Dale Barr (October 30, 2019) Let's say you have a table like below, and you want to find the start and end frames where you have a run of Z amidst a, b, c, d. Here is code that sets up this kind...">
 <meta name="twitter:image" content="https://psyteachr.github.io/tutorials/images/logos/logo.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-6NP3MF25W3');
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-6NP3MF25W3');
+  </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/style.css">
 </head>
@@ -53,17 +53,18 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Overview</a></li>
 <li class="book-part">Data Wrangling</li>
-<li><a class="" href="multiple-import.html"><span class="header-section-number">1</span> Importing data from multiple files</a></li>
-<li><a class="" href="multi-row-headers.html"><span class="header-section-number">2</span> Multi-Row Headers</a></li>
-<li><a class="active" href="detecting-runs-in-a-sequence.html"><span class="header-section-number">3</span> Detecting "runs" in a sequence</a></li>
-<li><a class="" href="pipes.html"><span class="header-section-number">4</span> Pipes</a></li>
+<li><a class="" href="file-formats.html"><span class="header-section-number">1</span> Importing data from different file formats into R</a></li>
+<li><a class="" href="multiple-import.html"><span class="header-section-number">2</span> Importing data from multiple files</a></li>
+<li><a class="" href="multi-row-headers.html"><span class="header-section-number">3</span> Multi-Row Headers</a></li>
+<li><a class="active" href="detecting-runs-in-a-sequence.html"><span class="header-section-number">4</span> Detecting "runs" in a sequence</a></li>
+<li><a class="" href="pipes.html"><span class="header-section-number">5</span> Pipes</a></li>
 <li class="book-part">Questionnaires</li>
-<li><a class="" href="converting-strings-to-numbers.html"><span class="header-section-number">5</span> Converting strings to numbers</a></li>
-<li><a class="" href="reverse-scoring.html"><span class="header-section-number">6</span> Reverse scoring</a></li>
+<li><a class="" href="converting-strings-to-numbers.html"><span class="header-section-number">6</span> Converting strings to numbers</a></li>
+<li><a class="" href="reverse-scoring.html"><span class="header-section-number">7</span> Reverse scoring</a></li>
 <li class="book-part">Plots</li>
-<li><a class="" href="highlight-a-range-of-x-values.html"><span class="header-section-number">7</span> Highlight a range of x-values</a></li>
+<li><a class="" href="highlight-a-range-of-x-values.html"><span class="header-section-number">8</span> Highlight a range of x-values</a></li>
 <li class="book-part">Stats</li>
-<li><a class="" href="testing-for-normality.html"><span class="header-section-number">8</span> Testing for normality</a></li>
+<li><a class="" href="testing-for-normality.html"><span class="header-section-number">9</span> Testing for normality</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="" href="symbols.html"><span class="header-section-number">B</span> Symbols</a></li>
@@ -77,15 +78,15 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="detecting-runs-in-a-sequence" class="section level1" number="3">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="detecting-runs-in-a-sequence" class="section level1">
 <h1>
-<span class="header-section-number">3</span> Detecting "runs" in a sequence<a class="anchor" aria-label="anchor" href="#detecting-runs-in-a-sequence"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4</span> Detecting "runs" in a sequence<a class="anchor" aria-label="anchor" href="#detecting-runs-in-a-sequence"><i class="fas fa-link"></i></a>
 </h1>
 <ul>
 <li>Dale Barr (October 30, 2019)</li>
 </ul>
 <p>Let's say you have a table like below, and you want to find the start and end frames where you have a run of <code>Z</code> amidst a, b, c, d. Here is code that sets up this kind of situation. Don't worry if you don't understand this code; just run it to create the example data in <code>runsdata</code>, and have a look at that table.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span>
 
 <span class="va">create_run_vec</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
@@ -107,10 +108,11 @@
   <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">select</span><span class="op">(</span><span class="va">subject</span>, <span class="va">trial</span>, <span class="va">stimulus</span><span class="op">)</span></code></pre></div>
 <p>Let's say you want to find the start and stop frames where <code>Z</code> appears in <code>stimulus</code>, and do this independently for each combination of <code>subject</code> and <code>trial</code>. Here's how <code>stimulus</code> looks for subject 1 and trial 1.</p>
-<pre><code>##  [1] "c" "c" "a" "a" "a" "d" "d" "b" "b" "b" "b" "Z" "Z" "Z" "b" "b" "a" "a" "a"
-## [20] "d" "d" "c" "c" "c" "Z" "Z" "Z" "b" "b" "b" "c" "c"</code></pre>
-<p>So here you can see that the first run of Zs is from frame 12 to 14, 27 and the second is from 25 to 27. We want to write a function that processes the data for each trial and results in a table like this:</p>
+<pre><code>##  [1] "b" "b" "b" "d" "d" "d" "c" "c" "a" "a" "Z" "Z" "Z" "d" "d" "d" "a" "a" "a"
+## [20] "a" "c" "c" "c" "b" "b" "Z" "Z" "Z" "c" "c" "c" "c" "b" "b" "b"</code></pre>
+<p>So here you can see that the first run of Zs is from frame 11 to 13, 28 and the second is from 26 to 28. We want to write a function that processes the data for each trial and results in a table like this:</p>
 <div class="kable-table">
+
 <div class="inline-table"><table class="table table-sm">
 <thead><tr>
 <th style="text-align:right;">
@@ -141,10 +143,10 @@ end_frame
 1
 </td>
 <td style="text-align:right;">
-12
+11
 </td>
 <td style="text-align:right;">
-14
+13
 </td>
 </tr>
 <tr>
@@ -158,22 +160,23 @@ end_frame
 2
 </td>
 <td style="text-align:right;">
-25
+26
 </td>
 <td style="text-align:right;">
-27
+28
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <p>The first thing to do is to add a logical vector to your tibble whose value is <code>TRUE</code> when the target value (e.g., <code>Z</code>) is present in the sequence, false otherwise.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">runsdata_tgt</span> <span class="op">&lt;-</span> <span class="va">runsdata</span> <span class="op">%&gt;%</span>
   <span class="fu">mutate</span><span class="op">(</span>is_target <span class="op">=</span> <span class="op">(</span><span class="va">stimulus</span> <span class="op">==</span> <span class="st">"Z"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">runsdata_tgt</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
+
 <div class="inline-table"><table class="table table-sm">
 <thead><tr>
 <th style="text-align:right;">
@@ -198,7 +201,7 @@ is_target
 1
 </td>
 <td style="text-align:left;">
-c
+b
 </td>
 <td style="text-align:left;">
 FALSE
@@ -212,7 +215,7 @@ FALSE
 1
 </td>
 <td style="text-align:left;">
-c
+b
 </td>
 <td style="text-align:left;">
 FALSE
@@ -226,7 +229,7 @@ FALSE
 1
 </td>
 <td style="text-align:left;">
-a
+b
 </td>
 <td style="text-align:left;">
 FALSE
@@ -240,7 +243,7 @@ FALSE
 1
 </td>
 <td style="text-align:left;">
-a
+d
 </td>
 <td style="text-align:left;">
 FALSE
@@ -254,7 +257,7 @@ FALSE
 1
 </td>
 <td style="text-align:left;">
-a
+d
 </td>
 <td style="text-align:left;">
 FALSE
@@ -278,25 +281,25 @@ FALSE
 </table></div>
 </div>
 <p>We want to iterate over subjects and trials. We'll start by creating a tibble with columns <code>is_target</code> nested into a column called <code>subtbl</code>.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">runs_nest</span> <span class="op">&lt;-</span> <span class="va">runsdata_tgt</span> <span class="op">%&gt;%</span>
   <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">stimulus</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># don't need it anymore</span>
   <span class="fu">nest</span><span class="op">(</span>subtbl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">is_target</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>We want to iterate over the little subtables stored within <code>subtbl</code> in each row of the table, passing the table to a function that will find the runs and return another table, which we'll store in new column. Let's write a function to detect the runs. That function will need the function <code><a href="https://rdrr.io/r/base/rle.html">rle()</a></code> (Run-Length Encoding) from base R. We'll run that on the logical vector we created (<code>is_target</code>). Before creating the function, let's see what <code><a href="https://rdrr.io/r/base/rle.html">rle()</a></code> does on the values in <code>is_target</code> for subject 1, trial 1.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s1t1</span> <span class="op">&lt;-</span> <span class="va">runsdata_tgt</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">subject</span> <span class="op">==</span> <span class="fl">1L</span>, <span class="va">trial</span> <span class="op">==</span> <span class="fl">1L</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">is_target</span><span class="op">)</span>
 
 <span class="va">s1t1</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/rle.html">rle</a></span><span class="op">(</span><span class="va">s1t1</span><span class="op">)</span></code></pre></div>
-<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
-## [13]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [25]  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE
+## [13]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [25] FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ## Run Length Encoding
-##   lengths: int [1:5] 11 3 10 3 5
+##   lengths: int [1:5] 10 3 12 3 7
 ##   values : logi [1:5] FALSE TRUE FALSE TRUE FALSE</code></pre>
 <p>If that doesn't make sense, look at the help for <code><a href="https://rdrr.io/r/base/rle.html">rle()</a></code> (type <code><a href="https://rdrr.io/r/base/rle.html">?rle</a></code> in the console). Now we're ready to write our function, <code>detect_runs()</code>.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">detect_runs</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>  
   <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/logical.html">is.logical</a></span><span class="op">(</span><span class="va">x</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"'x' must be a tibble whose first column is of type 'logical'"</span><span class="op">)</span>
   <span class="va">runs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rle.html">rle</a></span><span class="op">(</span><span class="va">x</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
@@ -310,9 +313,10 @@ FALSE
          end_fr <span class="op">=</span> <span class="va">tgt_end</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>We can test the function on <code>s1t1</code> just to make sure it works.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">detect_runs</span><span class="op">(</span><span class="fu">tibble</span><span class="op">(</span>lvec <span class="op">=</span> <span class="va">s1t1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
+
 <div class="inline-table"><table class="table table-sm">
 <thead><tr>
 <th style="text-align:right;">
@@ -331,10 +335,10 @@ end_fr
 1
 </td>
 <td style="text-align:right;">
-12
+11
 </td>
 <td style="text-align:right;">
-14
+13
 </td>
 </tr>
 <tr>
@@ -342,22 +346,23 @@ end_fr
 2
 </td>
 <td style="text-align:right;">
-25
+26
 </td>
 <td style="text-align:right;">
-27
+28
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <p>OK, now we're ready to run the function.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="va">runs_nest</span> <span class="op">%&gt;%</span>
   <span class="fu">mutate</span><span class="op">(</span>runstbl <span class="op">=</span> <span class="fu">map</span><span class="op">(</span><span class="va">subtbl</span>, <span class="va">detect_runs</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
+
 <div class="inline-table"><table class="table table-sm">
 <thead><tr>
 <th style="text-align:right;">
@@ -382,10 +387,10 @@ runstbl
 1
 </td>
 <td style="text-align:left;">
-FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
+FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
 </td>
 <td style="text-align:left;">
-1, 2, 12, 25, 14, 27
+1, 2, 11, 26, 13, 28
 </td>
 </tr>
 <tr>
@@ -396,10 +401,10 @@ FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRU
 2
 </td>
 <td style="text-align:left;">
-FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
+FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
 </td>
 <td style="text-align:left;">
-1, 2, 13, 27, 15, 29
+1, 2, 15, 30, 17, 32
 </td>
 </tr>
 <tr>
@@ -410,10 +415,10 @@ FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FAL
 3
 </td>
 <td style="text-align:left;">
-FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
+FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
 </td>
 <td style="text-align:left;">
-1, 2, 9, 23, 11, 25
+1, 2, 12, 29, 14, 31
 </td>
 </tr>
 <tr>
@@ -424,10 +429,10 @@ FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE,
 1
 </td>
 <td style="text-align:left;">
-FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE
+FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
 </td>
 <td style="text-align:left;">
-1, 2, 12, 26, 14, 28
+1, 2, 12, 29, 14, 31
 </td>
 </tr>
 <tr>
@@ -438,10 +443,10 @@ FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRU
 2
 </td>
 <td style="text-align:left;">
-FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
+FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
 </td>
 <td style="text-align:left;">
-1, 2, 15, 31, 17, 33
+1, 2, 15, 32, 17, 34
 </td>
 </tr>
 <tr>
@@ -452,23 +457,24 @@ FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FAL
 3
 </td>
 <td style="text-align:left;">
-FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
+FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
 </td>
 <td style="text-align:left;">
-1, 2, 16, 32, 18, 34
+1, 2, 17, 32, 19, 34
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <p>Now we just have to unnest and we're done!</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">result</span> <span class="op">%&gt;%</span>
   <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">subtbl</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">unnest</span><span class="op">(</span><span class="va">runstbl</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
+
 <div class="inline-table"><table class="table table-sm">
 <thead><tr>
 <th style="text-align:right;">
@@ -499,6 +505,74 @@ end_fr
 1
 </td>
 <td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+28
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
 12
 </td>
 <td style="text-align:right;">
@@ -510,84 +584,16 @@ end_fr
 1
 </td>
 <td style="text-align:right;">
-1
+3
 </td>
 <td style="text-align:right;">
 2
-</td>
-<td style="text-align:right;">
-25
-</td>
-<td style="text-align:right;">
-27
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-13
-</td>
-<td style="text-align:right;">
-15
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-27
 </td>
 <td style="text-align:right;">
 29
 </td>
-</tr>
-<tr>
 <td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-11
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-23
-</td>
-<td style="text-align:right;">
-25
+31
 </td>
 </tr>
 </tbody>
@@ -797,16 +803,16 @@ $( document ).ready(function() {
   window.onresize = move_sidebar;
 });
 </script><div class="chapter-nav">
-<div class="prev"><a href="multi-row-headers.html"><span class="header-section-number">2</span> Multi-Row Headers</a></div>
-<div class="next"><a href="pipes.html"><span class="header-section-number">4</span> Pipes</a></div>
+<div class="prev"><a href="multi-row-headers.html"><span class="header-section-number">3</span> Multi-Row Headers</a></div>
+<div class="next"><a href="pipes.html"><span class="header-section-number">5</span> Pipes</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#detecting-runs-in-a-sequence"><span class="header-section-number">3</span> Detecting "runs" in a sequence</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#detecting-runs-in-a-sequence"><span class="header-section-number">4</span> Detecting "runs" in a sequence</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/psyteachr/tutorials/blob/master/book/01-03-detect-runs.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/psyteachr/tutorials/edit/master/book/01-03-detect-runs.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/psyteachr/tutorials/blob/master/book/01-04-detect-runs.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/psyteachr/tutorials/edit/master/book/01-04-detect-runs.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -818,7 +824,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Tutorials</strong>" was written by psyTeachR Team. It was last built on 2021-10-19.</p>
+    <p>"<strong>Tutorials</strong>" was written by psyTeachR Team. It was last built on 2021-11-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

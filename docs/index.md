@@ -1,7 +1,7 @@
 --- 
 title: "Tutorials"
 author: "psyTeachR Team"
-date: "2021-10-19"
+date: "2021-11-09"
 site: bookdown::bookdown_site
 documentclass: book
 classoption: oneside # for PDFs
